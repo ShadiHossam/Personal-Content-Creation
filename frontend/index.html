@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shadi — Personal Branding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/app.css" />
+  <link rel="stylesheet" href="/static/css/rtl.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <div id="sidebar">
+    <div id="sidebar-logo">
+      <div class="logo-icon">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M9 2l5 5-5 5-5-5 5-5z" fill="white" opacity="0.85"/>
+          <path d="M9 8l5 5-5 5-5-5 5-5z" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">Shadi</span>
+        <span class="logo-sub">Personal Branding</span>
+      </div>
+    </div>
+    <nav>
+      <div class="nav-section-label">Overview</div>
+      <div class="nav-item active" data-screen="dashboard">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-item" data-screen="feed">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg></span>
+        <span>Feed</span>
+        <span class="badge" id="nav-feed-badge" style="display:none">0</span>
+      </div>
+      <div class="nav-item" data-screen="creators">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>
+        <span>Creators</span>
+      </div>
+      <div class="nav-item" data-screen="sources">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8z"/></svg></span>
+        <span>Sources</span>
+      </div>
+      <div class="nav-section-label">Tools</div>
+      <div class="nav-item" data-screen="analysis">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>
+        <span>Analysis</span>
+      </div>
+      <div class="nav-item" data-screen="intelligence">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/></svg></span>
+        <span>Intelligence</span>
+      </div>
+      <div class="nav-item" data-screen="write">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+        <span>Write</span>
+      </div>
+      <div class="nav-item" data-screen="scraper">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
+        <span>Scraper</span>
+      </div>
+      <div class="nav-item" data-screen="mystyle">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></span>
+        <span>My Style</span>
+      </div>
+      <div class="nav-item" data-screen="youtube">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg></span>
+        <span>YouTube Pack</span>
+      </div>
+      <div class="nav-item" data-screen="trends">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+        <span>Trends</span>
+      </div>
+      <div class="nav-item" data-screen="engage">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+        <span>Engage</span>
+        <span class="badge" id="nav-engage-badge" style="display:none">0</span>
+      </div>
+      <div class="nav-section-label">System</div>
+      <div class="nav-item" data-screen="settings">
+        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>
+        <span>Settings</span>
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">S</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name">Shadi</div>
+        <div class="sidebar-user-role">Personal Branding</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <div id="main">
+
+    <!-- ─── DASHBOARD ─── -->
+    <div class="screen active" id="screen-dashboard">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>Dashboard</h1>
+          <span class="screen-subtitle" id="greeting"></span>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px">
+          <button class="btn btn-ghost btn-sm" onclick="Feed.refresh();App.goTo('feed')">↻ Refresh Feed</button>
+          <button class="btn btn-primary btn-sm" onclick="App.goTo('write')">+ Write Post</button>
+        </div>
+      </div>
+      <div class="screen-body">
+        <div class="grid-4" id="dashboard-stats" style="margin-bottom:24px"></div>
+
+        <div class="grid-2" style="gap:20px;align-items:start">
+          <div class="card" style="padding:20px">
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:14px">Top Creators This Week</div>
+            <div id="dashboard-competitors"></div>
+          </div>
+          <div class="card" style="padding:20px">
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:14px">Latest News</div>
+            <div id="dashboard-news"></div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-secondary" onclick="App.goTo('intelligence')">Ask Intelligence</button>
+          <button class="btn btn-secondary" onclick="App.goTo('analysis')">View Analysis</button>
+          <button class="btn btn-secondary" onclick="App.goTo('creators')">Manage Creators</button>
+          <button class="btn btn-secondary" onclick="App.goTo('sources')">Browse News</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── FEED ─── -->
+    <div class="screen" id="screen-feed">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>Feed</h1>
+          <span class="screen-subtitle">Content from your tracked creators</span>
+        </div>
+      </div>
+      <div class="screen-body" style="padding:0">
+        <div class="feed-toolbar">
+          <div class="feed-toolbar-row">
+            <div class="filter-bar" id="feed-type-filters" style="margin:0">
+              <span class="filter-chip active" data-type="">All</span>
+              <span class="filter-chip" data-type="creator">Creators</span>
+              <span class="filter-chip" data-type="website">Websites</span>
+            </div>
+            <div class="feed-controls">
+              <div class="feed-date-range">
+                <input type="date" id="feed-from-date" title="From date" class="feed-date-input" />
+                <span class="feed-date-sep">–</span>
+                <input type="date" id="feed-to-date" title="To date" class="feed-date-input" />
+              </div>
+              <select id="feed-refresh-target" class="btn btn-ghost btn-sm" style="cursor:pointer">
+                <option value="">All</option>
+              </select>
+              <button class="btn btn-primary btn-sm" id="feed-refresh-btn" onclick="Feed.refresh()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+                Refresh
+              </button>
+            </div>
+          </div>
+          <div class="filter-bar" id="feed-filters" style="margin:0;display:none">
+            <span class="filter-chip active" data-filter="">All</span>
+            <span class="filter-chip" data-filter="platform:linkedin">LinkedIn</span>
+            <span class="filter-chip" data-filter="platform:twitter">Twitter</span>
+            <span class="filter-chip" data-filter="platform:youtube">YouTube</span>
+            <span class="filter-chip" data-filter="category:competitor">Competitors</span>
+            <span class="filter-chip" data-filter="category:inspiration">Inspirations</span>
+            <span class="filter-chip" data-filter="saved:true">Saved</span>
+          </div>
+          <div class="filter-bar" id="feed-website-filters" style="margin:0">
+            <!-- populated by Feed.loadWebsiteTags() -->
+          </div>
+        </div>
+        <div style="padding:20px 24px">
+          <div id="feed-list"></div>
+          <div id="feed-load-more" style="text-align:center;margin-top:16px;display:none">
+            <button class="btn btn-ghost" onclick="Feed.loadMore()">Load more</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CREATORS ─── -->
+    <div class="screen" id="screen-creators">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>Creators</h1>
+          <span class="screen-subtitle">Competitors and inspirations you track</span>
+        </div>
+      </div>
+      <div class="screen-body">
+        <div class="toolbar">
+          <input type="checkbox" id="bulk-select-all" title="Select all"
+            onclick="Creators._toggleSelectAll(this.checked)"
+            style="width:16px;height:16px;cursor:pointer;flex-shrink:0;accent-color:var(--accent)" />
+          <span class="filter-chip active" data-category="" id="creator-filter-all">All</span>
+          <span class="filter-chip" data-category="competitor" id="creator-filter-comp">Competitors</span>
+          <span class="filter-chip" data-category="inspiration" id="creator-filter-insp">Inspirations</span>
+          <button class="btn btn-ghost btn-sm" id="creators-filter-toggle" onclick="Creators._toggleFilterBar()">Filters ▾</button>
+          <div class="spacer"></div>
+          <button id="bulk-stop-btn" class="btn btn-danger btn-sm" onclick="Creators.stopBulkFetch()" style="display:none">⏹ Stop</button>
+          <span id="bulk-fetch-progress" style="display:none;font-size:12px;color:var(--text2)"></span>
+          <button id="bulk-fetch-all-btn" class="btn btn-ghost btn-sm" onclick="Creators.bulkFetchAll()">Fetch All</button>
+          <button class="btn btn-secondary btn-sm" onclick="Creators.openBulkModal()">+ Bulk Add</button>
+          <button class="btn btn-primary btn-sm" onclick="Creators.openModal()">+ Add Creator</button>
+        </div>
+
+        <!-- Extended filter bar (hidden until toggled) -->
+        <div id="creators-filter-bar" style="display:none">
+          <div class="filter-group">
+            <label class="filter-group-label">Country</label>
+            <select id="filter-country" onchange="Creators._applyCountryFilter(this.value)" class="input" style="font-size:12px;padding:3px 6px;height:auto">
+              <option value="">All</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-group-label">Has Platform</label>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <label class="filter-check-label"><input type="checkbox" onchange="Creators._togglePlatformFilter('linkedin',this.checked)"> LinkedIn</label>
+              <label class="filter-check-label"><input type="checkbox" onchange="Creators._togglePlatformFilter('twitter',this.checked)"> Twitter</label>
+              <label class="filter-check-label"><input type="checkbox" onchange="Creators._togglePlatformFilter('instagram',this.checked)"> Instagram</label>
+              <label class="filter-check-label"><input type="checkbox" onchange="Creators._togglePlatformFilter('youtube',this.checked)"> YouTube</label>
+              <label class="filter-check-label"><input type="checkbox" onchange="Creators._togglePlatformFilter('tiktok',this.checked)"> TikTok</label>
+            </div>
+          </div>
+          <div class="filter-group">
+            <label class="filter-group-label">Priority</label>
+            <div id="filter-priority-chips" style="display:flex;gap:4px;flex-wrap:wrap">
+              <span class="filter-chip active" onclick="Creators._applyPriorityFilter(null,this)">All</span>
+              <span class="filter-chip" onclick="Creators._applyPriorityFilter(1,this)">P1</span>
+              <span class="filter-chip" onclick="Creators._applyPriorityFilter(2,this)">P2</span>
+              <span class="filter-chip" onclick="Creators._applyPriorityFilter(3,this)">P3</span>
+              <span class="filter-chip" onclick="Creators._applyPriorityFilter(4,this)">P4</span>
+              <span class="filter-chip" onclick="Creators._applyPriorityFilter(5,this)">P5</span>
+            </div>
+          </div>
+          <div class="filter-group" id="filter-tags-group">
+            <label class="filter-group-label">Tags</label>
+            <div id="filter-tag-chips" style="display:flex;gap:4px;flex-wrap:wrap"></div>
+          </div>
+          <div class="filter-group" style="margin-left:auto">
+            <label class="filter-group-label">Sort by</label>
+            <select id="filter-sort" onchange="Creators._applySort(this.value)" class="input" style="font-size:12px;padding:3px 6px;height:auto">
+              <option value="rank">Rank (drag order)</option>
+              <option value="priority">Priority</option>
+              <option value="name">Name A–Z</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Bulk action bar -->
+        <div id="creators-bulk-bar" style="display:none;align-items:center;gap:8px;padding:8px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span id="bulk-bar-count" style="font-size:13px;font-weight:600;color:var(--accent)">0 selected</span>
+          <div style="flex:1"></div>
+          <button class="btn btn-ghost btn-sm" onclick="Creators.bulkFetchSelected()">↻ Fetch</button>
+          <div class="bulk-popover-wrap">
+            <button class="btn btn-ghost btn-sm" onclick="Creators._toggleBulkPopover('priority')">Priority ▾</button>
+            <div id="bulk-popover-priority" class="bulk-popover" style="display:none">
+              <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Set priority for selected</div>
+              <div style="display:flex;gap:4px;flex-wrap:wrap">
+                <button class="btn btn-ghost btn-sm" onclick="Creators.bulkSetPriority(1)">★1</button>
+                <button class="btn btn-ghost btn-sm" onclick="Creators.bulkSetPriority(2)">★2</button>
+                <button class="btn btn-ghost btn-sm" onclick="Creators.bulkSetPriority(3)">★3</button>
+                <button class="btn btn-ghost btn-sm" onclick="Creators.bulkSetPriority(4)">★4</button>
+                <button class="btn btn-ghost btn-sm" onclick="Creators.bulkSetPriority(5)">★5</button>
+                <button class="btn btn-ghost btn-sm" style="color:var(--text3)" onclick="Creators.bulkSetPriority(null)">Clear</button>
+              </div>
+            </div>
+          </div>
+          <div class="bulk-popover-wrap">
+            <button class="btn btn-ghost btn-sm" onclick="Creators._toggleBulkPopover('tag-add')">+ Tag ▾</button>
+            <div id="bulk-popover-tag-add" class="bulk-popover" style="display:none">
+              <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Add tag to selected</div>
+              <div id="bulk-tag-add-chips" style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px"></div>
+              <div style="display:flex;gap:4px">
+                <input type="text" id="bulk-new-tag-input" placeholder="New tag..." style="flex:1;font-size:12px" class="input" />
+                <button class="btn btn-primary btn-sm" onclick="Creators.bulkAddTag()">Add</button>
+              </div>
+            </div>
+          </div>
+          <div class="bulk-popover-wrap">
+            <button class="btn btn-ghost btn-sm" onclick="Creators._toggleBulkPopover('tag-remove')">- Tag ▾</button>
+            <div id="bulk-popover-tag-remove" class="bulk-popover" style="display:none">
+              <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Remove tag from selected</div>
+              <div id="bulk-tag-remove-chips" style="display:flex;gap:4px;flex-wrap:wrap"></div>
+            </div>
+          </div>
+          <div class="bulk-popover-wrap">
+            <button class="btn btn-ghost btn-sm" onclick="Creators._toggleBulkPopover('category')">Category ▾</button>
+            <div id="bulk-popover-category" class="bulk-popover" style="display:none">
+              <button class="btn btn-ghost btn-sm" style="width:100%;text-align:left" onclick="Creators.bulkSetCategory('competitor')">Competitor</button>
+              <button class="btn btn-ghost btn-sm" style="width:100%;text-align:left;margin-top:4px" onclick="Creators.bulkSetCategory('inspiration')">Inspiration</button>
+            </div>
+          </div>
+          <div class="bulk-popover-wrap">
+            <button class="btn btn-ghost btn-sm" onclick="Creators._toggleBulkPopover('export')">Export ▾</button>
+            <div id="bulk-popover-export" class="bulk-popover" style="display:none">
+              <button class="btn btn-ghost btn-sm" style="width:100%;text-align:left" onclick="Creators.bulkExport('json')">JSON</button>
+              <button class="btn btn-ghost btn-sm" style="width:100%;text-align:left;margin-top:4px" onclick="Creators.bulkExport('csv')">CSV</button>
+            </div>
+          </div>
+          <button class="btn btn-danger btn-sm" onclick="Creators.bulkDelete()">Delete</button>
+          <button class="btn btn-ghost btn-sm" onclick="Creators._selectedIds.clear();Creators.renderList()" style="color:var(--text3)">✕</button>
+        </div>
+        <div id="creators-list"></div>
+      </div>
+    </div>
+
+    <!-- ─── SOURCES ─── -->
+    <div class="screen" id="screen-sources">
+      <div class="screen-header">
+        <h1 id="sources-title">Latest News</h1>
+      </div>
+      <div class="screen-body">
+
+        <!-- Primary toolbar -->
+        <div class="toolbar" id="sources-toolbar-news">
+          <button class="btn btn-ghost btn-sm src-view-btn active" id="src-news-btn" onclick="Sources.showNewsView()">📰 News Feed</button>
+          <button class="btn btn-ghost btn-sm src-view-btn" id="src-manage-btn" onclick="Sources.showManageView()">🌐 Sources</button>
+          <button class="btn btn-ghost btn-sm" id="src-filter-toggle-btn" onclick="Sources.toggleFilter()" title="Filters">⚙ Filters</button>
+          <button class="btn btn-ghost btn-sm" id="src-saved-btn" onclick="Sources.toggleSavedOnly()" title="View saved articles">★ Saved</button>
+          <div class="spacer"></div>
+          <div class="refresh-btn-group" id="sources-refresh-group">
+            <button class="btn btn-ghost btn-sm" id="sources-refresh-btn" onclick="Sources.refreshAll()">↻ Refresh</button>
+            <button class="btn btn-ghost btn-sm" onclick="Sources.toggleRefreshDropdown()" title="More fetch options" style="padding:0 8px;border-left:1px solid var(--border)">▾</button>
+            <div class="refresh-dropdown hidden" id="sources-refresh-dropdown">
+              <button class="refresh-dropdown-item" onclick="Sources.refreshAll()">↻ Fetch latest (since last fetch)</button>
+              <button class="refresh-dropdown-item" onclick="Sources.promptRefreshFromDate()">📅 Fetch from a date…</button>
+              <button class="refresh-dropdown-item" onclick="Sources.refreshAll({ignoreHistory:true})">⟳ Re-fetch all (ignore history)</button>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="src-recommend-btn" onclick="Sources.openRecommendModal()">✨ AI Topics</button>
+        </div>
+
+        <div class="toolbar" id="sources-toolbar-manage" style="display:none">
+          <button class="btn btn-ghost btn-sm src-view-btn" id="src-news-btn2" onclick="Sources.showNewsView()">📰 News Feed</button>
+          <button class="btn btn-ghost btn-sm src-view-btn active" id="src-manage-btn2" onclick="Sources.showManageView()">🌐 Sources</button>
+          <div class="spacer"></div>
+          <button class="btn btn-ghost btn-sm" id="src-select-all-btn" onclick="Sources.selectAllSources()">Select All</button>
+          <button class="btn btn-ghost btn-sm" id="src-bulk-add-btn" onclick="Sources.openBulkAddModal()">⊞ Bulk Add</button>
+          <button class="btn btn-secondary btn-sm" onclick="Sources.openModal()">+ Add Source</button>
+        </div>
+
+        <!-- Bulk action bar for manage view -->
+        <div class="src-bulk-bar hidden" id="src-bulk-bar">
+          <span id="src-bulk-count" style="font-size:12px;color:var(--text2)"></span>
+          <button class="btn btn-ghost btn-sm" onclick="Sources.openBulkEditModal()">Edit Selected</button>
+          <button class="btn btn-danger btn-sm" onclick="Sources.bulkDelete()">Delete Selected</button>
+          <button class="btn btn-ghost btn-sm" style="color:var(--text3)" onclick="Sources.clearSelection()">✕ Clear</button>
+        </div>
+
+        <!-- Filter panel (collapsible) -->
+        <div class="src-filter-panel hidden" id="src-filter-panel">
+          <div class="src-filter-row">
+            <label>Sources</label>
+            <div id="src-filter-sources" class="src-filter-chips"></div>
+          </div>
+          <div class="src-filter-row">
+            <label>Priority</label>
+            <div id="src-filter-priorities" class="src-filter-chips"></div>
+          </div>
+          <div class="src-filter-row">
+            <label>Tags</label>
+            <div id="src-filter-tags" class="src-filter-chips"></div>
+          </div>
+          <div class="src-filter-row">
+            <label>Categories</label>
+            <div id="src-filter-categories" class="src-filter-chips"></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:4px">
+            <button class="btn btn-ghost btn-sm" onclick="Sources.clearFilters()">Clear Filters</button>
+            <button class="btn btn-primary btn-sm" onclick="Sources.applyFilters()">Apply</button>
+          </div>
+        </div>
+
+        <!-- Article bulk action bar (news view) -->
+        <div class="src-bulk-bar hidden" id="src-article-bulk-bar">
+          <span id="src-article-bulk-count" style="font-size:12px;color:var(--text2)"></span>
+          <button class="btn btn-ghost btn-sm" onclick="Sources.bulkWritePosts()">✍ Write Posts</button>
+          <button class="btn btn-ghost btn-sm" onclick="Sources.bulkCombinePost()">📝 Combine into Post</button>
+          <button class="btn btn-ghost btn-sm" onclick="Sources.bulkTagArticles()">🏷 Tag Selected</button>
+          <button class="btn btn-ghost btn-sm" onclick="Sources.bulkMarkRead()">✓ Mark Read</button>
+          <button class="btn btn-ghost btn-sm" style="color:var(--text3)" onclick="Sources.clearArticleSelection()">✕</button>
+        </div>
+
+        <!-- News Feed view -->
+        <div id="sources-news-view">
+          <div id="sources-news-list" class="article-grid"></div>
+        </div>
+
+        <!-- Manage Sources view -->
+        <div id="sources-manage-view" style="display:none">
+          <div id="sources-manage-list"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── ANALYSIS ─── -->
+    <div class="screen" id="screen-analysis">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>Analysis</h1>
+          <span class="screen-subtitle">Deep-dive stats, hooks, style DNA, and cross-account patterns</span>
+        </div>
+      </div>
+      <div class="screen-body">
+        <div class="tabs" id="analysis-tabs">
+          <div class="tab active" data-tab="single" onclick="Analysis.switchTab('single')">Single Creator</div>
+          <div class="tab" data-tab="compare" onclick="Analysis.switchTab('compare')">Compare</div>
+          <div class="tab" data-tab="hooks" onclick="Analysis.switchTab('hooks')">Hook Library</div>
+          <div class="tab" data-tab="style" onclick="Analysis.switchTab('style')">Style DNA</div>
+          <div class="tab" data-tab="linkedin" onclick="Analysis.switchTab('linkedin')">LinkedIn AI</div>
+        </div>
+
+        <!-- Single Creator tab -->
+        <div class="tab-content active" id="analysis-tab-single">
+          <div class="toolbar">
+            <select id="analysis-creator-select" style="width:auto"></select>
+            <button class="btn btn-ghost btn-sm" onclick="Analysis.showLandscape()" id="analysis-landscape-btn">All Creators Overview →</button>
+          </div>
+          <div id="analysis-creator-view"></div>
+          <div id="analysis-landscape-view" style="display:none"></div>
+        </div>
+
+        <!-- Compare tab -->
+        <div class="tab-content" id="analysis-tab-compare" style="display:none">
+          <div id="analysis-compare-view"></div>
+        </div>
+
+        <!-- Hook Library tab -->
+        <div class="tab-content" id="analysis-tab-hooks" style="display:none">
+          <div id="analysis-hooks-view"></div>
+        </div>
+
+        <!-- Style DNA tab -->
+        <div class="tab-content" id="analysis-tab-style" style="display:none">
+          <div id="analysis-style-view"></div>
+        </div>
+
+        <!-- LinkedIn AI tab -->
+        <div class="tab-content" id="analysis-tab-linkedin" style="display:none">
+          <div id="analysis-linkedin-view"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── INTELLIGENCE ─── -->
+    <div class="screen" id="screen-intelligence">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>Intelligence</h1>
+          <span class="screen-subtitle">Chat with Claude about your market data</span>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="Intelligence.newSession()" style="margin-left:auto">+ New Chat</button>
+      </div>
+      <div style="display:flex;flex:1;overflow:hidden">
+        <!-- History sidebar -->
+        <div style="width:220px;border-right:1px solid var(--border);overflow-y:auto;padding:10px 8px;background:var(--bg2);flex-shrink:0">
+          <div style="font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;padding:4px 10px 8px">Recent Chats</div>
+          <div id="intelligence-sessions"></div>
+        </div>
+        <!-- Chat area -->
+        <div class="chat-container" style="flex:1">
+          <div class="chat-messages" id="intelligence-messages">
+            <div class="empty-state">
+              <div class="empty-icon">🧠</div>
+              <h3>Intelligence</h3>
+              <p>Ask anything about your creators, news, and market data.</p>
+            </div>
+          </div>
+          <div class="chat-input-bar">
+            <textarea id="intelligence-input" placeholder="Ask anything about your data..." rows="1" onkeydown="Intelligence.onKeydown(event)"></textarea>
+            <button class="btn btn-primary" id="intelligence-send-btn" onclick="Intelligence.send()">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── WRITE ─── -->
+    <div class="screen" id="screen-write">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>Write a Post</h1>
+          <span class="screen-subtitle">AI-powered drafts in your voice and style</span>
+        </div>
+      </div>
+      <div class="screen-body">
+        <div class="grid-2" style="gap:24px;align-items:start">
+          <!-- Left: inputs -->
+          <div>
+            <div class="form-group">
+              <label>Your idea</label>
+              <textarea id="write-idea" placeholder="What do you want to write about?" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Angle</label>
+              <select id="write-angle">
+                <option value="challenge a myth">Challenge a myth</option>
+                <option value="share a tip">Share a tip</option>
+                <option value="tell a story">Tell a story</option>
+                <option value="share insight">Share insight / react to news</option>
+                <option value="ask a question">Ask a question</option>
+                <option value="how-to">How-to / Tutorial</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Format</label>
+              <div class="toggle-group" id="write-format-toggle">
+                <div class="toggle-option active" data-val="linkedin_post">LinkedIn Post</div>
+                <div class="toggle-option" data-val="thread">Thread</div>
+                <div class="toggle-option" data-val="article">Article Intro</div>
+                <div class="toggle-option" data-val="caption">Caption</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Language</label>
+              <div class="toggle-group" id="write-lang-toggle">
+                <div class="toggle-option active" data-val="ar">Arabic</div>
+                <div class="toggle-option" data-val="en">English</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Writing Skill</label>
+              <select id="write-skill-select">
+                <option value="">— Default (no skill) —</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>References <span style="color:var(--text3);font-weight:400">(optional)</span></label>
+              <div id="write-refs-list" style="margin-bottom:8px"></div>
+              <button class="btn btn-ghost btn-sm" onclick="Write.openRefPicker()">+ Add reference from saved content</button>
+            </div>
+            <button class="btn btn-primary" id="write-generate-btn" onclick="Write.generate()" style="width:100%;margin-top:6px">✨ Generate Draft</button>
+          </div>
+
+          <!-- Right: draft -->
+          <div>
+            <div class="section-title">Draft</div>
+            <div id="draft-output" contenteditable="true" data-dir="auto" style="display:none"></div>
+            <div id="draft-placeholder" style="color:var(--text3);font-size:13px;padding:20px 0">Your draft will appear here...</div>
+
+            <div id="write-feedback-bar" style="display:none;margin-top:12px">
+              <div style="display:flex;gap:8px;margin-bottom:8px">
+                <button class="btn btn-green btn-sm" onclick="Write.rateDraft('good')">👍 Good</button>
+                <button class="btn btn-ghost btn-sm" onclick="Write.rateDraft('bad')">👎 Needs work</button>
+                <button class="btn btn-ghost btn-sm" onclick="Write.copyDraft()">📋 Copy</button>
+                <button class="btn btn-ghost btn-sm" onclick="Write.regenerate()">🔄 Regenerate</button>
+              </div>
+              <div style="display:flex;gap:8px">
+                <input type="text" id="write-feedback-note" placeholder="Note (optional)" style="flex:1" />
+                <button class="btn btn-secondary btn-sm" onclick="Write.saveFeedback()">Save Feedback</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── MY STYLE ─── -->
+    <div class="screen" id="screen-mystyle">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>My Style</h1>
+          <span class="screen-subtitle">Your brand voice, writing rules, and skills</span>
+        </div>
+      </div>
+      <div class="screen-body">
+        <div class="tabs" id="style-tabs">
+          <div class="tab active" data-tab="profile">My Profile</div>
+          <div class="tab" data-tab="skills">Writing Skills</div>
+          <div class="tab" data-tab="feedback">Feedback Memory</div>
+        </div>
+
+        <div style="margin-top:18px">
+          <!-- Profile tab -->
+          <div class="tab-content active" id="tab-profile">
+            <div class="form-group">
+              <label>Who I am</label>
+              <textarea id="profile-bio" rows="3" placeholder="I'm a marketing strategist and AI consultant..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>My target audience</label>
+              <textarea id="profile-audience" rows="3" placeholder="SME owners, founders, growing businesses in the Arab world..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Global writing rules</label>
+              <div id="profile-rules-list"></div>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <input type="text" id="profile-rule-input" placeholder="Add a rule..." />
+                <button class="btn btn-secondary btn-sm" onclick="MyStyle.addRule()">Add</button>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="MyStyle.saveProfile()">Save Profile</button>
+          </div>
+
+          <!-- Skills tab -->
+          <div class="tab-content" id="tab-skills">
+            <div class="grid-2" style="gap:20px;align-items:start">
+              <div>
+                <button class="btn btn-primary btn-sm" onclick="MyStyle.openSkillModal()" style="margin-bottom:12px">+ New Skill</button>
+                <div id="skills-list"></div>
+              </div>
+              <div id="skill-edit-panel" style="display:none">
+                <div class="card">
+                  <div class="section-title" style="margin-top:0">Edit Skill</div>
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="skill-edit-name" />
+                  </div>
+                  <div class="form-group">
+                    <label>Style description</label>
+                    <textarea id="skill-edit-style" rows="3"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Skill-specific rules</label>
+                    <div id="skill-edit-rules"></div>
+                    <div style="display:flex;gap:8px;margin-top:8px">
+                      <input type="text" id="skill-rule-input" placeholder="Add a rule..." />
+                      <button class="btn btn-secondary btn-sm" onclick="MyStyle.addSkillRule()">Add</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Sample posts (paste 3–5 examples)</label>
+                    <div id="skill-samples-list"></div>
+                    <textarea id="skill-sample-input" rows="4" placeholder="Paste a sample post in this style..." style="margin-top:8px"></textarea>
+                    <div style="display:flex;gap:8px;margin-top:6px">
+                      <select id="skill-sample-lang" style="width:auto">
+                        <option value="ar">Arabic</option>
+                        <option value="en">English</option>
+                      </select>
+                      <button class="btn btn-secondary btn-sm" onclick="MyStyle.addSample()">Add Sample</button>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:8px">
+                    <button class="btn btn-primary" onclick="MyStyle.saveSkill()">Save Skill</button>
+                    <button class="btn btn-ghost" onclick="MyStyle.closeSkillEdit()">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feedback Memory tab -->
+          <div class="tab-content" id="tab-feedback">
+            <div class="filter-bar" style="margin-bottom:12px">
+              <span class="filter-chip active" data-rating="">All</span>
+              <span class="filter-chip" data-rating="good">👍 Good</span>
+              <span class="filter-chip" data-rating="bad">👎 Needs Work</span>
+            </div>
+            <div id="feedback-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SETTINGS ─── -->
+    <div class="screen" id="screen-settings">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>Settings</h1>
+          <span class="screen-subtitle">API keys, scraping options, and defaults</span>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="Settings.saveAll()" style="margin-left:auto">Save All</button>
+      </div>
+      <div class="screen-body">
+        <div class="settings-grid">
+        <div class="settings-col">
+        <div class="form-section">
+          <div class="form-section-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            API Keys
+          </div>
+          <div class="form-group">
+            <label>YouTube API Key</label>
+            <div style="display:flex;gap:8px">
+              <input type="password" id="setting-youtube-key" placeholder="AIza..." />
+              <button class="btn btn-ghost btn-sm" onclick="Settings.toggleShow('youtube-key')">Show</button>
+              <button class="btn btn-ghost btn-sm" onclick="Settings.test('youtube')">Test</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Claude AI <span style="color:var(--text3);font-weight:400">— how to connect</span></label>
+            <div class="toggle-group" id="setting-claude-backend-toggle">
+              <div class="toggle-option" data-val="cli" onclick="Settings.onClaudeBackendChange('cli')">Subscription (CLI)</div>
+              <div class="toggle-option" data-val="api" onclick="Settings.onClaudeBackendChange('api')">API Key</div>
+            </div>
+            <div id="setting-claude-api-key-row" style="display:none;margin-top:8px">
+              <div style="display:flex;gap:8px">
+                <input type="password" id="setting-claude-key" placeholder="sk-ant-..." />
+                <button class="btn btn-ghost btn-sm" onclick="Settings.toggleShow('claude-key')">Show</button>
+                <button class="btn btn-ghost btn-sm" onclick="Settings.test('claude')">Test</button>
+              </div>
+              <div style="font-size:12px;color:var(--text3);margin-top:4px">Your Anthropic API key from console.anthropic.com</div>
+            </div>
+            <div id="setting-claude-cli-hint" style="display:none;margin-top:6px;font-size:12px;color:var(--text3)">
+              Uses your locally installed <code>claude</code> CLI — no API key needed. Make sure you're logged in via <code>claude login</code>.
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>Apify API Key <span style="color:var(--text3);font-weight:400">(required for LinkedIn &amp; Twitter)</span></label>
+            <div style="display:flex;gap:8px">
+              <input type="password" id="setting-apify-key" placeholder="apify_api_..." />
+              <button class="btn btn-ghost btn-sm" onclick="Settings.toggleShow('apify-key')">Show</button>
+              <button class="btn btn-ghost btn-sm" onclick="Settings.test('apify')">Test</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            Defaults
+          </div>
+          <div class="form-group">
+            <label>Default Language</label>
+            <div class="toggle-group" id="setting-lang-toggle">
+              <div class="toggle-option active" data-val="ar">Arabic</div>
+              <div class="toggle-option" data-val="en">English</div>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>Default Format</label>
+            <select id="setting-format">
+              <option value="linkedin_post">LinkedIn Post</option>
+              <option value="thread">Twitter Thread</option>
+              <option value="article">Article Intro</option>
+              <option value="caption">Caption</option>
+            </select>
+          </div>
+        </div>
+        </div><!-- /settings-col left -->
+
+        <div class="settings-col">
+        <div class="form-section">
+          <div class="form-section-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Scraping Options
+          </div>
+          <div class="form-group">
+            <label>Default Max Posts per Scrape</label>
+            <input type="number" id="setting-scrape-max" placeholder="20" min="1" max="200" style="width:100px" />
+          </div>
+          <div class="form-group">
+            <label>LinkedIn Actor ID</label>
+            <input type="text" id="setting-linkedin-actor" placeholder="apify/linkedin-profile-scraper" />
+          </div>
+          <div class="form-group">
+            <label>Twitter Actor ID</label>
+            <input type="text" id="setting-twitter-actor" placeholder="apidojo/twitter-user-scraper" />
+          </div>
+          <div class="form-group">
+            <label>Twitter: Include Replies</label>
+            <div class="toggle-group" id="setting-twitter-replies-toggle">
+              <div class="toggle-option" data-val="true">Yes</div>
+              <div class="toggle-option active" data-val="false">No</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Twitter: Include Retweets</label>
+            <div class="toggle-group" id="setting-twitter-retweets-toggle">
+              <div class="toggle-option" data-val="true">Yes</div>
+              <div class="toggle-option active" data-val="false">No</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>X/Twitter: auth_token cookie <span style="color:var(--text3);font-weight:400">(enables chronological fetching)</span></label>
+            <div style="display:flex;gap:6px;align-items:center">
+              <input type="password" id="setting-twitter-auth-token" placeholder="Paste your auth_token cookie value" style="flex:1" />
+              <button class="btn btn-ghost btn-sm" onclick="Settings.toggleShow('twitter-auth-token')">👁</button>
+            </div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">In Chrome: x.com → F12 → Application → Cookies → auth_token</div>
+          </div>
+          <div class="form-group">
+            <label>X/Twitter: ct0 cookie <span style="color:var(--text3);font-weight:400">(CSRF token, required alongside auth_token)</span></label>
+            <div style="display:flex;gap:6px;align-items:center">
+              <input type="password" id="setting-twitter-ct0" placeholder="Paste your ct0 cookie value" style="flex:1" />
+              <button class="btn btn-ghost btn-sm" onclick="Settings.toggleShow('twitter-ct0')">👁</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>LinkedIn: li_at cookie <span style="color:var(--text3);font-weight:400">(enables feed + hashtag scraping — free)</span></label>
+            <div style="display:flex;gap:6px;align-items:center">
+              <input type="password" id="setting-linkedin-li-at" placeholder="Paste your li_at cookie value" style="flex:1" />
+              <button class="btn btn-ghost btn-sm" onclick="Settings.toggleShow('linkedin-li-at')">👁</button>
+            </div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">In Chrome: linkedin.com → F12 → Application → Cookies → li_at</div>
+          </div>
+          <div class="form-group">
+            <label>LinkedIn: Hashtags to track <span style="color:var(--text3);font-weight:400">(for daily engagement feed)</span></label>
+            <input type="text" id="setting-linkedin-hashtags" placeholder="#marketing, #AI, #leadership, #arabicbusiness" />
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">Comma-separated. Used to surface posts to engage with daily.</div>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>Use Apify Residential Proxy <span style="color:var(--text3);font-weight:400">(costs credits, reduces blocks)</span></label>
+            <div class="toggle-group" id="setting-proxy-toggle">
+              <div class="toggle-option" data-val="true">Yes</div>
+              <div class="toggle-option active" data-val="false">No</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-section">
+          <div class="form-section-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Analyze Accounts Skill
+          </div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:10px;line-height:1.6">
+            Run from Claude Code terminal:<br>
+            <code style="font-size:11px;background:var(--bg3);padding:2px 6px;border-radius:4px">/analyze-accounts CreatorName</code> — single account<br>
+            <code style="font-size:11px;background:var(--bg3);padding:2px 6px;border-radius:4px">/analyze-accounts Name1 Name2 Name3</code> — compare multiple<br>
+            <span style="margin-top:4px;display:block">Extracts hooks, style DNA, cross-account patterns. Edit the skill prompt below to customize what Claude does.</span>
+          </div>
+          <div class="form-group">
+            <label style="display:flex;justify-content:space-between;align-items:center">
+              Skill Prompt
+              <span id="skill-path-hint" style="font-size:10px;color:var(--text3);font-weight:400"></span>
+            </label>
+            <textarea id="skill-analyze-content" rows="18" style="font-family:monospace;font-size:11.5px;line-height:1.6;resize:vertical" placeholder="Loading skill content..."></textarea>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
+            <button class="btn btn-ghost btn-sm" onclick="Settings.editInCLI()" title="Copy command to open this skill in your Claude CLI terminal" style="display:flex;align-items:center;gap:5px">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              Edit in Claude CLI
+            </button>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-primary btn-sm" onclick="Settings.saveSkill()">Save Skill</button>
+              <button class="btn btn-ghost btn-sm" onclick="Settings.reloadSkill()">↺ Reload</button>
+            </div>
+          </div>
+        </div>
+        </div><!-- /settings-col right -->
+        </div><!-- /settings-grid -->
+
+        <!-- AI Providers (full-width below grid) -->
+        <div class="form-section" style="margin-top:24px">
+          <div class="form-section-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            AI Providers — Free Tier APIs
+          </div>
+          <p style="font-size:12px;color:var(--text3);margin-bottom:14px">Used for the ✨ AI Topics feature on the Sources page. All providers offer free tiers — no cost required.</p>
+          <div id="ai-providers-list">
+            <div style="color:var(--text3);font-size:12px">Loading providers...</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── SCRAPER ─── -->
+    <div class="screen" id="screen-scraper">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>Scraper</h1>
+          <span class="screen-subtitle">Connect your social accounts and pull your own data</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="Scraper.refresh()" style="margin-left:auto">↻ Refresh</button>
+      </div>
+      <div class="screen-body">
+
+        <!-- Tabs -->
+        <div class="tabs" id="scraper-tabs">
+          <div class="tab active" data-tab="scraper-accounts">My Accounts</div>
+          <div class="tab" data-tab="scraper-fetch">Fetch Data</div>
+          <div class="tab" data-tab="scraper-browser">Browser Scrape</div>
+          <div class="tab" data-tab="scraper-datasets">Datasets</div>
+        </div>
+
+        <!-- My Accounts -->
+        <div class="tab-content active" id="tab-scraper-accounts" style="margin-top:18px">
+          <div style="font-size:13px;color:var(--text3);margin-bottom:16px">
+            Connect your own accounts via OAuth to pull your profile, posts, and insights.
+          </div>
+          <div id="scraper-accounts-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px"></div>
+        </div>
+
+        <!-- Fetch Data -->
+        <div class="tab-content" id="tab-scraper-fetch" style="margin-top:18px;max-width:480px">
+          <div class="form-group">
+            <label>Platform</label>
+            <select id="scraper-platform-select"></select>
+          </div>
+          <div class="form-group">
+            <label>Data type</label>
+            <select id="scraper-kind-select">
+              <option value="post">Posts</option>
+              <option value="profile">Profile</option>
+              <option value="comment">Comments</option>
+              <option value="insight">Insights</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Max items</label>
+            <input type="number" id="scraper-max-items" value="50" min="1" max="500" style="width:100px" />
+          </div>
+          <button class="btn btn-primary" id="scraper-run-btn" onclick="Scraper.runFetch()">▶ Run Fetch</button>
+
+          <!-- Status -->
+          <div id="scraper-status-bar" style="display:none;margin-top:16px;padding:12px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:13px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div id="scraper-status-dot" style="width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+              <span id="scraper-status-text">Idle</span>
+            </div>
+            <div id="scraper-status-result" style="margin-top:8px;display:none;color:var(--text2)"></div>
+          </div>
+        </div>
+
+        <!-- Browser Scrape -->
+        <div class="tab-content" id="tab-scraper-browser" style="margin-top:18px;max-width:480px">
+          <div style="font-size:13px;color:var(--text3);margin-bottom:16px">
+            Scrape any public profile using the logged-in browser session. No OAuth needed.
+          </div>
+          <div class="form-group">
+            <label>Platform</label>
+            <select id="browser-platform-select">
+              <option value="linkedin">💼 LinkedIn</option>
+              <option value="twitter">🐦 X / Twitter</option>
+              <option value="instagram">📸 Instagram</option>
+              <option value="tiktok">🎵 TikTok</option>
+              <option value="facebook">🔵 Facebook</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Profile URL or handle</label>
+            <input type="text" id="browser-target" placeholder="e.g. ahmedza3ter or https://www.linkedin.com/in/ahmedza3ter/" style="width:100%" />
+          </div>
+          <div class="form-group">
+            <label>Max posts</label>
+            <input type="number" id="browser-max-records" value="50" min="1" max="500" style="width:100px" />
+          </div>
+          <div class="form-group" style="display:flex;align-items:center;gap:8px">
+            <input type="checkbox" id="browser-enrich-posts" />
+            <label for="browser-enrich-posts" style="margin:0;cursor:pointer">Enrich posts <span style="color:var(--text3);font-size:11px">(real captions, likes, videos — visits each post; recommended for Instagram)</span></label>
+          </div>
+          <div class="form-group" style="display:flex;align-items:center;gap:8px">
+            <input type="checkbox" id="browser-fetch-comments" />
+            <label for="browser-fetch-comments" style="margin:0;cursor:pointer">Fetch comments per post <span style="color:var(--text3);font-size:11px">(slower — visits each post)</span></label>
+          </div>
+          <div id="browser-comments-limit-group" class="form-group" style="display:none">
+            <label>Max comments per post</label>
+            <input type="number" id="browser-max-comments" value="20" min="1" max="100" style="width:100px" />
+          </div>
+          <button class="btn btn-primary" onclick="Scraper.runBrowserFetch()">▶ Run Browser Scrape</button>
+
+          <div id="browser-status-bar" style="display:none;margin-top:16px;padding:12px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:13px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div id="browser-status-dot" style="width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+              <span id="browser-status-text">Idle</span>
+            </div>
+            <div id="browser-status-result" style="margin-top:8px;display:none;color:var(--text2)"></div>
+          </div>
+        </div>
+
+        <!-- Datasets -->
+        <div class="tab-content" id="tab-scraper-datasets" style="margin-top:18px">
+          <div id="scraper-datasets-list"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── CREATOR PROFILE ─── -->
+    <div class="screen" id="screen-creator-profile">
+      <div class="screen-header">
+        <button class="btn btn-ghost btn-sm" onclick="App.goTo('creators')" style="margin-right:8px">← Back</button>
+        <h1 id="profile-title">Creator Profile</h1>
+        <div style="margin-left:auto;display:flex;gap:8px">
+          <button id="profile-refresh-btn" class="btn btn-ghost btn-sm" onclick="CreatorProfile.refresh()">↻ Refresh</button>
+          <button class="btn btn-ghost btn-sm" onclick="CreatorProfile.openEdit()">Edit</button>
+          <button class="btn btn-primary btn-sm" onclick="Analysis.selectCreator(CreatorProfile.currentId);App.goTo('analysis')">Analyze</button>
+        </div>
+      </div>
+      <div class="screen-body">
+        <div id="profile-content"></div>
+      </div>
+    </div>
+
+    <!-- ─── YOUTUBE PACK ─── -->
+    <div class="screen" id="screen-youtube">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>YouTube Content Pack</h1>
+          <span class="screen-subtitle">Turn a transcript into description, chapters, titles, tags & Shorts clips</span>
+        </div>
+      </div>
+      <div class="screen-body">
+        <div class="grid-2" style="gap:24px;align-items:start">
+
+          <!-- Left: inputs -->
+          <div>
+            <!-- Source toggle -->
+            <div class="form-group">
+              <label>Transcript source</label>
+              <div class="toggle-group" id="yt-source-toggle">
+                <div class="toggle-option active" data-val="text" onclick="YouTube.toggleSource('text')">Paste text</div>
+                <div class="toggle-option" data-val="url" onclick="YouTube.toggleSource('url')">YouTube URL</div>
+              </div>
+            </div>
+            <div class="form-group" id="yt-source-text">
+              <label>Transcript <span style="color:var(--text3);font-weight:400">(paste raw text or SRT content)</span></label>
+              <textarea id="yt-transcript" rows="8" placeholder="Paste the video transcript here…"></textarea>
+            </div>
+            <div class="form-group" id="yt-source-url" style="display:none">
+              <label>YouTube URL</label>
+              <input type="text" id="yt-url" placeholder="https://www.youtube.com/watch?v=…" />
+              <div style="font-size:11px;color:var(--text3);margin-top:4px">Fetches transcript automatically (requires youtube-transcript-api)</div>
+            </div>
+
+            <!-- Project -->
+            <div class="form-group">
+              <label>Channel / Project name</label>
+              <input type="text" id="yt-project-name" placeholder="My Channel" />
+            </div>
+            <div class="form-group">
+              <label>Channel description <span style="color:var(--text3);font-weight:400">(optional)</span></label>
+              <textarea id="yt-project-desc" rows="2" placeholder="Brand voice, audience, niche…"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Output language</label>
+              <div class="toggle-group" id="yt-lang-toggle">
+                <div class="toggle-option active" data-val="en" onclick="this.closest('.toggle-group').querySelectorAll('.toggle-option').forEach(e=>e.classList.remove('active'));this.classList.add('active')">English</div>
+                <div class="toggle-option" data-val="ar" onclick="this.closest('.toggle-group').querySelectorAll('.toggle-option').forEach(e=>e.classList.remove('active'));this.classList.add('active')">Arabic</div>
+                <div class="toggle-option" data-val="fr" onclick="this.closest('.toggle-group').querySelectorAll('.toggle-option').forEach(e=>e.classList.remove('active'));this.classList.add('active')">French</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Arabic dialect <span style="color:var(--text3);font-weight:400">(if Arabic)</span></label>
+              <select id="yt-dialect">
+                <option value="">— MSA / not applicable —</option>
+                <option value="egyptian">Egyptian</option>
+                <option value="ksa">Saudi (KSA)</option>
+                <option value="uae">Emirati (UAE)</option>
+                <option value="kuwait">Kuwaiti</option>
+              </select>
+            </div>
+
+            <!-- Keywords -->
+            <div class="form-group">
+              <label>Keywords</label>
+              <div id="yt-keywords-list" style="margin-bottom:8px"></div>
+              <div style="display:flex;gap:8px">
+                <input type="text" id="yt-kw-input" placeholder="Add keyword…" style="flex:1" onkeydown="if(event.key==='Enter'){YouTube.addKeyword();event.preventDefault()}" />
+                <select id="yt-kw-priority" style="width:auto">
+                  <option value="high">High</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="low">Low</option>
+                </select>
+                <button class="btn btn-secondary btn-sm" onclick="YouTube.addKeyword()">Add</button>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" id="yt-generate-btn" onclick="YouTube.generate()" style="width:100%;margin-top:6px">✨ Generate Content Pack</button>
+          </div>
+
+          <!-- Right: output -->
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+              <div class="section-title" style="margin:0;flex:1">Output</div>
+              <button class="btn btn-ghost btn-sm" onclick="YouTube.copyAll()">📋 Copy all</button>
+            </div>
+            <div id="yt-placeholder" style="color:var(--text3);font-size:13px;padding:20px 0">Your content pack will appear here…</div>
+            <div id="yt-output" style="display:none"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── TRENDS ─── -->
+    <div class="screen" id="screen-trends">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>Trends</h1>
+          <span class="screen-subtitle">Google &amp; YouTube trending for the Arab market</span>
+        </div>
+        <div style="margin-left:auto">
+          <button class="btn btn-ghost btn-sm" onclick="Trends.refresh()">↻ Refresh</button>
+        </div>
+      </div>
+      <div class="screen-body">
+
+        <!-- Tabs -->
+        <div class="tabs" id="trends-tabs" style="margin-bottom:20px">
+          <div class="tab active" data-tab="now" onclick="Trends.switchTab('now')">Trending Now</div>
+          <div class="tab" data-tab="keywords" onclick="Trends.switchTab('keywords')">Keyword Tracker</div>
+        </div>
+
+        <!-- ── Tab 1: Trending Now ── -->
+        <div class="tab-content active" id="trends-tab-now">
+          <div class="toolbar" style="margin-bottom:20px;flex-wrap:wrap;gap:10px">
+            <div class="filter-bar" id="trends-region-chips">
+              <span class="filter-chip active" data-region="AE" onclick="Trends.setRegion(this,'AE')">&#x1F1E6;&#x1F1EA; UAE</span>
+              <span class="filter-chip" data-region="SA" onclick="Trends.setRegion(this,'SA')">&#x1F1F8;&#x1F1E6; Saudi Arabia</span>
+              <span class="filter-chip" data-region="EG" onclick="Trends.setRegion(this,'EG')">&#x1F1EA;&#x1F1EC; Egypt</span>
+              <span class="filter-chip" data-region="US" onclick="Trends.setRegion(this,'US')">&#x1F1FA;&#x1F1F8; US</span>
+              <span class="filter-chip" data-region="WW" onclick="Trends.setRegion(this,'WW')">&#x1F310; Worldwide</span>
+            </div>
+            <span id="trends-cache-indicator" style="font-size:11px;color:var(--text3);margin-left:auto;align-self:center"></span>
+          </div>
+
+          <div class="grid-2" style="gap:24px;align-items:start">
+            <!-- Google Trends column -->
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Google Trending Searches
+              </div>
+              <div id="trends-google-chips" style="min-height:60px"></div>
+            </div>
+
+            <!-- YouTube Trending column -->
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span style="display:flex;align-items:center;gap:6px">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+                  YouTube Trending
+                </span>
+                <select id="trends-yt-category" onchange="Trends.loadYouTubeTrending()" style="font-size:11px;padding:3px 8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text);border-radius:6px;cursor:pointer">
+                  <option value="">All Categories</option>
+                  <option value="27">Education &amp; Business</option>
+                  <option value="22">People &amp; Blogs</option>
+                  <option value="25">News &amp; Politics</option>
+                  <option value="26">Howto &amp; Style</option>
+                  <option value="28">Science &amp; Tech</option>
+                  <option value="24">Entertainment</option>
+                </select>
+              </div>
+              <div id="trends-yt-list" style="min-height:60px"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Tab 2: Keyword Tracker ── -->
+        <div class="tab-content" id="trends-tab-keywords" style="display:none">
+          <div style="max-width:680px">
+
+            <div class="form-group">
+              <label>Keywords <span style="font-weight:400;color:var(--text3)">(up to 5, compare interest over time)</span></label>
+              <div id="trends-kw-inputs" style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;gap:8px">
+                  <input type="text" class="trends-kw-input" placeholder="Keyword 1" style="flex:1" onkeydown="if(event.key==='Enter')Trends.fetchKeywordInterest()" />
+                  <button class="btn btn-ghost btn-sm" onclick="Trends.addKeywordInput()">+ Add</button>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;margin-bottom:20px">
+              <div class="form-group" style="margin:0;min-width:140px">
+                <label>Region</label>
+                <select id="trends-kw-region">
+                  <option value="AE">UAE</option>
+                  <option value="SA">Saudi Arabia</option>
+                  <option value="EG">Egypt</option>
+                  <option value="US">US</option>
+                  <option value="WW">Worldwide</option>
+                </select>
+              </div>
+              <div>
+                <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Timeframe</div>
+                <div class="filter-bar" id="trends-kw-timeframe">
+                  <span class="filter-chip active" data-tf="7d">7d</span>
+                  <span class="filter-chip" data-tf="30d">30d</span>
+                  <span class="filter-chip" data-tf="90d">90d</span>
+                  <span class="filter-chip" data-tf="12mo">12mo</span>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="Trends.fetchKeywordInterest()" style="margin-bottom:2px">Search Trends</button>
+            </div>
+
+            <div id="trends-kw-results"></div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── ENGAGE ─── -->
+    <div class="screen" id="screen-engage">
+      <div class="screen-header">
+        <div class="screen-header-group">
+          <h1>Engage</h1>
+          <span class="screen-subtitle">Daily LinkedIn posts to comment on — ranked by AI</span>
+        </div>
+      </div>
+      <div class="screen-body">
+        <div class="toolbar">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <button class="btn btn-primary btn-sm" id="engage-refresh-btn" onclick="Engage.refresh()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+              Refresh Today's Posts
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="Engage.clearDone()">Clear Engaged/Skipped</button>
+          </div>
+          <div class="spacer"></div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <label style="font-size:12px;color:var(--text3)">Status:</label>
+            <select id="engage-filter-status" onchange="Engage.applyFilters()" style="font-size:12px;padding:4px 8px">
+              <option value="">All</option>
+              <option value="pending">Pending</option>
+              <option value="engaged">Engaged</option>
+              <option value="skipped">Skipped</option>
+            </select>
+            <label style="font-size:12px;color:var(--text3)">Min Score:</label>
+            <select id="engage-filter-score" onchange="Engage.applyFilters()" style="font-size:12px;padding:4px 8px">
+              <option value="">Any</option>
+              <option value="7">7+</option>
+              <option value="8">8+</option>
+              <option value="9">9+</option>
+            </select>
+            <label style="font-size:12px;color:var(--text3)">Source:</label>
+            <select id="engage-filter-source" onchange="Engage.applyFilters()" style="font-size:12px;padding:4px 8px">
+              <option value="">All Sources</option>
+              <option value="connection">My Feed</option>
+              <option value="hashtag">Hashtags</option>
+              <option value="specific_person">Tracked Creators</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Refresh status bar -->
+        <div id="engage-status-bar" style="display:none;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--text2)">
+          <span id="engage-status-text">Fetching LinkedIn posts... this takes ~60 seconds.</span>
+        </div>
+
+        <!-- Post cards -->
+        <div id="engage-cards" style="display:flex;flex-direction:column;gap:12px">
+          <div class="empty-state">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.4;margin-bottom:8px"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            <div>No posts yet — click <strong>Refresh Today's Posts</strong> to fetch from LinkedIn.</div>
+            <div style="font-size:12px;color:var(--text3);margin-top:6px">Make sure you've added your LinkedIn li_at cookie in Settings → Scraping Options.</div>
+          </div>
+        </div>
+
+        <!-- AI Recommendations section -->
+        <div style="margin-top:32px">
+          <div class="form-section-title" style="margin-bottom:12px">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            AI-Recommended Searches
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+            <button class="btn btn-ghost btn-sm" id="engage-ai-rec-btn" onclick="Engage.getAIRecommendations()">
+              ✦ Get AI Suggestions
+            </button>
+            <span id="engage-ai-rec-status" style="font-size:12px;color:var(--text3)"></span>
+          </div>
+          <div id="engage-ai-rec-chips" style="display:flex;flex-wrap:wrap;gap:8px;min-height:0"></div>
+        </div>
+
+        <!-- Search Profiles section -->
+        <div style="margin-top:32px">
+          <div class="form-section-title" style="margin-bottom:16px">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Search LinkedIn Profiles
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:16px">
+            <div class="form-group" style="flex:2;min-width:200px;margin-bottom:0">
+              <label>Keywords</label>
+              <input type="text" id="engage-search-keywords" placeholder="marketing manager, CMO, Arab business, AI consultant..." />
+            </div>
+            <div class="form-group" style="flex:1;min-width:160px;margin-bottom:0">
+              <label>Location (optional)</label>
+              <select id="engage-search-location-preset" onchange="Engage.locationPresetChange()" style="width:100%">
+                <option value="">Worldwide</option>
+                <optgroup label="Gulf">
+                  <option value="United Arab Emirates">UAE</option>
+                  <option value="Dubai, United Arab Emirates">Dubai, UAE</option>
+                  <option value="Abu Dhabi, United Arab Emirates">Abu Dhabi, UAE</option>
+                  <option value="Saudi Arabia">Saudi Arabia</option>
+                  <option value="Riyadh, Saudi Arabia">Riyadh, KSA</option>
+                  <option value="Qatar">Qatar</option>
+                  <option value="Kuwait">Kuwait</option>
+                  <option value="Bahrain">Bahrain</option>
+                  <option value="Oman">Oman</option>
+                </optgroup>
+                <optgroup label="Levant &amp; North Africa">
+                  <option value="Egypt">Egypt</option>
+                  <option value="Cairo, Egypt">Cairo, Egypt</option>
+                  <option value="Jordan">Jordan</option>
+                  <option value="Lebanon">Lebanon</option>
+                  <option value="Morocco">Morocco</option>
+                </optgroup>
+                <option value="__custom__">Custom…</option>
+              </select>
+              <input type="text" id="engage-search-location-custom"
+                     aria-label="Custom location"
+                     placeholder="Type a location…"
+                     style="display:none;margin-top:6px;width:100%" />
+            </div>
+            <div class="form-group" style="width:80px;margin-bottom:0">
+              <label>Max</label>
+              <input type="number" id="engage-search-max" value="30" min="5" max="100" />
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="Engage.searchProfiles()" style="white-space:nowrap;padding:8px 16px">Search People</button>
+          </div>
+          <div id="engage-search-results" style="display:none">
+            <div id="engage-search-table"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /#main -->
+</div><!-- /#app -->
+
+<!-- ─── MODALS ─── -->
+<div id="modal-overlay" class="modal-overlay" style="display:none" onclick="App.closeModal(event)">
+  <div class="modal" id="modal-box" onclick="event.stopPropagation()">
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- ─── TOAST CONTAINER ─── -->
+<div id="toast-container"></div>
+
+<!-- ─── JS ─── -->
+<script src="/static/js/api.js"></script>
+<script src="/static/js/app.js"></script>
+<script src="/static/js/feed.js"></script>
+<script src="/static/js/creators.js"></script>
+<script src="/static/js/sources.js"></script>
+<script src="/static/js/analysis.js"></script>
+<script src="/static/js/intelligence.js"></script>
+<script src="/static/js/writer.js"></script>
+<script src="/static/js/style.js"></script>
+<script src="/static/js/settings.js"></script>
+<script src="/static/js/creator-profile.js"></script>
+<script src="/static/js/scraper.js"></script>
+<script src="/static/js/youtube.js"></script>
+<script src="/static/js/trends.js"></script>
+<script src="/static/js/engage.js"></script>
+</body>
+</html>

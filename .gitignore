@@ -1,0 +1,30 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Sensitive data
+data/linkedin_session/
+data/scraper_chrome_profile/
+data/scraper_credentials/
+data/scraper_tokens/
+data/*.db
+data/*.db-shm
+data/*.db-wal
+
+# Datasets (keep structure, not content)
+data/scraper_datasets/
+
+# OS
+.DS_Store
+*.swp
+*.swo
+
+# Env
+.env
+.env.*

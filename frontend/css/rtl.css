@@ -1,0 +1,35 @@
+/* RTL / Arabic overrides */
+
+[lang=ar], [dir=rtl] {
+  font-family: var(--font-ar);
+  direction: rtl;
+  text-align: right;
+}
+
+[dir=rtl] .screen-header { flex-direction: row-reverse; }
+[dir=rtl] nav .nav-item { flex-direction: row-reverse; }
+[dir=rtl] nav .nav-item.active::before { left: auto; right: 0; border-radius: 2px 0 0 2px; }
+[dir=rtl] nav .nav-item .badge { margin-left: 0; margin-right: auto; }
+[dir=rtl] .creator-row { flex-direction: row-reverse; }
+[dir=rtl] .creator-actions { margin-right: auto; margin-left: 0; }
+[dir=rtl] .feed-item-actions { flex-direction: row-reverse; }
+[dir=rtl] .modal-footer { flex-direction: row-reverse; }
+[dir=rtl] .tag { margin-right: 0; margin-left: 4px; }
+[dir=rtl] .chat-bubble.user { align-self: flex-start; border-bottom-right-radius: 10px; border-bottom-left-radius: 3px; }
+[dir=rtl] .chat-bubble.assistant { align-self: flex-end; border-bottom-left-radius: 10px; border-bottom-right-radius: 3px; }
+[dir=rtl] .bar-row { flex-direction: row-reverse; }
+[dir=rtl] .bar-value { text-align: left; }
+[dir=rtl] .tabs { flex-direction: row-reverse; }
+[dir=rtl] .filter-bar { flex-direction: row-reverse; }
+[dir=rtl] .form-group label { text-align: right; }
+
+/* Arabic text in draft */
+.ar-text {
+  font-family: var(--font-ar);
+  direction: rtl;
+  text-align: right;
+  line-height: 2;
+}
+
+[dir=rtl] .bulk-popover { left: auto; right: 0; }
+[dir=rtl] #creators-filter-bar { flex-direction: row-reverse; }

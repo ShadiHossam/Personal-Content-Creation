@@ -1,0 +1,92 @@
+{
+   "optInFooter": {
+      "message": "By using this extension you agree to our {{terms}} and acknowledge our {{privacy}}."
+   },
+   "optInPrivacyLinkText": {
+      "message": "Privacy Policy"
+   },
+   "optInTermsLinkText": {
+      "message": "Terms of Services"
+   },
+   "optionsAgree": {
+      "message": "Agree"
+   },
+   "optionsDisagree": {
+      "message": "Disagree"
+   },
+   "optionsDisagreeModalBody": {
+      "message": "You'll miss out on our smartest extraction tools. You can always change this later in Settings."
+   },
+   "optionsDisagreeModalContinue": {
+      "message": "Continue with Basic Only"
+   },
+   "optionsDisagreeModalEnable": {
+      "message": "Enable Presets"
+   },
+   "optionsDisagreeModalTitle": {
+      "message": "Are you sure?"
+   },
+   "optionsPrivacyText": {
+      "message": "Instant Data Scraper needs to process the URLs you visit and the information about such URLs (\"Browsing Data\") to provide you with our Presets feature. Certain details collected in the Browsing Data could qualify as sensitive personal information under applicable privacy laws and regulations, and we need your consent to process this data. Since our affiliated companies facilitate some of our features and services, the Browsing Data may be shared with these affiliates. Some of our affiliated companies may also use the Browsing Data to create and provide their market intelligence services. These affiliated companies may disclose some of this information to its customers as part of these market intelligence services. By clicking \"Accept\" below you agree to the use of your Browsing Data in this way. You can opt-out of this use of your information at any time, but please note that this may affect your ability to access some of our services."
+   },
+   "optionsSubtitle": {
+      "message": "Whether it's 10 rows or 10,000, Instant Data Scraper detects tables, handles infinite scrolls, and cleans the data for you. Turn any website into a spreadsheet in seconds - no coding required."
+   },
+   "optionsTitle": {
+      "message": "Turn Any Website Into a Spreadsheet In a Second."
+   },
+   "optionsWelcomeIds": {
+      "message": "Instant Data Scraper!"
+   },
+   "optionsWelcomeTo": {
+      "message": "Welcome to "
+   },
+   "popupAdvancedFeaturesDisabled": {
+      "message": "Presets are disabled"
+   },
+   "popupApply": {
+      "message": "Apply"
+   },
+   "popupOptInSubtitle": {
+      "message": "Skip the manual setup! Instant Data Scraper will identify the most popular scraping setups used by our users on the same URL. Just select a community-recommended configuration and start extracting data instantly."
+   },
+   "popupOptInTitlePart1": {
+      "message": "New features. "
+   },
+   "popupOptInTitlePart2": {
+      "message": "Better results"
+   },
+   "popupOptInTitlePart3": {
+      "message": "."
+   },
+   "popupOptOutConfirmTitle": {
+      "message": "Are you sure you want to lose access to Presets?"
+   },
+   "popupOptOutDowngrade": {
+      "message": "Downgrade Anyway"
+   },
+   "popupOptOutKeepFeatures": {
+      "message": "Wait, Keep Presets"
+   },
+   "popupPrivacyPolicy": {
+      "message": "Privacy Policy"
+   },
+   "popupSavedConfigEmpty": {
+      "message": "No presets yet"
+   },
+   "popupSavedConfigPlaceholder": {
+      "message": "Presets"
+   },
+   "popupSettingsAdvancedFeatures": {
+      "message": "Presets"
+   },
+   "popupSettingsDescription": {
+      "message": "Instant Data Scraper can automatically identify popular data columns and navigation buttons used by others on the same URL, allowing you to bypass manual setup and achieve high-quality results with a single click."
+   },
+   "popupSettingsTitle": {
+      "message": "Settings"
+   },
+   "popupTerms": {
+      "message": "Terms"
+   }
+}

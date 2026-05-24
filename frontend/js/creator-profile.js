@@ -80,7 +80,7 @@ const CreatorProfile = {
         || (creator.twitter_handle ? `https://unavatar.io/twitter/${encodeURIComponent(creator.twitter_handle)}` : null)
         || (creator.instagram_handle ? `https://unavatar.io/instagram/${encodeURIComponent(creator.instagram_handle)}` : null);
       const avatar = avatarSrc
-        ? `<img src="${App.escape(avatarSrc)}" class="profile-avatar" onerror="this.onerror=null;this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\\'profile-avatar profile-avatar-fallback\\'></div>')">`
+        ? `<img src="${App.escape(App.proxyImg(avatarSrc))}" class="profile-avatar" referrerpolicy="no-referrer" onerror="this.onerror=null;this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\\'profile-avatar profile-avatar-fallback\\'></div>')">`
         : `<div class="profile-avatar profile-avatar-fallback">${this._iconPerson}</div>`;
 
       const catIsCompetitor = creator.category === 'competitor';
@@ -233,7 +233,7 @@ const CreatorProfile = {
 
     if (item.platform === 'youtube') {
       const thumbContent = item.image_url
-        ? `<img src="${App.escape(item.image_url)}" loading="lazy" alt="${App.escape(item.title || 'Video thumbnail')}">`
+        ? `<img src="${App.escape(App.proxyImg(item.image_url))}" loading="lazy" referrerpolicy="no-referrer" alt="${App.escape(item.title || 'Video thumbnail')}">`
         : `<div class="post-card-video-thumb-placeholder">${iconPlay}</div>`;
 
       const transcriptHtml = item.transcript
@@ -274,7 +274,7 @@ const CreatorProfile = {
     const hasImage = !!item.image_url;
 
     const imageTopHtml = hasImage
-      ? `<div class="post-card-image-wrap"><img src="${App.escape(item.image_url)}" loading="lazy" alt="" class="post-card-image" onerror="this.closest('.post-card-image-wrap').remove()"></div>`
+      ? `<div class="post-card-image-wrap"><img src="${App.escape(App.proxyImg(item.image_url))}" loading="lazy" referrerpolicy="no-referrer" alt="" class="post-card-image" onerror="this.closest('.post-card-image-wrap').remove()"></div>`
       : '';
 
     const footerStats = [
@@ -614,6 +614,22 @@ const CreatorProfile = {
       App.toast('Failed: ' + e.message, 'error');
       btn.disabled = false;
       btn.innerHTML = original;
+    }
+  },
+
+  async deleteCurrent() {
+    if (!this.currentId) return;
+    const nameEl = document.getElementById('profile-title');
+    const name = nameEl?.textContent || 'this creator';
+    if (!confirm(`Delete ${name} and all their content? This cannot be undone.`)) return;
+    try {
+      await API.del(`/api/creators/${this.currentId}`);
+      App.toast('Creator deleted', 'success');
+      this.currentId = null;
+      App.goTo('creators');
+      if (typeof Creators !== 'undefined' && Creators.load) Creators.load();
+    } catch (e) {
+      App.toast('Delete failed: ' + e.message, 'error');
     }
   },
 };

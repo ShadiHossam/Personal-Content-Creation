@@ -358,7 +358,11 @@ const Scraper = (() => {
           </tbody>
         </table>`;
     } catch (e) {
-      el.innerHTML = `<div style="color:var(--text3);font-size:13px">Error loading datasets: ${e.message}</div>`;
+      el.textContent = '';
+      const errEl = document.createElement('div');
+      errEl.style.cssText = 'color:var(--text3);font-size:13px';
+      errEl.textContent = 'Error loading datasets: ' + e.message;
+      el.appendChild(errEl);
     }
   }
 
@@ -458,7 +462,12 @@ const Scraper = (() => {
     return `${Math.floor(h / 24)}d ago`;
   }
 
-  return { init, refresh, startConnect, disconnect, runFetch, runBrowserFetch, viewDataset, deleteDataset, _saveCredentials };
+  function _stopPolling() {
+    if (_pollTimer) { clearInterval(_pollTimer); _pollTimer = null; }
+    if (_browserPollTimer) { clearInterval(_browserPollTimer); _browserPollTimer = null; }
+  }
+
+  return { init, refresh, startConnect, disconnect, runFetch, runBrowserFetch, viewDataset, deleteDataset, _saveCredentials, _stopPolling };
 })();
 
 // Hook into app lifecycle
@@ -467,11 +476,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const origGoTo = App.goTo;
   const _scraperInit = { done: false };
   App.goTo = function(screen, ...args) {
+    const prevScreen = App.currentScreen;
     origGoTo.call(this, screen, ...args);
     if (screen === 'scraper' && !_scraperInit.done) {
       _scraperInit.done = true;
       Scraper.init();
     }
+    // Stop any background polling when leaving the scraper screen
+    if (prevScreen === 'scraper' && screen !== 'scraper') Scraper._stopPolling();
   };
   // Also check if we landed on scraper via OAuth redirect
   if (new URLSearchParams(window.location.search).has('scraper_connected') ||

@@ -3,6 +3,19 @@ const YouTube = (() => {
 
   function init() {
     renderKeywords();
+    _wireLangToggle();
+  }
+
+  function _wireLangToggle() {
+    const group = document.getElementById('yt-lang-toggle');
+    if (!group || group.dataset._wired) return;
+    group.dataset._wired = '1';
+    group.querySelectorAll('.toggle-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        group.querySelectorAll('.toggle-option').forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+      });
+    });
   }
 
   // ── Keywords ────────────────────────────────────────────────────────────

@@ -1,5 +1,7 @@
 const Settings = {
   current: {},
+  _dirty: false,
+  _dirtyWired: false,
 
   async load() {
     try {
@@ -10,6 +12,37 @@ const Settings = {
     }
     this.loadSkill();
     this.loadAIProviders();
+    this._wireDirtyTracking();
+    this._setDirty(false);
+  },
+
+  _wireDirtyTracking() {
+    if (this._dirtyWired) return;
+    this._dirtyWired = true;
+    const screen = document.getElementById('screen-settings');
+    if (!screen) return;
+    const mark = () => this._setDirty(true);
+    screen.addEventListener('input', mark);
+    screen.addEventListener('change', mark);
+    // Toggle clicks
+    screen.addEventListener('click', (e) => {
+      if (e.target.closest('.toggle-option')) mark();
+    });
+    window.addEventListener('beforeunload', (e) => {
+      if (this._dirty && App.currentScreen === 'settings') {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+  },
+
+  _setDirty(v) {
+    this._dirty = v;
+    const btn = document.querySelector('#screen-settings .screen-header .btn-primary');
+    if (btn) {
+      btn.textContent = v ? 'Save All •' : 'Save All';
+      btn.classList.toggle('btn-dirty', v);
+    }
   },
 
   render() {
@@ -145,21 +178,18 @@ const Settings = {
     const claudeBackend = document.querySelector('#setting-claude-backend-toggle .toggle-option.active')?.dataset.val || 'cli';
     data['claude_backend'] = claudeBackend;
 
-    const yKey = document.getElementById('setting-youtube-key')?.value?.trim();
-    const cKey = document.getElementById('setting-claude-key')?.value?.trim();
-    const aKey = document.getElementById('setting-apify-key')?.value?.trim();
-
-    if (yKey) data['youtube_api_key'] = yKey;
-    if (cKey) data['claude_api_key'] = cKey;
-    if (aKey) data['apify_api_key'] = aKey;
-
-    const twAuthToken = document.getElementById('setting-twitter-auth-token')?.value?.trim();
-    const twCt0 = document.getElementById('setting-twitter-ct0')?.value?.trim();
-    if (twAuthToken) data['twitter_auth_token'] = twAuthToken;
-    if (twCt0) data['twitter_ct0'] = twCt0;
-
-    const liAt = document.getElementById('setting-linkedin-li-at')?.value?.trim();
-    if (liAt) data['linkedin_li_at'] = liAt;
+    // For credential fields, send empty string when user clears them so the value can be removed.
+    const credField = (id, key) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      data[key] = (el.value || '').trim();
+    };
+    credField('setting-youtube-key', 'youtube_api_key');
+    credField('setting-claude-key', 'claude_api_key');
+    credField('setting-apify-key', 'apify_api_key');
+    credField('setting-twitter-auth-token', 'twitter_auth_token');
+    credField('setting-twitter-ct0', 'twitter_ct0');
+    credField('setting-linkedin-li-at', 'linkedin_li_at');
     const liHashtags = document.getElementById('setting-linkedin-hashtags')?.value?.trim();
     if (liHashtags !== undefined) data['linkedin_hashtags'] = liHashtags;
 
@@ -191,6 +221,7 @@ const Settings = {
     try {
       await API.post('/api/settings', data);
       App.toast('Settings saved!', 'success');
+      this._setDirty(false);
       this.load();
     } catch (e) {
       App.toast(e.message, 'error');

@@ -660,6 +660,11 @@ def _enrich_ig_post(page, post_url: str, max_comments: int = 0) -> dict:
             const ogEl = document.querySelector('meta[property="og:description"]');
             const ogDesc = ogEl ? ogEl.getAttribute('content') || '' : '';
 
+            // ── Timestamp ──────────────────────────────────────────────────
+            // Instagram post pages have <time datetime="ISO-8601">
+            const timeEl = document.querySelector('time[datetime]');
+            const timestamp = timeEl ? timeEl.getAttribute('datetime') || '' : '';
+
             // ── Video ─────────────────────────────────────────────────────
             const videoEl = document.querySelector('video');
             let videoUrl = '', videoPoster = '';
@@ -708,7 +713,7 @@ def _enrich_ig_post(page, post_url: str, max_comments: int = 0) -> dict:
                 }
             }
 
-            return { ogDesc, videoUrl, videoPoster, comments };
+            return { ogDesc, timestamp, videoUrl, videoPoster, comments };
         }""",
         max_comments,
     )
@@ -730,6 +735,8 @@ def _enrich_ig_post(page, post_url: str, max_comments: int = 0) -> dict:
         if m_caption:
             result["caption"] = m_caption.group(1).strip()
 
+    if raw.get("timestamp"):
+        result["timestamp"] = raw["timestamp"]
     if raw.get("videoUrl"):
         result["video_url"] = raw["videoUrl"]
     if raw.get("videoPoster"):

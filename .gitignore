@@ -28,3 +28,6 @@ data/scraper_datasets/
 # Env
 .env
 .env.*
+
+# Claude Code local config
+.claude/

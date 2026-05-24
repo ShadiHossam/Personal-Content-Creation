@@ -1,10 +1,47 @@
 const App = {
   currentScreen: 'dashboard',
+  _lastFocusBeforeModal: null,
 
   init() {
-    // Navigation
+    // Navigation — keyboard-activatable
     document.querySelectorAll('.nav-item').forEach(el => {
+      if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
       el.addEventListener('click', () => this.goTo(el.dataset.screen));
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.goTo(el.dataset.screen); }
+      });
+    });
+
+    // Keyboard a11y for chips / tabs / toggle-options across the app
+    this._wireKeyboardActivation();
+    this._associateLabels();
+    const mo = new MutationObserver(() => { this._wireKeyboardActivation(); this._associateLabels(); });
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    // Global error surfaces — without this, async bugs die silently in the console
+    window.addEventListener('unhandledrejection', (ev) => {
+      const msg = (ev.reason && ev.reason.message) ? ev.reason.message : String(ev.reason);
+      App.toast('Unexpected error: ' + msg, 'error');
+      console.error('Unhandled rejection:', ev.reason);
+    });
+    window.addEventListener('error', (ev) => {
+      if (ev.error) console.error('Window error:', ev.error);
+    });
+
+    // Modal: Escape + focus trap
+    document.addEventListener('keydown', (e) => {
+      const overlay = document.getElementById('modal-overlay');
+      if (!overlay || overlay.style.display !== 'flex') return;
+      if (e.key === 'Escape') { e.preventDefault(); this.closeModal(); return; }
+      if (e.key === 'Tab') this._trapFocus(e, overlay);
+    });
+
+    // Mobile sidebar toggle
+    const ham = document.getElementById('sidebar-toggle');
+    if (ham) ham.addEventListener('click', () => document.body.classList.toggle('sidebar-open'));
+    document.querySelectorAll('.nav-item').forEach(el => {
+      el.addEventListener('click', () => document.body.classList.remove('sidebar-open'));
     });
 
     // Greeting
@@ -13,12 +50,64 @@ const App = {
     const el = document.getElementById('greeting');
     if (el) el.textContent = `${greeting}, Shadi`;
 
-    // Load unread badge
+    // Load unread badge — only poll when tab is visible to avoid background traffic
     this.updateBadge();
-    setInterval(() => this.updateBadge(), 60000);
+    setInterval(() => {
+      if (document.visibilityState === 'visible') this.updateBadge();
+    }, 60000);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') this.updateBadge();
+    });
 
     // Load dashboard
     Dashboard.load();
+  },
+
+  /** Auto-associate labels with the first input/textarea/select in their .form-group. */
+  _associateLabels() {
+    let auto = 0;
+    document.querySelectorAll('.form-group').forEach(group => {
+      const label = group.querySelector(':scope > label');
+      if (!label || label.htmlFor) return;
+      const target = group.querySelector('input, textarea, select');
+      if (!target) return;
+      if (!target.id) target.id = `auto-input-${++auto}-${Date.now().toString(36)}`;
+      label.htmlFor = target.id;
+    });
+  },
+
+  _wireKeyboardActivation() {
+    document.querySelectorAll('.filter-chip, .tab, .toggle-option').forEach(el => {
+      if (el.dataset._kbWired) return;
+      el.dataset._kbWired = '1';
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+      const role = el.classList.contains('tab') ? 'tab' : 'button';
+      if (!el.hasAttribute('role')) el.setAttribute('role', role);
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+      });
+    });
+  },
+
+  _trapFocus(e, overlay) {
+    const focusables = overlay.querySelectorAll(
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  },
+
+  /** Run an async fn while disabling/labeling a button; restores on completion. */
+  async withBusy(btn, busyLabel, fn) {
+    if (!btn) return fn();
+    const wasHTML = btn.innerHTML;
+    btn.disabled = true;
+    if (busyLabel) btn.textContent = busyLabel;
+    try { return await fn(); }
+    finally { btn.disabled = false; btn.innerHTML = wasHTML; }
   },
 
   goTo(screen) {
@@ -64,15 +153,32 @@ const App = {
   },
 
   openModal(html) {
+    this._lastFocusBeforeModal = document.activeElement;
     document.getElementById('modal-content').innerHTML = html;
-    document.getElementById('modal-overlay').style.display = 'flex';
+    const overlay = document.getElementById('modal-overlay');
+    overlay.style.display = 'flex';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    // Focus first focusable after content is in the DOM
+    setTimeout(() => {
+      const first = overlay.querySelector(
+        'input:not([type="hidden"]):not([disabled]), textarea:not([disabled]), select:not([disabled]), button:not([disabled])'
+      );
+      if (first) first.focus();
+    }, 50);
   },
 
   closeModal(e) {
-    document.getElementById('modal-overlay').style.display = 'none';
+    const overlay = document.getElementById('modal-overlay');
+    overlay.style.display = 'none';
     document.getElementById('modal-content').innerHTML = '';
     const box = document.getElementById('modal-box');
     if (box) box.style.width = '';
+    // Restore previous focus
+    if (this._lastFocusBeforeModal && typeof this._lastFocusBeforeModal.focus === 'function') {
+      this._lastFocusBeforeModal.focus();
+    }
+    this._lastFocusBeforeModal = null;
   },
 
   toast(msg, type = '') {
@@ -108,6 +214,24 @@ const App = {
   escape(s) {
     if (!s) return '';
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  },
+
+  // Route CDN images that send Cross-Origin-Resource-Policy: same-origin
+  // through our backend proxy so the browser will display them.
+  proxyImg(url) {
+    if (!url) return '';
+    try {
+      const u = new URL(url, window.location.origin);
+      if (u.protocol !== 'https:') return url;
+      const host = u.hostname.toLowerCase();
+      const blocked = ['.fbcdn.net', '.cdninstagram.com', '.tiktokcdn.com', '.tiktokcdn-us.com', '.twimg.com'];
+      if (blocked.some(s => host === s.slice(1) || host.endsWith(s))) {
+        return '/api/img-proxy?url=' + encodeURIComponent(url);
+      }
+      return url;
+    } catch (_e) {
+      return url;
+    }
   },
 
   detectArabic(text) {
@@ -195,16 +319,24 @@ const Dashboard = {
         el.innerHTML = '<div style="color:var(--text3);font-size:13px;padding:16px 0">No competitor data yet. Add creators and refresh.</div>';
         return;
       }
-      el.innerHTML = landscape.slice(0, 4).map((c, i) => `
+      el.innerHTML = landscape.slice(0, 4).map((c, i) => {
+        const avatarSrc = c.profile_image_url
+          || (c.instagram_handle ? `https://unavatar.io/instagram/${encodeURIComponent(c.instagram_handle)}` : null)
+          || (c.twitter_handle ? `https://unavatar.io/twitter/${encodeURIComponent(c.twitter_handle)}` : null);
+        const avatar = avatarSrc
+          ? `<img src="${App.escape(App.proxyImg(avatarSrc))}" class="creator-avatar" referrerpolicy="no-referrer" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'creator-avatar creator-avatar-fallback',textContent:''}))">`
+          : `<div class="creator-avatar creator-avatar-fallback"></div>`;
+        return `
         <div class="creator-row" onclick="CreatorProfile.open(${c.id})" title="View profile">
-          <div class="creator-avatar" style="font-size:13px;font-weight:700;color:var(--accent)">${i + 1}</div>
+          <div class="creator-rank-badge">${i + 1}</div>
+          ${avatar}
           <div class="creator-info">
             <div class="creator-name">${App.escape(c.name)}</div>
             <div class="creator-meta">${c.post_count} posts · ${c.avg_engagement} avg eng.</div>
           </div>
           <button class="btn btn-ghost btn-sm">View →</button>
-        </div>
-      `).join('');
+        </div>`;
+      }).join('');
     } catch {
       el.innerHTML = '<div style="color:var(--text3);font-size:13px;padding:16px 0">No data yet</div>';
     }

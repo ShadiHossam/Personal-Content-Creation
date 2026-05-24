@@ -101,6 +101,12 @@ def _normalize_direct_instagram(record: dict) -> dict:
         "profile": {
             "name": user.get("full_name") or record.get("og_title") or "",
             "biography": user.get("biography") or "",
+            "image": (
+                user.get("profile_pic_url_hd")
+                or user.get("profile_pic_url")
+                or record.get("og_image")
+                or ""
+            ),
             "followers": user.get("followers"),
             "following": user.get("following"),
             "is_verified": user.get("is_verified"),
@@ -146,12 +152,16 @@ def _normalize_direct_facebook(record: dict) -> dict:
     }
 
 
-def run_direct_cffi(platform: str, target: str) -> dict:
+def run_direct_cffi(platform: str, target: str, max_records: int = 30) -> dict:
     """Method 1: curl_cffi with Chrome fingerprint + saved session cookies.
 
     Raises RuntimeError when the response came back but contains no
     useful data — that signals the cascade to try the next method instead
     of returning a falsely-successful empty result.
+
+    The underlying scrape_demo helpers fetch whatever the public endpoint
+    returns (typically ~12 for Instagram web_profile_info); we trim the
+    record list to max_records so the cap is at least honored downstream.
     """
     from scrape_demo import run_demo
 
@@ -175,6 +185,7 @@ def run_direct_cffi(platform: str, target: str) -> dict:
                 f"twitter direct returned no data (x_status={rec.get('x_status')}, "
                 f"syndication={rec.get('syndication_status')})"
             )
+        out["records"] = out["records"][:max_records]
         return out
     if platform == "instagram":
         rec = run_demo.scrape_instagram(target, cookies=cookies)
@@ -182,6 +193,7 @@ def run_direct_cffi(platform: str, target: str) -> dict:
         api_status = rec.get("api_status") or 0
         if api_status >= 400 and not out["records"] and not out["profile"].get("followers"):
             raise RuntimeError(f"instagram web_profile_info HTTP {api_status}")
+        out["records"] = out["records"][:max_records]
         return out
     if platform == "facebook":
         rec = run_demo.scrape_facebook(target, cookies=cookies)
@@ -196,11 +208,12 @@ def run_direct_cffi(platform: str, target: str) -> dict:
             raise RuntimeError(
                 f"tiktok direct returned no data (status={rec.get('status')})"
             )
+        out["records"] = out["records"][:max_records]
         return out
     raise ValueError(f"unsupported platform for direct_cffi: {platform}")
 
 
-def run_apify_method(platform: str, target: str) -> dict:
+def run_apify_method(platform: str, target: str, max_records: int = 30) -> dict:
     """Method 2: managed Apify actor via apify_dispatch."""
     if not apify_dispatch.get_token():
         raise ApifyRunError("apify_token not configured")
@@ -208,7 +221,7 @@ def run_apify_method(platform: str, target: str) -> dict:
         raise ApifyRunError(f"apify_{platform}_enabled is off")
 
     if platform == "tiktok":
-        profile, posts = apify_dispatch.run_tiktok(target.lstrip("@"))
+        profile, posts = apify_dispatch.run_tiktok(target.lstrip("@"), max_videos=max_records)
         return {
             "profile": {
                 "name": profile.get("nickname") or profile.get("uniqueId") or target,
@@ -224,12 +237,13 @@ def run_apify_method(platform: str, target: str) -> dict:
             "raw": {"profile": profile, "posts": posts},
         }
     if platform == "instagram":
-        result = apify_dispatch.run_instagram(target)
+        result = apify_dispatch.run_instagram(target, max_posts=max_records)
         prof = result.get("profile") or {}
         return {
             "profile": {
                 "name": prof.get("full_name") or prof.get("username") or "",
                 "biography": prof.get("biography") or "",
+                "image": prof.get("profile_pic") or prof.get("profile_pic_url") or "",
                 "followers": prof.get("followers"),
                 "following": prof.get("following"),
                 "is_verified": prof.get("is_verified"),
@@ -256,7 +270,7 @@ def run_apify_method(platform: str, target: str) -> dict:
             "raw": result,
         }
     if platform == "facebook":
-        result = apify_dispatch.run_facebook(target)
+        result = apify_dispatch.run_facebook(target, max_posts=max_records)
         prof = result.get("profile") or {}
         return {
             "profile": {
@@ -273,7 +287,7 @@ def run_apify_method(platform: str, target: str) -> dict:
             "raw": result,
         }
     if platform == "twitter":
-        result = apify_dispatch.run_twitter(target)
+        result = apify_dispatch.run_twitter(target, max_tweets=max_records)
         prof = result.get("profile") or {}
         return {
             "profile": {
@@ -298,7 +312,17 @@ def run_extension_idsmcr(platform: str, target: str, max_records: int = 30) -> d
     from backend.scraper_tool import extension_driver
 
     target_url = _target_to_url(platform, target)
-    return extension_driver.run_idsmcr(platform, target_url, max_records=max_records)
+    # Instagram's profile grid doesn't expose likes/comments/timestamps —
+    # only the post page does. Enrich each post so we get real engagement
+    # numbers instead of zeros.
+    enrich_posts = platform == "instagram"
+    return extension_driver.run_idsmcr(
+        platform,
+        target_url,
+        max_records=max_records,
+        enrich_posts=enrich_posts,
+        max_posts_to_enrich=max_records,
+    )
 
 
 def _target_to_url(platform: str, target: str) -> str:
@@ -338,7 +362,9 @@ DEFAULT_LADDER: dict[str, list[str]] = {
 
 # Only catch failures that mean "this method couldn't get the data" — not
 # programmer bugs like AttributeError or KeyError.
-_EXPECTED_FAILURES = (ApifyRunError, RuntimeError, TimeoutError, OSError, ValueError)
+# ImportError covers missing optional deps (e.g. scrape_demo not installed) —
+# treat as "this method is unavailable" and fall through.
+_EXPECTED_FAILURES = (ApifyRunError, RuntimeError, TimeoutError, OSError, ValueError, ImportError)
 
 
 def run_with_cascade(
@@ -368,12 +394,7 @@ def run_with_cascade(
 
         t0 = time.monotonic()
         try:
-            # Only the extension method currently honors max_records; others
-            # ignore the kwarg via **_ so we can pass uniformly.
-            if method_name == "extension_idsmcr":
-                data = fn(platform, target, max_records=max_records)
-            else:
-                data = fn(platform, target)
+            data = fn(platform, target, max_records=max_records)
             ms = int((time.monotonic() - t0) * 1000)
             attempts.append({"method": method_name, "ok": True, "ms": ms})
             return {

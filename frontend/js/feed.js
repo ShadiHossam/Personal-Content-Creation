@@ -183,14 +183,16 @@ const Feed = {
 
     const platformColor = { linkedin: '#0a66c2', twitter: '#1d9bf0', youtube: '#ff0000' }[item.platform] || 'var(--accent)';
     const body = (item.body || '').length > 300 ? item.body.substring(0, 300) + '...' : item.body;
-    const initial = (item.creator_name || '?')[0].toUpperCase();
+    // Force a single ASCII char for the fallback initial — guarantees no HTML/quote injection.
+    const rawInitial = ((item.creator_name || '?')[0] || '?').toUpperCase();
+    const initial = /[A-Z0-9]/.test(rawInitial) ? rawInitial : '?';
 
     const avatarHtml = item.creator_image_url
-      ? `<img src="${App.escape(item.creator_image_url)}" class="feed-item-avatar" onerror="this.outerHTML='<div class=feed-item-avatar-fallback>${initial}</div>'">`
+      ? `<img src="${App.escape(App.proxyImg(item.creator_image_url))}" class="feed-item-avatar" referrerpolicy="no-referrer" data-fallback-initial="${initial}" onerror="this.outerHTML='<div class=\\'feed-item-avatar-fallback\\'>'+this.dataset.fallbackInitial+'</div>'">`
       : `<div class="feed-item-avatar-fallback">${initial}</div>`;
 
     el.innerHTML = `
-      ${item.image_url ? `<div class="feed-item-image-wrap"><img src="${App.escape(item.image_url)}" loading="lazy" alt="" class="feed-item-image" onerror="this.closest('.feed-item-image-wrap').remove()"></div>` : `<div class="feed-item-platform-bar" style="background:${platformColor}"></div>`}
+      ${item.image_url ? `<div class="feed-item-image-wrap"><img src="${App.escape(App.proxyImg(item.image_url))}" loading="lazy" referrerpolicy="no-referrer" alt="" class="feed-item-image" onerror="this.closest('.feed-item-image-wrap').remove()"></div>` : `<div class="feed-item-platform-bar" style="background:${platformColor}"></div>`}
       <div class="feed-item-content">
         <div class="feed-item-header">
           ${avatarHtml}

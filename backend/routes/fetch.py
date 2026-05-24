@@ -224,19 +224,33 @@ async def fetch_creator(
                     continue
                 if _after_until(pub, until):
                     continue
-                if db.query(ContentItem).filter(ContentItem.url == url).first():
+                new_likes = _parse_int(rec.get("likes"))
+                new_comments = _parse_int(rec.get("comments_count") or rec.get("comments"))
+                new_image = rec["images"][0] if rec.get("images") else rec.get("image_url") or None
+                new_body = (rec.get("caption") or rec.get("text", ""))[:2000]
+                new_format = "video" if rec.get("has_video") or rec.get("is_video") else ("image" if rec.get("images") or rec.get("image_url") else "text")
+
+                existing = db.query(ContentItem).filter(ContentItem.url == url).first()
+                if existing:
+                    # Refresh engagement / timestamp / media for existing posts.
+                    if new_likes:    existing.likes = new_likes
+                    if new_comments: existing.comments_count = new_comments
+                    if pub and not existing.published_at: existing.published_at = pub
+                    if new_image and not existing.image_url: existing.image_url = new_image
+                    if new_body and (not existing.body or len(new_body) > len(existing.body)):
+                        existing.body = new_body
                     continue
                 db.add(ContentItem(
                     creator_id=creator_id,
                     platform="instagram",
                     url=url,
-                    body=(rec.get("caption") or rec.get("text", ""))[:2000],
+                    body=new_body,
                     published_at=pub,
-                    likes=_parse_int(rec.get("likes")),
-                    comments_count=_parse_int(rec.get("comments")),
+                    likes=new_likes,
+                    comments_count=new_comments,
                     shares=0,
-                    image_url=rec["images"][0] if rec.get("images") else rec.get("image_url") or None,
-                    format="video" if rec.get("has_video") or rec.get("is_video") else ("image" if rec.get("images") or rec.get("image_url") else "text"),
+                    image_url=new_image,
+                    format=new_format,
                 ))
                 new_count += 1
         except Exception as e:

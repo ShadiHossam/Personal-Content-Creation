@@ -229,6 +229,9 @@ def competitive_landscape(category: Optional[str] = None, db: Session = Depends(
             "post_count": n,
             "avg_engagement": round(total_eng / n, 1) if n else 0,
             "platforms": list({i.platform for i in items}),
+            "profile_image_url": c.profile_image_url,
+            "instagram_handle": c.instagram_handle,
+            "twitter_handle": c.twitter_handle,
         })
     result.sort(key=lambda x: x["avg_engagement"], reverse=True)
     return result

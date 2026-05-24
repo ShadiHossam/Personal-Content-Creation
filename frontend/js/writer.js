@@ -131,6 +131,97 @@ const Write = {
     navigator.clipboard.writeText(text).then(() => App.toast('Copied to clipboard!', 'success'));
   },
 
+  // ── Local drafts (localStorage) ───────────────────────────────────────────
+
+  _DRAFTS_KEY: 'write.drafts.v1',
+
+  _readDrafts() {
+    try { return JSON.parse(localStorage.getItem(this._DRAFTS_KEY) || '[]'); } catch { return []; }
+  },
+  _writeDrafts(list) {
+    localStorage.setItem(this._DRAFTS_KEY, JSON.stringify(list.slice(0, 100)));
+  },
+
+  saveDraft() {
+    const text = document.getElementById('draft-output')?.textContent?.trim() || '';
+    if (!text) { App.toast('Nothing to save yet', 'error'); return; }
+    const idea = document.getElementById('write-idea')?.value?.trim() || '';
+    const list = this._readDrafts();
+    list.unshift({
+      id: 'd-' + Date.now(),
+      created_at: new Date().toISOString(),
+      idea,
+      format: this.format,
+      language: this.language,
+      text,
+    });
+    this._writeDrafts(list);
+    App.toast('Draft saved locally', 'success');
+  },
+
+  exportDraft() {
+    const text = document.getElementById('draft-output')?.textContent || '';
+    if (!text) { App.toast('Nothing to export', 'error'); return; }
+    const idea = document.getElementById('write-idea')?.value?.trim() || 'draft';
+    const safe = idea.replace(/[^a-z0-9-_]+/gi, '_').substring(0, 40) || 'draft';
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `${safe}-${Date.now()}.txt`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  },
+
+  openDraftsList() {
+    const drafts = this._readDrafts();
+    const rows = drafts.length ? drafts.map(d => {
+      const dt = new Date(d.created_at).toLocaleString();
+      const preview = App.escape((d.text || '').substring(0, 140));
+      return `
+        <div style="padding:10px 4px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:flex-start">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:11px;color:var(--text3);margin-bottom:4px">${dt} · ${App.escape(d.format || '')} · ${App.escape(d.language || '')}</div>
+            <div style="font-size:13px;color:var(--text2);white-space:pre-wrap;word-break:break-word">${preview}${(d.text||'').length>140?'…':''}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="Write.loadDraft('${d.id}')">Load</button>
+            <button class="btn btn-ghost btn-sm" style="color:var(--red)" onclick="Write.deleteDraft('${d.id}')">Delete</button>
+          </div>
+        </div>`;
+    }).join('') : '<div style="color:var(--text3);font-size:13px;padding:20px;text-align:center">No saved drafts yet.</div>';
+
+    App.openModal(`
+      <div class="modal-title">Saved Drafts</div>
+      <div style="max-height:50vh;overflow-y:auto">${rows}</div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="App.closeModal()">Close</button>
+      </div>
+    `);
+  },
+
+  loadDraft(id) {
+    const drafts = this._readDrafts();
+    const d = drafts.find(x => x.id === id);
+    if (!d) return;
+    document.getElementById('write-idea').value = d.idea || '';
+    const output = document.getElementById('draft-output');
+    const placeholder = document.getElementById('draft-placeholder');
+    const feedbackBar = document.getElementById('write-feedback-bar');
+    if (output) { output.textContent = d.text; output.style.display = 'block'; output.dir = App.detectArabic(d.text) ? 'rtl' : 'ltr'; }
+    if (placeholder) placeholder.style.display = 'none';
+    if (feedbackBar) feedbackBar.style.display = '';
+    this.currentDraft = d.text;
+    App.closeModal();
+    App.toast('Draft loaded', 'success');
+  },
+
+  deleteDraft(id) {
+    if (!confirm('Delete this draft?')) return;
+    const drafts = this._readDrafts().filter(x => x.id !== id);
+    this._writeDrafts(drafts);
+    this.openDraftsList();
+  },
+
   openRefPicker() {
     App.openModal(`
       <div class="modal-title">Add Reference</div>
@@ -178,7 +269,11 @@ const Write = {
         </div>
       `).join('');
     } catch (e) {
-      el.innerHTML = `<div style="color:var(--red);font-size:12px;padding:12px">${e.message}</div>`;
+      el.textContent = '';
+      const errEl = document.createElement('div');
+      errEl.style.cssText = 'color:var(--red);font-size:12px;padding:12px';
+      errEl.textContent = e.message;
+      el.appendChild(errEl);
     }
   },
 
@@ -195,7 +290,11 @@ const Write = {
         </div>
       `).join('');
     } catch (e) {
-      el.innerHTML = `<div style="color:var(--red);font-size:12px;padding:12px">${e.message}</div>`;
+      el.textContent = '';
+      const errEl = document.createElement('div');
+      errEl.style.cssText = 'color:var(--red);font-size:12px;padding:12px';
+      errEl.textContent = e.message;
+      el.appendChild(errEl);
     }
   },
 

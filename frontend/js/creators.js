@@ -203,6 +203,20 @@ const Creators = {
   },
   _applySort(val) { this.sortBy = val; this.renderList(); },
 
+  _resetFilters() {
+    this.categoryFilter = '';
+    this.countryFilter = '';
+    this.priorityFilter = null;
+    this.platformFilters = new Set();
+    this.tagFilters = new Set();
+    const countrySel = document.getElementById('filter-country');
+    if (countrySel) countrySel.value = '';
+    document.querySelectorAll('#creators-filter-bar input[type=checkbox]').forEach(cb => { cb.checked = false; });
+    document.querySelectorAll('#filter-priority-chips .filter-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
+    document.querySelectorAll('.filter-chip[data-category]').forEach(c => c.classList.toggle('active', c.dataset.category === ''));
+    this.renderList();
+  },
+
   // ── Inline priority ──
 
   _inlineEditPriority(creatorId, badgeEl) {
@@ -395,7 +409,7 @@ const Creators = {
     }
 
     if (!filtered.length) {
-      el.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><h3>No creators match these filters</h3><p>Try adjusting or clearing the filters above.</p></div>`;
+      el.innerHTML = `<div class="empty-state"><div class="empty-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><h3>No creators match these filters</h3><p>Try adjusting or clearing the filters above, or add a new creator to your list.</p><div class="empty-actions"><button class="btn btn-secondary btn-sm" onclick="Creators._resetFilters()">Clear Filters</button><button class="btn btn-primary btn-sm" onclick="Creators.openModal()">+ Add Creator</button></div></div>`;
       this._updateBulkBar();
       this._populateFilterBar();
       return;
@@ -457,7 +471,7 @@ const Creators = {
       || (c.twitter_handle ? `https://unavatar.io/twitter/${encodeURIComponent(c.twitter_handle)}` : null)
       || (c.instagram_handle ? `https://unavatar.io/instagram/${encodeURIComponent(c.instagram_handle)}` : null);
     const avatar = avatarSrc
-      ? `<img src="${App.escape(avatarSrc)}" class="creator-avatar" onerror="this.outerHTML='${fallbackAvatar.replace(/'/g, "\\'")}">`
+      ? `<img src="${App.escape(App.proxyImg(avatarSrc))}" class="creator-avatar" referrerpolicy="no-referrer" onerror="this.outerHTML='${fallbackAvatar.replace(/'/g, "\\'")}">`
       : fallbackAvatar;
 
     const catBadge = c.category === 'competitor'

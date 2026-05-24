@@ -5,7 +5,9 @@ const Analysis = {
   _friendlyError(e) {
     const m = e?.message || '';
     if (m.includes('502') || m.includes('not configured') || m.includes('Claude')) return 'Claude is not configured — add an API key in Settings → API Keys.';
-    if (m.includes('404')) return 'Creator not found.';
+    // Only call it "Creator not found" when the failing endpoint is the creator lookup itself.
+    if (m.includes('404') && /\/api\/creators\/\d+(?:\s|$|")/.test(m) && !/\/(stats|insights|notes|posts)\b/.test(m)) return 'Creator not found.';
+    if (m.includes('404')) return 'A required endpoint was unavailable for a moment — please retry.';
     if (m.includes('422')) return 'Could not extract hooks from this document.';
     if (m.includes('400')) return 'Invalid request — check your inputs.';
     if (m.includes('500')) return 'Server error — try again in a moment.';
@@ -184,12 +186,27 @@ const Analysis = {
     if (end_date) params.set('end_date', end_date);
     const qs = params.toString();
 
+    const fetchAll = () => Promise.all([
+      API.get(`/api/creators/${id}`),
+      API.get(`/api/creators/${id}/stats${qs ? '?' + qs : ''}`),
+      API.get(`/api/analysis/insights/${id}`),
+    ]);
+
     try {
-      const [creator, stats, insights] = await Promise.all([
-        API.get(`/api/creators/${id}`),
-        API.get(`/api/creators/${id}/stats${qs ? '?' + qs : ''}`),
-        API.get(`/api/analysis/insights/${id}`),
-      ]);
+      let creator, stats, insights;
+      try {
+        [creator, stats, insights] = await fetchAll();
+      } catch (firstErr) {
+        // Dev server uvicorn --reload can return a single transient 404 during restart.
+        // Retry once after a brief delay before surfacing the error.
+        const msg = firstErr?.message || '';
+        if (msg.includes('404') || msg.includes('Failed to fetch')) {
+          await new Promise(r => setTimeout(r, 1200));
+          [creator, stats, insights] = await fetchAll();
+        } else {
+          throw firstErr;
+        }
+      }
 
       el.innerHTML = `
         <div class="analysis-creator-header">

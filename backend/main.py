@@ -13,7 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.database import engine, Base
 from backend.models import *  # registers all models
-from backend.routes import creators, sources, content, settings, style, analysis, intelligence, write, fetch, youtube, trends, engage
+from backend.routes import creators, sources, content, settings, style, analysis, intelligence, write, fetch, youtube, trends, engage, img_proxy
 from backend.scraper_tool.routes import router as scraper_router
 
 Base.metadata.create_all(bind=engine)
@@ -50,9 +50,19 @@ with engine.connect() as _conn:
 
 app = FastAPI(title="Shadi Personal Branding System")
 
+# Restrict CORS to local origins. Override via SHADI_CORS_ORIGINS env (comma-separated).
+_default_cors = [
+    "http://localhost",
+    "http://127.0.0.1",
+]
+_default_cors += [f"http://localhost:{p}" for p in (8000, 8001, 3000, 5173, 4000, 5000)]
+_default_cors += [f"http://127.0.0.1:{p}" for p in (8000, 8001, 3000, 5173, 4000, 5000)]
+_cors_env = os.environ.get("SHADI_CORS_ORIGINS", "").strip()
+_cors_origins = [o.strip() for o in _cors_env.split(",") if o.strip()] if _cors_env else _default_cors
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_cors_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -69,6 +79,7 @@ app.include_router(fetch.router)
 app.include_router(youtube.router)
 app.include_router(trends.router)
 app.include_router(engage.router)
+app.include_router(img_proxy.router)
 app.include_router(scraper_router)
 
 # Serve frontend

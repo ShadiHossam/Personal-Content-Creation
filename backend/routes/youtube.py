@@ -39,7 +39,7 @@ class GeneratePackRequest(BaseModel):
 @router.post("/generate-pack")
 def generate_pack(data: GeneratePackRequest, db: Session = Depends(get_db)):
     # 1. Resolve Claude backend (api key OR claude CLI), same flow as write.py
-    from ..ai.client import resolve_backend, _api_call, _cli_call
+    from ..ai.client import resolve_backend, call_ai
 
     try:
         backend, api_key = resolve_backend(db)
@@ -84,15 +84,7 @@ def generate_pack(data: GeneratePackRequest, db: Session = Depends(get_db)):
     prompt = build_prompt(transcript, project, keyword_list)
 
     try:
-        if backend == "api":
-            raw = _api_call(
-                [{"role": "user", "content": prompt}],
-                api_key=api_key,
-                system=SYSTEM_PROMPT,
-                max_tokens=4096,
-            )
-        else:
-            raw = _cli_call(prompt, system=SYSTEM_PROMPT)
+        raw = call_ai(prompt, system=SYSTEM_PROMPT, db=db, max_tokens=4096)
     except ValueError as exc:
         raise HTTPException(502, str(exc))
 

@@ -36,16 +36,20 @@ class FeedbackRequest(BaseModel):
 
 @router.post("/generate")
 async def generate_draft(data: GenerateRequest, db: Session = Depends(get_db)):
-    from ..ai.client import resolve_backend, call_claude
+    from ..ai.client import resolve_provider_name, get_api_key, call_ai
 
-    try:
-        backend, api_key = resolve_backend(db)
-    except ValueError as exc:
-        raise HTTPException(400, str(exc))
+    provider = resolve_provider_name(db, "writing")
 
-    # CLI mode: pre-gather all context and call once (no tool-use loop)
-    if backend == "cli":
-        return await _generate_via_cli(data, db, call_claude)
+    # Only Anthropic supports the agentic tool-use loop. Every other provider
+    # (Claude CLI, Groq, OpenRouter, Gemini) goes through the single-shot
+    # inline-context path — same code, just driven by `call_ai` so it picks the
+    # right backend automatically.
+    if provider != "anthropic":
+        return await _generate_via_single_shot(data, db)
+
+    api_key = get_api_key(db)
+    if not api_key:
+        raise HTTPException(400, "Anthropic API key required for the agentic writing path.")
 
     import anthropic
     client = anthropic.Anthropic(api_key=api_key)
@@ -195,8 +199,10 @@ Write ONLY the final post — no meta-commentary, no explanations. Just the post
     return {"draft": draft}
 
 
-async def _generate_via_cli(data: GenerateRequest, db: Session, call_claude) -> dict:
-    """CLI path: gather all context inline, then call Claude once."""
+async def _generate_via_single_shot(data: GenerateRequest, db: Session) -> dict:
+    """Single-shot path used for every non-Anthropic provider (CLI, Groq, OpenRouter, Gemini).
+    Pre-gathers all context inline, then makes one call via the unified `call_ai` dispatcher."""
+    from ..ai.client import call_ai
     context_parts = []
 
     profile = db.query(Profile).first()
@@ -268,7 +274,7 @@ Write ONLY the final post — no meta-commentary, no explanations. Just the post
     )
 
     try:
-        draft = call_claude(user_prompt, system=system, db=db, max_tokens=2000)
+        draft = call_ai(user_prompt, system=system, db=db, max_tokens=2000, feature="writing")
     except ValueError as exc:
         raise HTTPException(502, str(exc))
     return {"draft": draft}

@@ -266,14 +266,135 @@ const Settings = {
 
   // ── AI Providers ──────────────────────────────────────────────────────────
   async loadAIProviders() {
-    const el = document.getElementById('ai-providers-list');
-    if (!el) return;
+    const listEl = document.getElementById('ai-providers-list');
+    const prefsEl = document.getElementById('ai-provider-prefs');
+    if (!listEl) return;
     try {
       const providers = await API.get('/api/settings/ai-providers');
-      el.innerHTML = this._renderAIProviders(providers);
+      if (prefsEl) {
+        this._renderProviderPrefs(prefsEl, providers);
+        this._wireProviderPrefs();
+        this._updateWritingWarning();
+      }
+      listEl.innerHTML = this._renderAIProviders(providers);
     } catch {
-      el.innerHTML = '<p style="color:var(--text3);font-size:12px">Could not load AI providers.</p>';
+      listEl.innerHTML = '<p style="color:var(--text3);font-size:12px">Could not load AI providers.</p>';
     }
+  },
+
+  _providerLabel(name) {
+    return ({
+      anthropic: 'Anthropic (Claude API key)',
+      claude_cli: 'Claude CLI (local subscription)',
+      groq: 'Groq (free tier)',
+      openrouter: 'OpenRouter (free tier)',
+      gemini: 'Google Gemini (free tier)',
+    })[name] || name;
+  },
+
+  _renderProviderPrefs(root, providers) {
+    // Build via DOM nodes (no innerHTML interpolation) to keep the security
+    // hook happy and avoid any XSS risk on provider/setting names.
+    root.replaceChildren();
+
+    const s = this.current || {};
+    const grid = document.createElement('div');
+    grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;max-width:720px';
+
+    const makeSelect = (id, settingKey, label, currentValue, includeInherit, fullWidth) => {
+      const wrap = document.createElement('div');
+      if (fullWidth) wrap.style.gridColumn = '1 / -1';
+
+      const lbl = document.createElement('label');
+      lbl.className = 'form-label';
+      lbl.style.cssText = 'display:block;margin-bottom:4px';
+      lbl.textContent = label;
+      wrap.appendChild(lbl);
+
+      const sel = document.createElement('select');
+      sel.id = id;
+      sel.className = 'form-control';
+      sel.dataset.prefKey = settingKey;
+
+      if (includeInherit) {
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.textContent = '— Use global default —';
+        if (!currentValue) opt.selected = true;
+        sel.appendChild(opt);
+      }
+      Object.keys(providers).forEach(name => {
+        const opt = document.createElement('option');
+        opt.value = name;
+        opt.textContent = this._providerLabel(name);
+        if (currentValue === name) opt.selected = true;
+        sel.appendChild(opt);
+      });
+
+      wrap.appendChild(sel);
+      grid.appendChild(wrap);
+    };
+
+    makeSelect('pref-ai-default', 'ai_provider_default',
+      'Default provider (used everywhere unless overridden)',
+      s['ai_provider_default'] || 'anthropic', false, true);
+    makeSelect('pref-ai-writing', 'ai_provider_for_writing',
+      'Writing', s['ai_provider_for_writing'] || '', true, false);
+    makeSelect('pref-ai-analysis', 'ai_provider_for_analysis',
+      'Analysis', s['ai_provider_for_analysis'] || '', true, false);
+    makeSelect('pref-ai-intel', 'ai_provider_for_intelligence',
+      'Intelligence chat', s['ai_provider_for_intelligence'] || '', true, false);
+
+    root.appendChild(grid);
+
+    // Static warning banner with placeholder span — populated via textContent.
+    const warn = document.createElement('div');
+    warn.id = 'ai-writing-warning';
+    warn.style.cssText = 'margin-top:10px;padding:10px 12px;background:rgba(255,180,0,0.08);border-left:3px solid #f5a623;border-radius:4px;font-size:12px;color:var(--text2);line-height:1.5;display:none';
+    const strong = document.createElement('strong');
+    strong.style.color = '#f5a623';
+    strong.textContent = '⚠ ';
+    const provSpan = document.createElement('span');
+    provSpan.id = 'ai-writing-warning-provider';
+    strong.appendChild(provSpan);
+    warn.appendChild(strong);
+    warn.appendChild(document.createTextNode(
+      ' does not support the agentic tool-use loop. Drafts will be generated via the single-shot inline-context path — they still work, but may be slightly less context-aware than the Anthropic agentic loop.'
+    ));
+    root.appendChild(warn);
+  },
+
+  _updateWritingWarning() {
+    const s = this.current || {};
+    const effective = s['ai_provider_for_writing'] || s['ai_provider_default'] || 'anthropic';
+    const warn = document.getElementById('ai-writing-warning');
+    const provSpan = document.getElementById('ai-writing-warning-provider');
+    if (!warn || !provSpan) return;
+    if (effective === 'anthropic') {
+      warn.style.display = 'none';
+    } else {
+      provSpan.textContent = `Agentic tool-use unavailable on ${this._providerLabel(effective)} —`;
+      warn.style.display = 'block';
+    }
+  },
+
+  _wireProviderPrefs() {
+    const selects = document.querySelectorAll('#ai-provider-prefs select[data-pref-key]');
+    selects.forEach(sel => {
+      sel.addEventListener('change', async () => {
+        const key = sel.dataset.prefKey;
+        try {
+          await API.post('/api/settings', { [key]: sel.value });
+          this.current[key] = sel.value;
+          App.toast('Saved', 'success');
+          if (key === 'ai_provider_default' || key === 'ai_provider_for_writing') {
+            this._updateWritingWarning();
+          }
+        } catch (e) {
+          App.toast('Save failed: ' + e.message, 'error');
+        }
+      });
+    });
   },
 
   _renderAIProviders(providers) {

@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    container_name: shadi-sms
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # Optional — only used if you want the Claude CLI on the server (Scenario C).
+      # ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      SHADI_CORS_ORIGINS: ${SHADI_CORS_ORIGINS:-http://localhost:8000}
+    volumes:
+      # Persists the SQLite DB, scraper login state, and any uploaded files.
+      - ./data:/app/data
+      # Mount a pre-baked Playwright storage state file if you have one
+      # (created locally via `python open_login_browser.py` then uploaded).
+      # - ./data/storage_state.json:/app/data/storage_state.json:ro

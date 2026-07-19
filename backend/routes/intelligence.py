@@ -1,3 +1,5 @@
+import asyncio
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -82,21 +84,36 @@ async def chat(session_id: int, data: MessageIn, db: Session = Depends(get_db)):
 
     from ..ai.client import call_claude_messages
 
+    # Auto-title after first message — must check before adding the new
+    # message, since SQLAlchemy autoflush would otherwise flush it first
+    # and make session.messages appear non-empty.
+    is_first_message = not session.messages and session.title == "New Chat"
+
     # Save user message
     user_msg = ChatMessage(session_id=session_id, role="user", content=data.content)
     db.add(user_msg)
 
-    # Auto-title after first message
-    if not session.messages and session.title == "New Chat":
+    if is_first_message:
         session.title = data.content[:60] + ("..." if len(data.content) > 60 else "")
 
     db.commit()
 
     # Build data context summary
     creators = db.query(Creator).order_by(Creator.rank).all()
+    creator_ids = [c.id for c in creators]
+
+    items_by_creator: dict = {}
+    if creator_ids:
+        for it in db.query(ContentItem).filter(
+            ContentItem.creator_id.in_(creator_ids)
+        ).order_by(ContentItem.id).all():
+            bucket = items_by_creator.setdefault(it.creator_id, [])
+            if len(bucket) < 50:
+                bucket.append(it)
+
     creator_summary = []
     for c in creators:
-        items = db.query(ContentItem).filter(ContentItem.creator_id == c.id).limit(50).all()
+        items = items_by_creator.get(c.id, [])
         n = len(items)
         if n:
             avg_eng = round(sum((i.likes or 0) + (i.comments_count or 0) + (i.shares or 0) for i in items) / n, 1)
@@ -132,7 +149,8 @@ Answer questions about content strategy, competitors, trends, and what Shadi sho
     messages = [{"role": m.role, "content": m.content} for m in history[-20:]]
 
     try:
-        answer = call_claude_messages(
+        answer = await asyncio.to_thread(
+            call_claude_messages,
             messages,
             system=system_context,
             db=db,

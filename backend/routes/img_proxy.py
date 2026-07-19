@@ -11,7 +11,7 @@ open SSRF gateway.
 
 from __future__ import annotations
 
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 import httpx
 from fastapi import APIRouter, HTTPException, Query
@@ -41,15 +41,34 @@ def _host_allowed(host: str) -> bool:
 
 @router.get("/img-proxy")
 async def img_proxy(url: str = Query(..., description="Full https URL to proxy")):
-    parsed = urlparse(url)
-    if parsed.scheme != "https" or not parsed.netloc:
-        raise HTTPException(400, "https url required")
-    if not _host_allowed(parsed.netloc):
-        raise HTTPException(403, f"host not allowed: {parsed.netloc}")
+    # Redirects are followed manually (not via httpx's follow_redirects) so every
+    # hop — not just the initial URL — is checked against the host allowlist.
+    # Otherwise an allow-listed CDN could redirect the request to an arbitrary
+    # (including internal/private) host and turn this into an open SSRF gateway.
+    max_redirects = 5
+    current_url = url
 
     try:
-        async with httpx.AsyncClient(timeout=15.0, follow_redirects=True) as client:
-            r = await client.get(url, headers={"User-Agent": _BROWSER_UA, "Accept": "image/*,*/*"})
+        async with httpx.AsyncClient(timeout=15.0, follow_redirects=False) as client:
+            for _ in range(max_redirects + 1):
+                parsed = urlparse(current_url)
+                if parsed.scheme != "https" or not parsed.netloc:
+                    raise HTTPException(400, "https url required")
+                if not _host_allowed(parsed.netloc):
+                    raise HTTPException(403, f"host not allowed: {parsed.netloc}")
+
+                r = await client.get(
+                    current_url, headers={"User-Agent": _BROWSER_UA, "Accept": "image/*,*/*"}
+                )
+                if r.status_code in (301, 302, 303, 307, 308):
+                    location = r.headers.get("location")
+                    if not location:
+                        raise HTTPException(502, "redirect with no location")
+                    current_url = urljoin(current_url, location)
+                    continue
+                break
+            else:
+                raise HTTPException(502, "too many redirects")
     except httpx.HTTPError as e:
         raise HTTPException(502, f"upstream fetch failed: {type(e).__name__}")
 

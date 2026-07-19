@@ -15,6 +15,8 @@ from .providers import (
     get_provider,
     PROVIDER_CONFIG,
     TokenMissingError,
+    TokenInvalidError,
+    RateLimitError,
     ClaudeCLINotFoundError,
 )
 
@@ -143,7 +145,18 @@ def call_ai_messages(
     config = PROVIDER_CONFIG.get(provider_name, {})
     model = config.get("default_model", MODEL)
 
-    return provider.complete(messages, model, system=system, max_tokens=max_tokens)
+    try:
+        return provider.complete(messages, model, system=system, max_tokens=max_tokens)
+    except TokenInvalidError:
+        raise ValueError(
+            f"The API key saved for '{provider_name}' was rejected. "
+            f"Check it in Settings → API Keys."
+        )
+    except RateLimitError:
+        raise ValueError(
+            f"Provider '{provider_name}' is rate-limited right now. Try again shortly, "
+            f"or switch providers in Settings."
+        )
 
 
 # ── backward-compatible wrappers (do not remove — many routes import these) ──

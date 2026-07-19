@@ -165,11 +165,12 @@ const Engage = (() => {
   async function clearDone() {
     const confirm = window.confirm('Clear all Engaged and Skipped posts?');
     if (!confirm) return;
-    const doneIds = _items.filter(i => i.status !== 'pending').map(i => i.id);
-    for (const id of doneIds) {
-      try { await API.patch(`/api/engage/items/${id}`, { status: 'pending' }); } catch {}
+    try {
+      await API.del('/api/engage/items?status=engaged,skipped');
+    } catch (e) {
+      App.toast('Failed to clear: ' + e.message, 'error');
+      return;
     }
-    // Actually mark them as "old" by changing the filter — we just reload
     await _loadItems();
   }
 
@@ -181,8 +182,12 @@ const Engage = (() => {
       if (ideaEl) {
         ideaEl.value = `Craft a thoughtful LinkedIn comment reply to this post by ${authorName}:\n\n"${postText}"`;
       }
-      const formatEl = document.getElementById('write-format');
-      if (formatEl) formatEl.value = 'caption';
+      const formatOpt = document.querySelector('#write-format-toggle .toggle-option[data-val="caption"]');
+      if (formatOpt) {
+        document.querySelectorAll('#write-format-toggle .toggle-option').forEach(o => o.classList.remove('active'));
+        formatOpt.classList.add('active');
+        if (window.Write) Write.format = 'caption';
+      }
     }, 300);
   }
 
@@ -235,7 +240,7 @@ const Engage = (() => {
         </td>
         <td style="padding:10px 8px">
           ${p.linkedin_url
-            ? `<a href="${_escHtml(p.linkedin_url)}" target="_blank" rel="noopener" style="font-weight:500;color:var(--text1)">${_escHtml(p.name)}</a>`
+            ? `<a href="${_escHtml(p.linkedin_url)}" target="_blank" rel="noopener" style="font-weight:500;color:var(--text)">${_escHtml(p.name)}</a>`
             : `<span style="font-weight:500">${_escHtml(p.name)}</span>`}
         </td>
         <td style="padding:10px 8px;color:var(--text2);font-size:12px">${_escHtml(p.headline || '')}</td>
@@ -337,7 +342,7 @@ const Engage = (() => {
           <div class="engage-ai-chip" title="${_escHtml(s.reason)}"
                onclick="Engage._applyRecommendation(${JSON.stringify(_escHtml(s.keywords))}, ${JSON.stringify(_escHtml(s.location))})"
                style="cursor:pointer;background:var(--bg2);border:1px solid var(--border);border-radius:20px;
-                      padding:6px 14px;font-size:12px;color:var(--text1);transition:background 0.15s"
+                      padding:6px 14px;font-size:12px;color:var(--text);transition:background 0.15s"
                onmouseover="this.style.background='var(--bg3)'"
                onmouseout="this.style.background='var(--bg2)'">
             <span style="font-weight:500">${_escHtml(s.keywords)}</span>

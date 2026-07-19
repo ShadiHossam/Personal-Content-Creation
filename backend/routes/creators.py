@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import func, desc, asc, or_
 from pydantic import BaseModel
@@ -21,6 +21,26 @@ router = APIRouter(prefix="/api/creators", tags=["creators"])
 def _get_setting(db: Session, key: str) -> Optional[str]:
     row = db.query(Setting).filter(Setting.key == key).first()
     return row.value if row else None
+
+
+def _safe_count(value) -> int:
+    """Parse scraper-provided engagement counts, tolerating '1.2K'/'3,400'/floats/None."""
+    if value is None:
+        return 0
+    if isinstance(value, (int, float)):
+        return int(value)
+    s = str(value).strip().replace(",", "")
+    if not s:
+        return 0
+    mult = 1
+    if s[-1].upper() == "K":
+        mult, s = 1000, s[:-1]
+    elif s[-1].upper() == "M":
+        mult, s = 1_000_000, s[:-1]
+    try:
+        return int(float(s) * mult)
+    except ValueError:
+        return 0
 
 
 class CreatorIn(BaseModel):
@@ -79,19 +99,26 @@ def list_creators(category: Optional[str] = None, db: Session = Depends(get_db))
     if category:
         q = q.filter(Creator.category == category)
     creators = q.order_by(Creator.rank).all()
+    creator_ids = [c.id for c in creators]
+
+    total_counts = dict(
+        db.query(ContentItem.creator_id, func.count(ContentItem.id))
+        .filter(ContentItem.creator_id.in_(creator_ids))
+        .group_by(ContentItem.creator_id)
+        .all()
+    ) if creator_ids else {}
+    new_counts = dict(
+        db.query(ContentItem.creator_id, func.count(ContentItem.id))
+        .filter(ContentItem.creator_id.in_(creator_ids), ContentItem.is_read == False)
+        .group_by(ContentItem.creator_id)
+        .all()
+    ) if creator_ids else {}
 
     result = []
     for c in creators:
-        new_count = db.query(func.count(ContentItem.id)).filter(
-            ContentItem.creator_id == c.id,
-            ContentItem.is_read == False
-        ).scalar()
-        total_count = db.query(func.count(ContentItem.id)).filter(
-            ContentItem.creator_id == c.id
-        ).scalar()
         out = CreatorOut.model_validate(c)
-        out.new_items_count = new_count
-        out.total_items_count = total_count
+        out.new_items_count = new_counts.get(c.id, 0)
+        out.total_items_count = total_counts.get(c.id, 0)
         out.tags = [t.tag_name for t in c.tags]
         result.append(out)
     return result
@@ -295,9 +322,9 @@ def import_posts(creator_id: int, payload: dict, db: Session = Depends(get_db)):
                 except ValueError:
                     continue
 
-        likes = int(post.get("likes") or post.get("numLikes") or post.get("reactions") or 0)
-        comments = int(post.get("comments") or post.get("numComments") or post.get("comments_count") or 0)
-        shares = int(post.get("shares") or post.get("numShares") or post.get("reposts") or 0)
+        likes = _safe_count(post.get("likes") or post.get("numLikes") or post.get("reactions"))
+        comments = _safe_count(post.get("comments") or post.get("numComments") or post.get("comments_count"))
+        shares = _safe_count(post.get("shares") or post.get("numShares") or post.get("reposts"))
 
         if not body:
             skipped += 1
@@ -428,6 +455,51 @@ def list_all_tags(db: Session = Depends(get_db)):
     return [r[0] for r in rows]
 
 
+@router.get("/export")
+def export_creators(ids: List[int] = Query(default=[]), format: str = "json", db: Session = Depends(get_db)):
+    creators = db.query(Creator).filter(Creator.id.in_(ids)).order_by(Creator.rank).all() if ids else []
+    rows = []
+    for c in creators:
+        rows.append({
+            "id": c.id,
+            "name": c.name,
+            "country": c.country,
+            "category": c.category,
+            "priority": c.priority,
+            "tags": [t.tag_name for t in c.tags],
+            "linkedin_url": c.linkedin_url,
+            "twitter_handle": c.twitter_handle,
+            "instagram_handle": c.instagram_handle,
+            "youtube_channel_id": c.youtube_channel_id,
+            "tiktok_handle": c.tiktok_handle,
+            "notes": c.notes,
+        })
+
+    if format == "csv":
+        output = io.StringIO()
+        fields = ["id", "name", "country", "category", "priority", "tags",
+                  "linkedin_url", "twitter_handle", "instagram_handle",
+                  "youtube_channel_id", "tiktok_handle", "notes"]
+        writer = csv.DictWriter(output, fieldnames=fields)
+        writer.writeheader()
+        for row in rows:
+            row["tags"] = ",".join(row["tags"])
+            writer.writerow(row)
+        content = output.getvalue()
+        return Response(
+            content=content,
+            media_type="text/csv",
+            headers={"Content-Disposition": "attachment; filename=creators.csv"}
+        )
+
+    content = json_lib.dumps(rows, ensure_ascii=False, indent=2)
+    return Response(
+        content=content,
+        media_type="application/json",
+        headers={"Content-Disposition": "attachment; filename=creators.json"}
+    )
+
+
 @router.get("/{creator_id}", response_model=CreatorOut)
 def get_creator(creator_id: int, db: Session = Depends(get_db)):
     c = db.query(Creator).filter(Creator.id == creator_id).first()
@@ -465,8 +537,12 @@ def update_creator(creator_id: int, data: CreatorIn, db: Session = Depends(get_d
     db.commit()
     db.refresh(c)
     out = CreatorOut.model_validate(c)
-    out.new_items_count = 0
-    out.total_items_count = 0
+    out.new_items_count = db.query(func.count(ContentItem.id)).filter(
+        ContentItem.creator_id == c.id, ContentItem.is_read == False
+    ).scalar()
+    out.total_items_count = db.query(func.count(ContentItem.id)).filter(
+        ContentItem.creator_id == c.id
+    ).scalar()
     out.tags = [t.tag_name for t in c.tags]
     return out
 
@@ -546,51 +622,6 @@ def bulk_remove_tag(data: BulkTagIn, db: Session = Depends(get_db)):
     ).delete(synchronize_session=False)
     db.commit()
     return {"ok": True}
-
-
-@router.get("/export")
-def export_creators(ids: List[int] = [], format: str = "json", db: Session = Depends(get_db)):
-    creators = db.query(Creator).filter(Creator.id.in_(ids)).order_by(Creator.rank).all() if ids else []
-    rows = []
-    for c in creators:
-        rows.append({
-            "id": c.id,
-            "name": c.name,
-            "country": c.country,
-            "category": c.category,
-            "priority": c.priority,
-            "tags": [t.tag_name for t in c.tags],
-            "linkedin_url": c.linkedin_url,
-            "twitter_handle": c.twitter_handle,
-            "instagram_handle": c.instagram_handle,
-            "youtube_channel_id": c.youtube_channel_id,
-            "tiktok_handle": c.tiktok_handle,
-            "notes": c.notes,
-        })
-
-    if format == "csv":
-        output = io.StringIO()
-        fields = ["id", "name", "country", "category", "priority", "tags",
-                  "linkedin_url", "twitter_handle", "instagram_handle",
-                  "youtube_channel_id", "tiktok_handle", "notes"]
-        writer = csv.DictWriter(output, fieldnames=fields)
-        writer.writeheader()
-        for row in rows:
-            row["tags"] = ",".join(row["tags"])
-            writer.writerow(row)
-        content = output.getvalue()
-        return Response(
-            content=content,
-            media_type="text/csv",
-            headers={"Content-Disposition": "attachment; filename=creators.csv"}
-        )
-
-    content = json_lib.dumps(rows, ensure_ascii=False, indent=2)
-    return Response(
-        content=content,
-        media_type="application/json",
-        headers={"Content-Disposition": "attachment; filename=creators.json"}
-    )
 
 
 @router.get("/{creator_id}/notes")

@@ -19,6 +19,10 @@ _BASE_PROJECTS_DIR = os.path.join(_BASE_DIR, "data", "scraper_datasets")
 
 
 def _datasets_dir(slug: str) -> str:
+    # Guard against path traversal — slug is caller-supplied (query param),
+    # so reject anything that isn't a plain path segment.
+    if not slug or "/" in slug or "\\" in slug or ".." in slug:
+        raise ValueError(f"invalid project slug: {slug!r}")
     return os.path.join(_BASE_PROJECTS_DIR, slug)
 
 

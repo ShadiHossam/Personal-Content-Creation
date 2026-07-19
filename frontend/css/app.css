@@ -40,7 +40,9 @@
 
   /* Status */
   --green: #059669;
+  --green-dim: rgba(5,150,105,0.10);
   --red: #E11D48;
+  --red-dim: rgba(225,29,72,0.10);
   --yellow: #D97706;
 
   /* Text */
@@ -2547,7 +2549,7 @@ textarea { resize: vertical; min-height: 80px; }
   gap: 8px; margin-bottom: 8px; flex-wrap: wrap;
 }
 .engage-card-author {
-  font-size: 13px; font-weight: 600; color: var(--text1); margin-bottom: 6px;
+  font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px;
 }
 .engage-author-link {
   color: var(--accent-light); text-decoration: none;

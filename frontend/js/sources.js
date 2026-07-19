@@ -1061,7 +1061,7 @@ const Sources = {
         badge = 'No key'; badgeClass = 'no-key';
       }
       const modelPicker = models.length > 1
-        ? `<select id="provider-model-${key}" style="font-size:11px;padding:2px 4px;margin-top:4px;border:1px solid var(--border);background:var(--bg2);border-radius:4px;color:var(--text1);width:100%" onclick="event.stopPropagation()" onchange="Sources._onProviderModelChange('${key}', this.value)">${models.map(m => `<option value="${m}">${m.split('/').pop()}</option>`).join('')}</select>`
+        ? `<select id="provider-model-${key}" style="font-size:11px;padding:2px 4px;margin-top:4px;border:1px solid var(--border);background:var(--bg2);border-radius:4px;color:var(--text);width:100%" onclick="event.stopPropagation()" onchange="Sources._onProviderModelChange('${key}', this.value)">${models.map(m => `<option value="${m}">${m.split('/').pop()}</option>`).join('')}</select>`
         : `<div style="font-size:11px;color:var(--text3);margin-top:2px">${defaultModel.split('/').pop() || 'built-in'}</div>`;
       return `
         <div class="provider-option" data-provider="${key}" data-model="${defaultModel}" onclick="Sources._selectProvider('${key}', document.getElementById('provider-model-${key}')?.value || '${defaultModel}', this)">

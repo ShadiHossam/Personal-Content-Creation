@@ -161,7 +161,36 @@ def bulk_update_sources(data: BulkUpdateIn, db: Session = Depends(get_db)):
 @router.get("", response_model=List[SourceOut])
 def list_sources(db: Session = Depends(get_db)):
     sources = db.query(Source).order_by(Source.priority.asc(), Source.name.asc()).all()
-    return [_source_out(s, db) for s in sources]
+    source_ids = [s.id for s in sources]
+
+    if source_ids:
+        total_counts = dict(
+            db.query(SourceItem.source_id, func.count(SourceItem.id))
+            .filter(SourceItem.source_id.in_(source_ids))
+            .group_by(SourceItem.source_id).all()
+        )
+        unread_counts = dict(
+            db.query(SourceItem.source_id, func.count(SourceItem.id))
+            .filter(SourceItem.source_id.in_(source_ids), SourceItem.is_read == False)
+            .group_by(SourceItem.source_id).all()
+        )
+        oldest_dates = dict(
+            db.query(SourceItem.source_id, func.min(SourceItem.published_at))
+            .filter(SourceItem.source_id.in_(source_ids))
+            .group_by(SourceItem.source_id).all()
+        )
+    else:
+        total_counts, unread_counts, oldest_dates = {}, {}, {}
+
+    result = []
+    for s in sources:
+        out = SourceOut.model_validate(s)
+        out.unread_count = unread_counts.get(s.id, 0)
+        out.total_count = total_counts.get(s.id, 0)
+        out.oldest_post_at = oldest_dates.get(s.id)
+        out.tags = s.tags or []
+        result.append(out)
+    return result
 
 
 @router.post("", response_model=SourceOut)

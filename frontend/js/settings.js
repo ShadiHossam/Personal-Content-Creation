@@ -409,7 +409,7 @@ const Settings = {
       const models = info.models || [];
       const defaultModel = info.default_model || '';
       const modelSelector = models.length > 1 ? `
-        <select id="ai-model-${key}" style="font-size:11px;padding:2px 4px;border:1px solid var(--border);background:var(--bg2);border-radius:4px;color:var(--text1)" title="Select model">
+        <select id="ai-model-${key}" style="font-size:11px;padding:2px 4px;border:1px solid var(--border);background:var(--bg2);border-radius:4px;color:var(--text)" title="Select model">
           ${models.map(m => `<option value="${m}" ${m === defaultModel ? 'selected' : ''}>${m.split('/').pop()}</option>`).join('')}
         </select>` : '';
       if (m.noKey) {

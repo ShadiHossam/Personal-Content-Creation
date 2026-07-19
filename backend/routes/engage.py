@@ -13,7 +13,7 @@ from pydantic import BaseModel
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
-from ..database import get_db
+from ..database import get_db, SessionLocal
 from ..models import ContentItem, Creator, EngageItem, Profile, Setting
 
 log = logging.getLogger(__name__)
@@ -112,9 +112,16 @@ def update_status(item_id: int, body: StatusUpdate, db: Session = Depends(get_db
 # ─── DELETE /api/engage/items ────────────────────────────────────────────────
 
 @router.delete("/items")
-def clear_old_items(days: int = 7, db: Session = Depends(get_db)):
-    cutoff = _now() - timedelta(days=days)
-    deleted = db.query(EngageItem).filter(EngageItem.fetched_at < cutoff).delete()
+def clear_old_items(days: int = 7, status: Optional[str] = None, db: Session = Depends(get_db)):
+    """By default, clears items older than `days`. If `status` is given
+    (comma-separated, e.g. "engaged,skipped"), deletes items matching those
+    statuses instead, regardless of age."""
+    if status:
+        statuses = [s.strip() for s in status.split(",") if s.strip()]
+        deleted = db.query(EngageItem).filter(EngageItem.status.in_(statuses)).delete(synchronize_session=False)
+    else:
+        cutoff = _now() - timedelta(days=days)
+        deleted = db.query(EngageItem).filter(EngageItem.fetched_at < cutoff).delete()
     db.commit()
     return {"deleted": deleted}
 
@@ -126,12 +133,24 @@ def trigger_fetch(background_tasks: BackgroundTasks, db: Session = Depends(get_d
     li_at = _get_setting(db, "linkedin_li_at")
     if not li_at:
         raise HTTPException(400, "LinkedIn li_at cookie not configured. Add it in Settings → Scraping Options.")
-    background_tasks.add_task(_run_fetch, li_at, db)
+    background_tasks.add_task(_run_fetch, li_at)
     return {"ok": True, "message": "Fetch started — refresh in ~60 seconds"}
 
 
-def _run_fetch(li_at: str, db: Session):
-    """Background task: scrape LinkedIn, score posts, save to DB."""
+def _run_fetch(li_at: str):
+    """Background task: scrape LinkedIn, score posts, save to DB.
+
+    Opens its own session since it keeps running after the request/response
+    cycle ends, by which point the request-scoped session would be closed.
+    """
+    db = SessionLocal()
+    try:
+        _run_fetch_with_session(li_at, db)
+    finally:
+        db.close()
+
+
+def _run_fetch_with_session(li_at: str, db: Session):
     hashtags_raw = _get_setting(db, "linkedin_hashtags") or ""
     hashtags = [h.strip().lstrip("#") for h in hashtags_raw.split(",") if h.strip()]
 

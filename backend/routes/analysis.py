@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime, timezone
+import asyncio
 import json
 import re
 
@@ -101,7 +102,8 @@ Total posts analyzed: {len(items)}
 """
 
     try:
-        answer = call_claude(
+        answer = await asyncio.to_thread(
+            call_claude,
             f"{context}\n\nQuestion: {data.question}",
             system="You are a content strategy analyst. Analyze the provided social media posts and answer the user's question with specific, actionable insights. Be concise and data-driven.",
             db=db,
@@ -181,7 +183,8 @@ Rules:
 - Return ONLY valid JSON, nothing else"""
 
     try:
-        raw = call_claude(
+        raw = await asyncio.to_thread(
+            call_claude,
             prompt,
             system="You are a content strategy analyst. Return only valid JSON as instructed. No prose, no markdown fences.",
             db=db,
@@ -217,18 +220,29 @@ def competitive_landscape(category: Optional[str] = None, db: Session = Depends(
     if category and category != "all":
         q = q.filter(Creator.category == category)
     creators = q.all()
+    creator_ids = [c.id for c in creators]
+
+    items_by_creator: dict = {}
+    if creator_ids:
+        rows = db.query(
+            ContentItem.creator_id, ContentItem.likes,
+            ContentItem.comments_count, ContentItem.shares, ContentItem.platform,
+        ).filter(ContentItem.creator_id.in_(creator_ids)).all()
+        for creator_id, likes, comments, shares, platform in rows:
+            items_by_creator.setdefault(creator_id, []).append((likes, comments, shares, platform))
+
     result = []
     for c in creators:
-        items = db.query(ContentItem).filter(ContentItem.creator_id == c.id).all()
+        items = items_by_creator.get(c.id, [])
         n = len(items)
-        total_eng = sum((i.likes or 0) + (i.comments_count or 0) + (i.shares or 0) for i in items)
+        total_eng = sum((likes or 0) + (comments or 0) + (shares or 0) for likes, comments, shares, _ in items)
         result.append({
             "id": c.id,
             "name": c.name,
             "category": c.category,
             "post_count": n,
             "avg_engagement": round(total_eng / n, 1) if n else 0,
-            "platforms": list({i.platform for i in items}),
+            "platforms": list({platform for *_, platform in items}),
             "profile_image_url": c.profile_image_url,
             "instagram_handle": c.instagram_handle,
             "twitter_handle": c.twitter_handle,
@@ -312,7 +326,11 @@ Reply ONLY with a JSON array, no prose:
 ]"""
 
         try:
-            raw = call_claude(prompt, system="You are a content hook analyst. Extract and classify opening hooks. Return only valid JSON.", db=db, max_tokens=3000)
+            raw = await asyncio.to_thread(
+                call_claude, prompt,
+                system="You are a content hook analyst. Extract and classify opening hooks. Return only valid JSON.",
+                db=db, max_tokens=3000,
+            )
         except ValueError as exc:
             raise HTTPException(502, str(exc))
 
@@ -429,7 +447,11 @@ Return a JSON object with exactly these fields:
 Return ONLY valid JSON, no prose outside it."""
 
         try:
-            raw = call_claude(prompt, system="You are a writing style analyst. Return only valid JSON.", db=db, max_tokens=2000)
+            raw = await asyncio.to_thread(
+                call_claude, prompt,
+                system="You are a writing style analyst. Return only valid JSON.",
+                db=db, max_tokens=2000,
+            )
         except ValueError as exc:
             raise HTTPException(502, str(exc))
 
@@ -531,7 +553,11 @@ Produce a cross-account analysis with these sections:
 Be specific, use creator names, cite examples from the posts above."""
 
     try:
-        analysis = call_claude(prompt, system="You are a competitive content intelligence analyst. Be specific and name the creators in your analysis.", db=db, max_tokens=2500)
+        analysis = await asyncio.to_thread(
+            call_claude, prompt,
+            system="You are a competitive content intelligence analyst. Be specific and name the creators in your analysis.",
+            db=db, max_tokens=2500,
+        )
     except ValueError as exc:
         raise HTTPException(502, str(exc))
 
@@ -726,7 +752,8 @@ Reply ONLY with a JSON array, no prose:
 ]"""
 
     try:
-        raw = call_claude(
+        raw = await asyncio.to_thread(
+            call_claude,
             prompt,
             system="You are a content hook analyst. Extract and classify opening hooks from text. Return only valid JSON.",
             db=db,
@@ -998,7 +1025,9 @@ LinkedIn posts analyzed: {len(items)}
         user_message = data.user_context
 
     try:
-        result = call_claude(user_message, system=system_prompt, db=db, max_tokens=3000)
+        result = await asyncio.to_thread(
+            call_claude, user_message, system=system_prompt, db=db, max_tokens=3000,
+        )
     except ValueError as exc:
         raise HTTPException(502, str(exc))
 

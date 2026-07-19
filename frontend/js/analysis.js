@@ -477,13 +477,13 @@ const Analysis = {
     }
     if (key === 'engagement' && typeof data === 'object') {
       const best = (data.best_posts || []).map(p => `
-        <div style="background:#10b98111;border-radius:6px;padding:8px 10px;margin-bottom:6px">
-          <div style="font-size:12px;font-weight:600;color:#10b981;margin-bottom:2px">✓ ${App.escape(p.summary || '')}</div>
+        <div style="background:var(--green-dim);border-radius:6px;padding:8px 10px;margin-bottom:6px">
+          <div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:2px">✓ ${App.escape(p.summary || '')}</div>
           <div style="font-size:11px;color:var(--text2)">${App.escape(p.why || '')}</div>
         </div>`).join('');
       const worst = (data.worst_posts || []).map(p => `
-        <div style="background:#ef444411;border-radius:6px;padding:8px 10px;margin-bottom:6px">
-          <div style="font-size:12px;font-weight:600;color:#ef4444;margin-bottom:2px">✗ ${App.escape(p.summary || '')}</div>
+        <div style="background:var(--red-dim);border-radius:6px;padding:8px 10px;margin-bottom:6px">
+          <div style="font-size:12px;font-weight:600;color:var(--red);margin-bottom:2px">✗ ${App.escape(p.summary || '')}</div>
           <div style="font-size:11px;color:var(--text2)">${App.escape(p.why || '')}</div>
         </div>`).join('');
       return `<div style="padding-top:10px">
@@ -706,6 +706,7 @@ const Analysis = {
       }
       const data = await API.post(`/api/intelligence/sessions/${this._landscapeSessionId}/chat`, { content: q });
       textEl.innerHTML = this.renderMarkdown(data.answer);
+      textEl.dir = App.detectArabic(data.answer || '') ? 'rtl' : 'ltr';
     } catch (e) {
       this._landscapeSessionId = null;
       textEl.innerHTML = `<span style="color:var(--red)">${App.escape(e.message)}</span>`;
@@ -942,7 +943,7 @@ const Analysis = {
       <div id="hooks-upload-panel" style="display:none"></div>
       <div id="hooks-bulk-bar" style="display:none;background:var(--bg2);border:1px solid var(--border);padding:10px 14px;align-items:center;gap:10px;border-radius:8px;margin-bottom:8px">
         <span id="hooks-bulk-count" style="font-size:12px;font-weight:600;color:var(--text)">0 selected</span>
-        <button class="btn btn-sm" style="background:#ef444422;color:#ef4444;border:1px solid #ef444444" onclick="Analysis.bulkDeleteHooks()">Delete Selected</button>
+        <button class="btn btn-sm" style="background:var(--red-dim);color:var(--red);border:1px solid var(--red-dim)" onclick="Analysis.bulkDeleteHooks()">Delete Selected</button>
         <button class="btn btn-secondary btn-sm" onclick="Analysis.bulkCopyHooks()">Copy to Clipboard</button>
         <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="Analysis.clearBulkSelection()">Deselect All</button>
       </div>

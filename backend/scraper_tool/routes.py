@@ -5,7 +5,7 @@ from __future__ import annotations
 import threading
 from typing import Any
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 
@@ -273,6 +273,137 @@ def _handle_to_url(platform: str, target: str) -> str:
     return target
 
 
+class CompanyInfoBody(BaseModel):
+    target: str = ""
+    li_at: str = ""
+    project_slug: str = "default"
+
+
+class CompanyPeopleBody(BaseModel):
+    target: str = ""
+    li_at: str = ""
+    keyword: str = ""
+    max_people: int = 50
+    project_slug: str = "default"
+
+
+@router.post("/linkedin/company")
+def scrape_linkedin_company(body: CompanyInfoBody):
+    target = body.target.strip()
+    li_at = body.li_at.strip()
+    slug = body.project_slug or "default"
+
+    if not target:
+        return {"error": "target is required"}
+    if not li_at:
+        return {"error": "li_at cookie is required"}
+    if not _try_acquire():
+        return {"error": "A scraper run is already in progress"}
+
+    def _work():
+        try:
+            from backend.scraper_tool.clients.linkedin_company import scrape_company
+            _scraper_status["progress"] = "LinkedIn: fetching company info…"
+            info = scrape_company(target, li_at)
+            _scraper_status["progress"] = "LinkedIn: saving…"
+            dataset = storage.save_dataset(
+                slug, "linkedin", "company_info", [info],
+                account_handle=info.get("name", target),
+                meta={"target": target},
+            )
+            _scraper_store["latest"] = {"run_id": dataset["run_id"], "count": dataset["count"]}
+            _release(f"Done — company info saved")
+        except Exception as exc:
+            _scraper_store["latest"] = {"error": str(exc)}
+            _release(f"Error: {exc}")
+
+    threading.Thread(target=_work, daemon=True).start()
+    return {"ok": True}
+
+
+@router.post("/linkedin/company/people")
+def scrape_linkedin_company_people(body: CompanyPeopleBody):
+    target = body.target.strip()
+    li_at = body.li_at.strip()
+    keyword = body.keyword.strip()
+    max_people = max(1, min(body.max_people, 500))
+    slug = body.project_slug or "default"
+
+    if not target:
+        return {"error": "target is required"}
+    if not li_at:
+        return {"error": "li_at cookie is required"}
+    if not _try_acquire():
+        return {"error": "A scraper run is already in progress"}
+
+    def _work():
+        try:
+            from backend.scraper_tool.clients.linkedin_company import scrape_company_people
+            _scraper_status["progress"] = f"LinkedIn: fetching employees (max {max_people})…"
+            people = scrape_company_people(target, li_at, keyword=keyword, max_people=max_people)
+            _scraper_status["progress"] = f"LinkedIn: saving {len(people)} employees…"
+            dataset = storage.save_dataset(
+                slug, "linkedin", "company_people", people,
+                account_handle=target,
+                meta={"target": target, "keyword": keyword, "max_people": max_people},
+            )
+            _scraper_store["latest"] = {"run_id": dataset["run_id"], "count": dataset["count"]}
+            _release(f"Done — {len(people)} employees")
+        except Exception as exc:
+            _scraper_store["latest"] = {"error": str(exc)}
+            _release(f"Error: {exc}")
+
+    threading.Thread(target=_work, daemon=True).start()
+    return {"ok": True}
+
+
+class CompanySearchBody(BaseModel):
+    keyword: str = ""
+    location: str = ""
+    size_filter: str = ""
+    max_results: int = 100
+    li_at: str = ""
+    project_slug: str = "default"
+
+
+@router.post("/linkedin/search-companies")
+def search_linkedin_companies(body: CompanySearchBody):
+    keyword = body.keyword.strip()
+    slug = body.project_slug or "default"
+    max_results = max(1, min(body.max_results, 500))
+
+    if not keyword:
+        return {"error": "keyword is required"}
+    if not _try_acquire():
+        return {"error": "A scraper run is already in progress"}
+
+    def _work():
+        try:
+            from backend.scraper_tool import extension_driver
+            _scraper_status["progress"] = f"LinkedIn: searching companies for '{keyword}'…"
+            companies = extension_driver.search_companies(
+                keyword=keyword,
+                location=body.location.strip(),
+                size_filter=body.size_filter.strip(),
+                max_results=max_results,
+                li_at=body.li_at.strip(),
+            )
+            _scraper_status["progress"] = f"LinkedIn: saving {len(companies)} companies…"
+            dataset = storage.save_dataset(
+                slug, "linkedin", "company_search", companies,
+                account_handle=keyword,
+                meta={"keyword": keyword, "location": body.location, "size_filter": body.size_filter},
+            )
+            _scraper_store["latest"] = {"run_id": dataset["run_id"], "count": dataset["count"]}
+            _release(f"Done — {len(companies)} companies")
+        except Exception as exc:
+            _scraper_store["latest"] = {"error": str(exc)}
+            _release(f"Error: {exc}")
+
+    threading.Thread(target=_work, daemon=True).start()
+    return {"ok": True}
+
+
 @router.get("/status")
 def status():
     return {**_scraper_status, "latest": _scraper_store.get("latest")}
@@ -283,12 +414,18 @@ def status():
 
 @router.get("/datasets")
 def list_datasets(project_slug: str = "default"):
-    return {"datasets": storage.list_datasets(project_slug)}
+    try:
+        return {"datasets": storage.list_datasets(project_slug)}
+    except ValueError as exc:
+        raise HTTPException(400, str(exc))
 
 
 @router.get("/dataset/{run_id}")
 def get_dataset(run_id: str, project_slug: str = "default", include_raw: str = "0"):
-    dataset = storage.get_dataset(project_slug, run_id)
+    try:
+        dataset = storage.get_dataset(project_slug, run_id)
+    except ValueError as exc:
+        raise HTTPException(400, str(exc))
     if not dataset:
         return {"error": "not found"}
     if include_raw != "1":
@@ -299,5 +436,8 @@ def get_dataset(run_id: str, project_slug: str = "default", include_raw: str = "
 
 @router.post("/dataset/{run_id}/delete")
 def delete_dataset(run_id: str, project_slug: str = "default"):
-    ok = storage.delete_dataset(project_slug, run_id)
+    try:
+        ok = storage.delete_dataset(project_slug, run_id)
+    except ValueError as exc:
+        raise HTTPException(400, str(exc))
     return {"ok": ok}

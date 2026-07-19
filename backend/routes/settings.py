@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import Optional, Dict
@@ -16,7 +16,8 @@ router = APIRouter(prefix="/api/settings", tags=["settings"])
 SENSITIVE_KEYS = {
     "youtube_api_key", "claude_api_key", "apify_api_key",
     "ai_provider_groq_key", "ai_provider_openrouter_key",
-    "ai_provider_gemini_key", "linkedin_li_at",
+    "ai_provider_gemini_key", "ai_provider_together_key",
+    "linkedin_li_at", "twitter_auth_token", "twitter_ct0",
 }
 
 
@@ -54,6 +55,8 @@ def save_settings(data: Dict[str, str], db: Session = Depends(get_db)):
 
 @router.get("/value/{key}")
 def get_raw_value(key: str, db: Session = Depends(get_db)):
+    if key not in SENSITIVE_KEYS:
+        raise HTTPException(404, detail="Unknown setting")
     row = db.query(Setting).filter(Setting.key == key).first()
     return {"value": row.value if row else None}
 

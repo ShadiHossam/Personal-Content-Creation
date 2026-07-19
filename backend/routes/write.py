@@ -167,13 +167,20 @@ Write ONLY the final post — no meta-commentary, no explanations. Just the post
     # Agentic tool-use loop
     max_iterations = 5
     for _ in range(max_iterations):
-        response = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=2000,
-            system=system,
-            tools=tools,
-            messages=messages
-        )
+        try:
+            response = client.messages.create(
+                model="claude-sonnet-4-6",
+                max_tokens=2000,
+                system=system,
+                tools=tools,
+                messages=messages
+            )
+        except anthropic.AuthenticationError:
+            raise HTTPException(502, "The Anthropic API key was rejected. Check it in Settings → API Keys.")
+        except anthropic.RateLimitError:
+            raise HTTPException(502, "Anthropic is rate-limiting requests right now. Try again shortly.")
+        except anthropic.APIError as exc:
+            raise HTTPException(502, f"Anthropic API error: {exc}")
 
         if response.stop_reason == "end_turn":
             draft = next((b.text for b in response.content if hasattr(b, "text")), "")

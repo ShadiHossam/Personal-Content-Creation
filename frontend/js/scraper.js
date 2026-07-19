@@ -3,6 +3,8 @@ const Scraper = (() => {
   let _connections = {};
   let _pollTimer = null;
   let _browserPollTimer = null;
+  let _companyPollTimer = null;
+  let _companyResults = [];
 
   const PLATFORM_ICONS = {
     reddit:    '🟠',
@@ -19,6 +21,11 @@ const Scraper = (() => {
     _setupTabs();
     _checkOAuthCallback();
     await refresh();
+    const saved = localStorage.getItem('linkedin_li_at');
+    if (saved) {
+      const el = document.getElementById('linkedin-li-at');
+      if (el) el.value = saved;
+    }
   }
 
   async function refresh() {
@@ -449,6 +456,256 @@ const Scraper = (() => {
     } catch (e) { App.toast(e.message, 'error'); }
   }
 
+  // ── LinkedIn Companies tab ────────────────────────────────────────────
+
+  function _getLinkedInInputs() {
+    const liAt = document.getElementById('linkedin-li-at')?.value?.trim();
+    const target = document.getElementById('linkedin-company-target')?.value?.trim();
+    const keyword = document.getElementById('linkedin-people-keyword')?.value?.trim();
+    const maxPeople = parseInt(document.getElementById('linkedin-max-people')?.value) || 50;
+    const searchKeyword = document.getElementById('linkedin-search-keyword')?.value?.trim();
+    const searchLocation = document.getElementById('linkedin-search-location')?.value?.trim();
+    const searchSize = document.getElementById('linkedin-search-size')?.value || '';
+    const searchMax = parseInt(document.getElementById('linkedin-search-max')?.value) || 100;
+    if (liAt) localStorage.setItem('linkedin_li_at', liAt);
+    return { liAt, target, keyword, maxPeople, searchKeyword, searchLocation, searchSize, searchMax };
+  }
+
+  async function runCompanySearch() {
+    const { liAt, searchKeyword, searchLocation, searchSize, searchMax } = _getLinkedInInputs();
+    if (!searchKeyword) { App.toast('Enter an industry or keyword to search', 'error'); return; }
+
+    document.getElementById('linkedin-company-status-bar').style.display = 'block';
+    document.getElementById('linkedin-company-status-result').style.display = 'none';
+    document.getElementById('linkedin-company-results').style.display = 'none';
+    _setCompanyStatus('running', 'Opening browser…');
+
+    try {
+      const res = await API.post('/api/scraper/linkedin/search-companies', {
+        keyword: searchKeyword,
+        location: searchLocation,
+        size_filter: searchSize,
+        max_results: searchMax,
+        li_at: liAt,
+      });
+      if (res.error) { _setCompanyStatus('error', res.error); return; }
+      _pollCompanyStatus('search');
+    } catch (e) { _setCompanyStatus('error', e.message); }
+  }
+
+  async function runCompanyInfo() {
+    const { liAt, target } = _getLinkedInInputs();
+    if (!target) { App.toast('Enter a company URL or name', 'error'); return; }
+    if (!liAt) { App.toast('Paste your li_at cookie first', 'error'); return; }
+
+    document.getElementById('linkedin-company-status-bar').style.display = 'block';
+    document.getElementById('linkedin-company-status-result').style.display = 'none';
+    document.getElementById('linkedin-company-results').style.display = 'none';
+    _setCompanyStatus('running', 'Starting browser…');
+
+    try {
+      const res = await API.post('/api/scraper/linkedin/company', { target, li_at: liAt });
+      if (res.error) { _setCompanyStatus('error', res.error); return; }
+      _pollCompanyStatus('info');
+    } catch (e) { _setCompanyStatus('error', e.message); }
+  }
+
+  async function runPeopleFetch() {
+    const { liAt, target, keyword, maxPeople } = _getLinkedInInputs();
+    if (!target) { App.toast('Enter a company URL or name', 'error'); return; }
+    if (!liAt) { App.toast('Paste your li_at cookie first', 'error'); return; }
+
+    document.getElementById('linkedin-company-status-bar').style.display = 'block';
+    document.getElementById('linkedin-company-status-result').style.display = 'none';
+    document.getElementById('linkedin-company-results').style.display = 'none';
+    _setCompanyStatus('running', 'Starting browser…');
+
+    try {
+      const res = await API.post('/api/scraper/linkedin/company/people', {
+        target, li_at: liAt, keyword, max_people: maxPeople,
+      });
+      if (res.error) { _setCompanyStatus('error', res.error); return; }
+      _pollCompanyStatus('people');
+    } catch (e) { _setCompanyStatus('error', e.message); }
+  }
+
+  function _pollCompanyStatus(mode) {
+    if (_companyPollTimer) clearInterval(_companyPollTimer);
+    _companyPollTimer = setInterval(async () => {
+      try {
+        const s = await API.get('/api/scraper/status');
+        _setCompanyStatus(s.running ? 'running' : (s.done ? 'done' : 'idle'), s.progress || 'Idle');
+        if (!s.running && s.done) {
+          clearInterval(_companyPollTimer);
+          _companyPollTimer = null;
+          const resEl = document.getElementById('linkedin-company-status-result');
+          if (s.latest) {
+            resEl.style.display = 'block';
+            if (s.latest.error) {
+              resEl.textContent = 'Error: ' + s.latest.error;
+            } else {
+              resEl.innerHTML = `Saved <strong>${s.latest.count}</strong> records · run ID: <code>${s.latest.run_id}</code>`;
+              _loadDatasets();
+              if (s.latest.run_id) _loadCompanyResults(s.latest.run_id, mode);
+            }
+          }
+        }
+      } catch (_) {}
+    }, 1500);
+  }
+
+  async function _loadCompanyResults(runId, mode) {
+    try {
+      const data = await API.get(`/api/scraper/dataset/${runId}?project_slug=default`);
+      const records = data.records || [];
+      _companyResults = records;
+      if (mode === 'people') {
+        _renderPeopleTable(records);
+      } else if (mode === 'search') {
+        _renderCompanySearchTable(records);
+      } else {
+        _renderCompanyInfo(records[0] || {});
+      }
+    } catch (e) { console.error('Failed to load company results', e); }
+  }
+
+  function _renderCompanySearchTable(records) {
+    const container = document.getElementById('linkedin-company-results');
+    const countEl = document.getElementById('linkedin-results-count');
+    const tableEl = document.getElementById('linkedin-results-table');
+    if (!records.length) { container.style.display = 'none'; return; }
+
+    countEl.textContent = `${records.length} compan${records.length !== 1 ? 'ies' : 'y'} found`;
+    const _esc = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    tableEl.innerHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border);color:var(--text3)">
+            <th style="text-align:left;padding:6px 10px;font-weight:500">#</th>
+            <th style="text-align:left;padding:6px 10px;font-weight:500">Company</th>
+            <th style="text-align:left;padding:6px 10px;font-weight:500">Industry</th>
+            <th style="text-align:left;padding:6px 10px;font-weight:500">Size / Followers</th>
+            <th style="text-align:left;padding:6px 10px;font-weight:500">LinkedIn</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${records.map((r, i) => `
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:7px 10px;color:var(--text3);font-size:11px">${i + 1}</td>
+              <td style="padding:7px 10px">
+                <div style="font-weight:500">${_esc(r.name)}</div>
+                ${r.description ? `<div style="font-size:11px;color:var(--text3);margin-top:2px">${_esc(r.description).slice(0,80)}${r.description.length>80?'…':''}</div>` : ''}
+              </td>
+              <td style="padding:7px 10px;color:var(--text2);font-size:11px">${_esc(r.industry)}</td>
+              <td style="padding:7px 10px;color:var(--text3);font-size:11px">${_esc(r.size)}</td>
+              <td style="padding:7px 10px">${r.linkedin_url ? `<a href="${_esc(r.linkedin_url)}" target="_blank" style="color:var(--accent);font-size:11px">↗ View</a>` : '—'}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>`;
+    container.style.display = 'block';
+  }
+
+  function _renderPeopleTable(records) {
+    const container = document.getElementById('linkedin-company-results');
+    const countEl = document.getElementById('linkedin-results-count');
+    const tableEl = document.getElementById('linkedin-results-table');
+    if (!records.length) { container.style.display = 'none'; return; }
+
+    countEl.textContent = `${records.length} employee${records.length !== 1 ? 's' : ''} found`;
+    const _esc = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    tableEl.innerHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border);color:var(--text3)">
+            <th style="text-align:left;padding:6px 10px;font-weight:500">Name</th>
+            <th style="text-align:left;padding:6px 10px;font-weight:500">Title</th>
+            <th style="text-align:left;padding:6px 10px;font-weight:500">Location</th>
+            <th style="text-align:left;padding:6px 10px;font-weight:500">Profile</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${records.map(r => `
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:7px 10px;font-weight:500">${_esc(r.name)}</td>
+              <td style="padding:7px 10px;color:var(--text2)">${_esc(r.title)}</td>
+              <td style="padding:7px 10px;color:var(--text3);font-size:11px">${_esc(r.location)}</td>
+              <td style="padding:7px 10px">${r.profile_url ? `<a href="${_esc(r.profile_url)}" target="_blank" style="color:var(--accent);font-size:11px">↗ LinkedIn</a>` : '—'}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>`;
+    container.style.display = 'block';
+  }
+
+  function _renderCompanyInfo(info) {
+    const container = document.getElementById('linkedin-company-results');
+    const countEl = document.getElementById('linkedin-results-count');
+    const tableEl = document.getElementById('linkedin-results-table');
+    const _esc = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+    countEl.textContent = 'Company info';
+    const rows = [
+      ['Company', info.name], ['Tagline', info.tagline], ['Industry', info.industry],
+      ['Employees', info.employee_range], ['HQ', info.hq], ['Followers', info.followers],
+      ['Website', info.website ? `<a href="${_esc(info.website)}" target="_blank" style="color:var(--accent)">${_esc(info.website)}</a>` : ''],
+      ['LinkedIn', info.linkedin_url ? `<a href="${_esc(info.linkedin_url)}" target="_blank" style="color:var(--accent)">View page ↗</a>` : ''],
+    ].filter(r => r[1]);
+
+    tableEl.innerHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <tbody>
+          ${rows.map(([k, v]) => `
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:7px 10px;color:var(--text3);font-weight:500;white-space:nowrap;width:120px">${_esc(k)}</td>
+              <td style="padding:7px 10px;color:var(--text)">${v}</td>
+            </tr>`).join('')}
+          ${info.about ? `
+            <tr>
+              <td style="padding:7px 10px;color:var(--text3);font-weight:500;vertical-align:top">About</td>
+              <td style="padding:7px 10px;color:var(--text2);font-size:12px;line-height:1.5">${_esc(info.about).slice(0, 600)}${info.about.length > 600 ? '…' : ''}</td>
+            </tr>` : ''}
+        </tbody>
+      </table>`;
+    container.style.display = 'block';
+  }
+
+  function _setCompanyStatus(state, text) {
+    const dot = document.getElementById('linkedin-company-status-dot');
+    if (!dot) return;
+    document.getElementById('linkedin-company-status-text').textContent = text;
+    dot.style.background = state === 'running' ? '#f59e0b' : state === 'done' ? '#22c55e' : state === 'error' ? '#ef4444' : 'var(--accent)';
+  }
+
+  function exportCompanyCSV() {
+    if (!_companyResults.length) { App.toast('No data to export — run a scrape first', 'error'); return; }
+    const first = _companyResults[0] || {};
+    let headers, filename;
+    if ('profile_url' in first) {
+      // Employee results
+      headers = ['name', 'title', 'location', 'profile_url', 'company'];
+      filename = 'linkedin_employees.csv';
+    } else if ('description' in first || ('industry' in first && !('tagline' in first))) {
+      // Company search results
+      headers = ['name', 'industry', 'size', 'description', 'linkedin_url'];
+      filename = 'linkedin_companies.csv';
+    } else {
+      // Single company info
+      headers = ['name', 'tagline', 'industry', 'employee_range', 'hq', 'followers', 'website', 'linkedin_url'];
+      filename = 'linkedin_company_info.csv';
+    }
+    const rows = _companyResults.map(r => headers.map(h => `"${String(r[h] || '').replace(/"/g, '""')}"`).join(','));
+    const csv = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    App.toast('CSV downloaded', 'success');
+  }
+
   // ── Helpers ───────────────────────────────────────────────────────────
 
   function _relTime(isoStr) {
@@ -465,9 +722,10 @@ const Scraper = (() => {
   function _stopPolling() {
     if (_pollTimer) { clearInterval(_pollTimer); _pollTimer = null; }
     if (_browserPollTimer) { clearInterval(_browserPollTimer); _browserPollTimer = null; }
+    if (_companyPollTimer) { clearInterval(_companyPollTimer); _companyPollTimer = null; }
   }
 
-  return { init, refresh, startConnect, disconnect, runFetch, runBrowserFetch, viewDataset, deleteDataset, _saveCredentials, _stopPolling };
+  return { init, refresh, startConnect, disconnect, runFetch, runBrowserFetch, viewDataset, deleteDataset, _saveCredentials, _stopPolling, runCompanySearch, runCompanyInfo, runPeopleFetch, exportCompanyCSV };
 })();
 
 // Hook into app lifecycle

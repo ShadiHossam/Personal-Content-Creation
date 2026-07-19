@@ -114,7 +114,10 @@ const Intelligence = {
 
     const el = document.createElement('div');
     el.className = `chat-bubble ${role}`;
-    if (isAr) el.style.fontFamily = 'var(--font-ar)';
+    if (isAr) {
+      el.style.fontFamily = 'var(--font-ar)';
+      el.dir = 'rtl';
+    }
     el.textContent = content;
     container.appendChild(el);
     container.scrollTop = container.scrollHeight;

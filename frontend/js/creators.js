@@ -494,8 +494,10 @@ const Creators = {
 
     const isChecked = this._selectedIds.has(c.id);
 
+    const nameDir = App.detectArabic(c.name || '') ? 'rtl' : 'ltr';
+
     return `
-      <div class="creator-row" onclick="CreatorProfile.open(${c.id})" title="Click to view profile">
+      <div class="creator-row" dir="${nameDir}" onclick="CreatorProfile.open(${c.id})" title="Click to view profile">
         <input type="checkbox" class="creator-row-cb" data-id="${c.id}" ${isChecked ? 'checked' : ''}
           onclick="event.stopPropagation();Creators._toggleSelect(${c.id}, this.checked)"
           style="width:16px;height:16px;cursor:pointer;flex-shrink:0;accent-color:var(--accent)" />

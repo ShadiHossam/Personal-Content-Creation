@@ -878,6 +878,7 @@
           <div class="tab" data-tab="scraper-fetch">Fetch Data</div>
           <div class="tab" data-tab="scraper-browser">Browser Scrape</div>
           <div class="tab" data-tab="scraper-datasets">Datasets</div>
+          <div class="tab" data-tab="scraper-linkedin">LI Companies</div>
         </div>
 
         <!-- My Accounts -->
@@ -968,6 +969,103 @@
         <!-- Datasets -->
         <div class="tab-content" id="tab-scraper-datasets" style="margin-top:18px">
           <div id="scraper-datasets-list"></div>
+        </div>
+
+        <!-- LI Companies -->
+        <div class="tab-content" id="tab-scraper-linkedin" style="margin-top:18px;max-width:600px">
+
+          <!-- Session cookie -->
+          <div class="form-group">
+            <label>li_at session cookie <span style="color:var(--text3);font-size:11px">(DevTools → Application → Cookies → linkedin.com)</span></label>
+            <input type="password" id="linkedin-li-at" placeholder="AQEDATxxxxxx…"
+                   style="width:100%;font-family:monospace;font-size:12px"
+                   oninput="localStorage.setItem('linkedin_li_at', this.value)" />
+          </div>
+
+          <hr style="border:none;border-top:1px solid var(--border);margin:20px 0 16px" />
+
+          <!-- ── COMPANY SEARCH (primary) ── -->
+          <div style="font-size:14px;font-weight:600;margin-bottom:4px">Search Companies</div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:12px">Uses the logged-in browser profile — no cookie needed. Run <code>open_login_browser.py</code> once to set up LinkedIn session.</div>
+          <div class="form-group">
+            <label>Industry / keyword</label>
+            <input type="text" id="linkedin-search-keyword"
+                   placeholder="e.g. SaaS B2B, fintech, digital marketing agency"
+                   style="width:100%"
+                   onkeydown="if(event.key==='Enter'){event.preventDefault();Scraper.runCompanySearch()}" />
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="form-group" style="margin-bottom:0">
+              <label>Location <span style="color:var(--text3);font-size:11px">(optional)</span></label>
+              <input type="text" id="linkedin-search-location" placeholder="e.g. Egypt, Dubai, USA" style="width:100%" />
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label>Company size <span style="color:var(--text3);font-size:11px">(optional)</span></label>
+              <select id="linkedin-search-size" style="width:100%">
+                <option value="">Any size</option>
+                <option value="small">Small (1–50)</option>
+                <option value="medium">Medium (51–500)</option>
+                <option value="large">Large (500+)</option>
+                <option value="1-10">1–10</option>
+                <option value="11-50">11–50</option>
+                <option value="51-200">51–200</option>
+                <option value="201-500">201–500</option>
+                <option value="501-1000">501–1,000</option>
+                <option value="1001-5000">1,001–5,000</option>
+                <option value="10001+">10,001+</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:12px">
+            <label>Max companies</label>
+            <input type="number" id="linkedin-search-max" value="100" min="1" max="500" style="width:100px" />
+          </div>
+          <button class="btn btn-primary" onclick="Scraper.runCompanySearch()">▶ Search Companies</button>
+
+          <!-- Status bar (shared) -->
+          <div id="linkedin-company-status-bar" style="display:none;margin-top:16px;padding:12px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:13px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div id="linkedin-company-status-dot" style="width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+              <span id="linkedin-company-status-text">Idle</span>
+            </div>
+            <div id="linkedin-company-status-result" style="margin-top:8px;display:none;color:var(--text2)"></div>
+          </div>
+
+          <!-- Results -->
+          <div id="linkedin-company-results" style="display:none;margin-top:18px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+              <div style="font-size:13px;font-weight:600" id="linkedin-results-count"></div>
+              <button class="btn btn-ghost btn-sm" onclick="Scraper.exportCompanyCSV()">↓ Export CSV</button>
+            </div>
+            <div id="linkedin-results-table" style="overflow-x:auto"></div>
+          </div>
+
+          <hr style="border:none;border-top:1px solid var(--border);margin:24px 0 16px" />
+
+          <!-- ── EMPLOYEE SCRAPER (secondary) ── -->
+          <div style="font-size:14px;font-weight:600;margin-bottom:4px">Scrape Employees</div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:12px">Look up employees of a specific company</div>
+          <div class="form-group">
+            <label>Company URL or name</label>
+            <input type="text" id="linkedin-company-target"
+                   placeholder="e.g. anthropic  or  https://www.linkedin.com/company/anthropic/"
+                   style="width:100%"
+                   onkeydown="if(event.key==='Enter'){event.preventDefault();Scraper.runPeopleFetch()}" />
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end">
+            <div class="form-group" style="margin-bottom:0">
+              <label>Role filter <span style="color:var(--text3);font-size:11px">(optional)</span></label>
+              <input type="text" id="linkedin-people-keyword" placeholder="e.g. CTO, Engineer" style="width:100%" />
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label>Max</label>
+              <input type="number" id="linkedin-max-people" value="50" min="1" max="500" style="width:80px" />
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button class="btn btn-ghost btn-sm" onclick="Scraper.runCompanyInfo()">🏢 Company Info</button>
+            <button class="btn btn-ghost btn-sm" onclick="Scraper.runPeopleFetch()">👥 Scrape Employees</button>
+          </div>
         </div>
 
       </div>
@@ -1339,7 +1437,7 @@
 <script src="/static/js/intelligence.js?v=20260523-5"></script>
 <script src="/static/js/writer.js?v=20260523-5"></script>
 <script src="/static/js/style.js?v=20260523-5"></script>
-<script src="/static/js/settings.js?v=20260523-5"></script>
+<script src="/static/js/settings.js?v=20260608-1"></script>
 <script src="/static/js/creator-profile.js?v=20260525-1"></script>
 <script src="/static/js/scraper.js?v=20260523-5"></script>
 <script src="/static/js/youtube.js?v=20260523-5"></script>

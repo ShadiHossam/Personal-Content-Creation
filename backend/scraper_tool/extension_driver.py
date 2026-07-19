@@ -305,6 +305,183 @@ def run_idsmcr(
     }
 
 
+def search_companies(
+    keyword: str,
+    location: str = "",
+    size_filter: str = "",
+    max_results: int = 100,
+    li_at: str = "",
+) -> list[dict]:
+    """Search LinkedIn for companies using the persistent Chrome profile or li_at cookie.
+
+    Paginates through LinkedIn's company search results, extracting name, industry,
+    size, and URL. Provide li_at cookie to authenticate when the persistent profile
+    is not logged into LinkedIn.
+
+    Size filter values: 'small' (1-50), 'medium' (51-500), 'large' (500+),
+    or exact codes like '1-10', '11-50', '51-200', '201-500', '501-1000',
+    '1001-5000', '5001-10000', '10001+'.
+    """
+    import json as _json
+    import random
+    import time
+    from urllib.parse import quote
+
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError as e:
+        raise ExtensionNotConfigured(f"playwright not installed: {e}") from e
+
+    ext_path = _ensure_extension("instant-data-scraper")
+    profile_dir = _ensure_profile()
+
+    _SIZE_CODES = {
+        "1-10": ["B"], "11-50": ["C"], "51-200": ["D"], "201-500": ["E"],
+        "501-1000": ["F"], "1001-5000": ["G"], "5001-10000": ["H"], "10001+": ["I"],
+        "small": ["B", "C"], "medium": ["D", "E"], "large": ["F", "G", "H", "I"],
+    }
+
+    def _build_url(page_num: int) -> str:
+        q = keyword.strip()
+        if location.strip():
+            q += f" {location.strip()}"
+        url = f"https://www.linkedin.com/search/results/companies/?keywords={quote(q)}&origin=SWITCH_SEARCH_VERTICAL"
+        codes = _SIZE_CODES.get(size_filter.strip().lower(), [])
+        if codes:
+            url += f"&companySize={quote(_json.dumps(codes))}"
+        if page_num > 1:
+            url += f"&page={page_num}"
+        return url
+
+    exe = settings.chromium_executable_path or None
+    if exe and not Path(exe).exists():
+        exe = None
+
+    companies: list[dict] = []
+    seen_urls: set[str] = set()
+
+    with sync_playwright() as p:
+        ctx = p.chromium.launch_persistent_context(
+            user_data_dir=str(profile_dir),
+            executable_path=exe,
+            headless=False,
+            args=[
+                f"--disable-extensions-except={ext_path}",
+                f"--load-extension={ext_path}",
+                "--disable-blink-features=AutomationControlled",
+                "--disable-infobars",
+                "--no-first-run",
+                "--no-default-browser-check",
+            ],
+            viewport={"width": 1280, "height": 800},
+            user_agent=(
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+            ),
+        )
+        ctx.add_init_script("""
+            Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+            if (!window.chrome) window.chrome = { runtime: {} };
+            Object.defineProperty(navigator, 'plugins', { get: () => [1,2,3,4,5] });
+            Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en'] });
+        """)
+
+        # Inject li_at cookie if provided — works even when the persistent profile
+        # isn't logged into LinkedIn
+        if li_at.strip():
+            ctx.add_cookies([{
+                "name": "li_at",
+                "value": li_at.strip(),
+                "domain": ".linkedin.com",
+                "path": "/",
+                "httpOnly": True,
+                "secure": True,
+                "sameSite": "None",
+            }])
+            log.info("LinkedIn: injected li_at cookie for company search")
+
+        try:
+            page = ctx.pages[0] if ctx.pages else ctx.new_page()
+            page_num = 1
+
+            while len(companies) < max_results:
+                url = _build_url(page_num)
+                log.info("LinkedIn company search (extension): page %d — %s", page_num, url)
+                page.goto(url, wait_until="domcontentloaded", timeout=30000)
+                try:
+                    page.wait_for_load_state("networkidle", timeout=12000)
+                except Exception:
+                    pass
+                time.sleep(random.uniform(2.0, 3.5))
+
+                # Auth wall check
+                cur_url = page.url
+                if any(s in cur_url for s in ("/login", "/authwall", "/checkpoint")):
+                    if li_at.strip():
+                        raise RuntimeError(
+                            "LinkedIn session expired or CAPTCHA triggered — paste a fresh li_at cookie"
+                        )
+                    raise RuntimeError(
+                        "LinkedIn auth wall hit — provide your li_at cookie in the Session Cookie field"
+                    )
+
+
+                # Extract company cards via JS eval
+                batch = page.eval_on_selector_all(
+                    ".entity-result__item, li.reusable-search__result-container",
+                    r"""(cards) => cards.map(card => {
+                        const linkEl = card.querySelector('a[href*="/company/"]');
+                        const href = linkEl ? linkEl.href.split('?')[0].replace(/\/$/, '') : '';
+                        const nameEl = card.querySelector(
+                            '.entity-result__title-text a span[aria-hidden="true"], ' +
+                            '.entity-result__title-text a'
+                        );
+                        const name = nameEl ? nameEl.innerText.trim() : (linkEl ? linkEl.innerText.trim() : '');
+                        const primaryEl = card.querySelector('.entity-result__primary-subtitle');
+                        const industry = primaryEl ? primaryEl.innerText.trim() : '';
+                        const secondaryEl = card.querySelector('.entity-result__secondary-subtitle');
+                        const size = secondaryEl ? secondaryEl.innerText.trim() : '';
+                        const snippetEl = card.querySelector('.entity-result__summary');
+                        const description = snippetEl ? snippetEl.innerText.trim() : '';
+                        return { name, industry, size, description, linkedin_url: href };
+                    }).filter(c => c.linkedin_url && c.name)"""
+                )
+
+                added = 0
+                for item in batch:
+                    url_key = item.get("linkedin_url", "")
+                    if url_key and url_key not in seen_urls:
+                        seen_urls.add(url_key)
+                        companies.append(item)
+                        added += 1
+
+                log.info(
+                    "LinkedIn company search: page %d — +%d new (total %d)",
+                    page_num, added, len(companies),
+                )
+
+                if added == 0 or len(companies) >= max_results:
+                    break
+
+                # Click Next page button
+                try:
+                    next_btn = page.query_selector(
+                        "button[aria-label='Next'], .artdeco-pagination__button--next"
+                    )
+                    if not next_btn:
+                        break
+                    next_btn.click()
+                    time.sleep(random.uniform(2.0, 3.5))
+                    page_num += 1
+                except Exception:
+                    break
+
+        finally:
+            ctx.close()
+
+    return companies[:max_results]
+
+
 def _extract_profile_image(page, platform: str) -> str:
     """Extract the profile owner's avatar URL from the currently loaded page."""
     try:

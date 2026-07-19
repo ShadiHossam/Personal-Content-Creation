@@ -118,7 +118,14 @@ async def fetch_item_details(item_id: int, db: Session = Depends(get_db)):
     if item.platform != "youtube":
         raise HTTPException(400, "fetch-details is only supported for YouTube videos")
 
-    video_id = item.url.split("v=")[-1].split("&")[0] if item.url and "v=" in item.url else ""
+    video_id = ""
+    if item.url:
+        from urllib.parse import urlparse, parse_qs
+        parsed = urlparse(item.url)
+        if parsed.hostname in ("youtu.be",):
+            video_id = parsed.path.lstrip("/")
+        elif "v=" in item.url:
+            video_id = parse_qs(parsed.query).get("v", [""])[0]
     if not video_id:
         raise HTTPException(400, "Could not extract video ID from URL")
 

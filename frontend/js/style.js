@@ -231,7 +231,7 @@ const MyStyle = {
 
   async deleteSample(id) {
     try {
-      await API.del(`/api/samples/${id}`);
+      await API.del(`/api/style/samples/${id}`);
       this.editingSamples = this.editingSamples.filter(s => s.id !== id);
       this.renderSamples();
     } catch (e) {

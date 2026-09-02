@@ -471,7 +471,7 @@ const Creators = {
       || (c.twitter_handle ? `https://unavatar.io/twitter/${encodeURIComponent(c.twitter_handle)}` : null)
       || (c.instagram_handle ? `https://unavatar.io/instagram/${encodeURIComponent(c.instagram_handle)}` : null);
     const avatar = avatarSrc
-      ? `<img src="${App.escape(App.proxyImg(avatarSrc))}" class="creator-avatar" referrerpolicy="no-referrer" onerror="this.outerHTML='${fallbackAvatar.replace(/'/g, "\\'")}">`
+      ? `<img src="${App.escape(App.proxyImg(avatarSrc))}" class="creator-avatar" referrerpolicy="no-referrer" onerror="this.outerHTML='${fallbackAvatar.replace(/'/g, "\\'")}'">`
       : fallbackAvatar;
 
     const catBadge = c.category === 'competitor'

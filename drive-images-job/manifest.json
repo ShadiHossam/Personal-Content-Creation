@@ -1,0 +1,1982 @@
+[
+  {
+    "num": 1,
+    "slug": "90-day-ai-plan",
+    "title": "90 Day AI Plan UAE: A Small Organisation's Sprint Playbook",
+    "file": "src/content/blog/en-AE/90-day-ai-plan-uae.md",
+    "drive_ids": [
+      "1rPlY1QQPrcat2CXGr337xiP36DSgNTWY",
+      "1LpfaMBpQHgJAp0-xJfIBSqUOlonlmVz9",
+      "12VeblovpGqryEcu_jolKJ0T9qvGuRTyq"
+    ],
+    "done": false
+  },
+  {
+    "num": 2,
+    "slug": "ppc-budget",
+    "title": "A PPC Budget in the UAE That Spends Small and Learns Fast",
+    "file": "src/content/blog/en-AE/ppc-budget-uae.md",
+    "drive_ids": [
+      "10hujKBwKI8dFaejOGh4i1BFNScebMfCG",
+      "1KViO9_4SJmvRD_hj6IIeQAXG8x45I_IO",
+      "15w4nYI6zaGtRP50MeIMROdpEXSD3R_Ir"
+    ],
+    "done": false
+  },
+  {
+    "num": 3,
+    "slug": "ab-test-sample-size",
+    "title": "A/B Test Sample Size UAE: A Statistical Significance Marketing Guide for Dubai Teams",
+    "file": "src/content/blog/en-AE/ab-test-sample-size-uae.md",
+    "drive_ids": [
+      "1SX9SSe26WrDX5XfYMAdCU2SSNV0HQ5Op",
+      "10hujKBwKI8dFaejOGh4i1BFNScebMfCG",
+      "1YHv3r_-N9tcnO0xaYm3aewfwuFmYKfOU"
+    ],
+    "done": false
+  },
+  {
+    "num": 4,
+    "slug": "ab-testing-low-traffic",
+    "title": "A/B Testing Low Traffic UAE Websites: Reliable Results on a Smaller Audience",
+    "file": "src/content/blog/en-AE/ab-testing-low-traffic-uae.md",
+    "drive_ids": [
+      "1f5WGkHByqIV-W1tutTTWoKRYQNe6PoPb",
+      "1au_1sxjU3OmE_eRv4KtVBP0BZ4M_dv6h",
+      "1wjo33lpr4Knx4uSb15gAmA_DUX9jT37w"
+    ],
+    "done": false
+  },
+  {
+    "num": 5,
+    "slug": "ab-testing",
+    "title": "A/B Testing UAE: How to Run Experiments When Traffic Is Small",
+    "file": "src/content/blog/en-AE/ab-testing-uae.md",
+    "drive_ids": [
+      "1Acai9RyH9wEcmktdC2KDZjFIk9v6Qa1z",
+      "1bfx7BgtGi7JAanfM5qVBM-P6mTHFWu07",
+      "1as3wMwF1JNGQmhH16c7TnssPdWJsrZ4I"
+    ],
+    "done": false
+  },
+  {
+    "num": 6,
+    "slug": "agent-running-costs",
+    "title": "AI Agent Cost UAE: What It Really Costs to Run an Agent Every Day",
+    "file": "src/content/blog/en-AE/ai-agent-cost-uae.md",
+    "drive_ids": [
+      "1JsgAHkmsOfs_k3Qp-XgiESX76xKcMYYo",
+      "1zdto-Jd9U61uygF25yvpd2dtGkXM7Xf8",
+      "1u9114VhvzJJ5_wqbXRGAh68fIbiQLVGr"
+    ],
+    "done": false
+  },
+  {
+    "num": 7,
+    "slug": "ai-agent-memory",
+    "title": "AI Agent Memory UAE: What Your Agent Remembers and Forgets",
+    "file": "src/content/blog/en-AE/ai-agent-memory-uae.md",
+    "drive_ids": [
+      "1RYy8CH4Lh3ggaJc_VWVVpdBOXvmnTeT8",
+      "1N-9PcGySXa4tcF8t72Sw8vE1UH660lQS",
+      "1JaBtC9lW1UZh0gSt7XselmVtvYSZsYam"
+    ],
+    "done": false
+  },
+  {
+    "num": 8,
+    "slug": "how-to-deploy-ai-agent",
+    "title": "AI Agent Production in the UAE: How to Deploy from Pilot to Live",
+    "file": "src/content/blog/en-AE/deploy-ai-agent-uae.md",
+    "drive_ids": [
+      "1C--ZyozKzckRgm6Z7ouhr5wpskxWCAoz",
+      "1RSvclVk97nTEIhkDbt-eiVB7AgxNRiQf",
+      "1EUR-vGDEH4HwoO5ISjRI6vrb1_O-yblB"
+    ],
+    "done": false
+  },
+  {
+    "num": 9,
+    "slug": "ai-agent-security",
+    "title": "AI Agent Security in the UAE: Permissions, Least Privilege, and Safe Automation",
+    "file": "src/content/blog/en-AE/ai-agent-security-uae.md",
+    "drive_ids": [
+      "1GIb7bAclKJ6MEilzm58sBO8-AzlDgYr4",
+      "1dGs60qhfFD9C0xEI6iTdAZF-wlCCPjNT",
+      "1Iyo0EmX-g_ddjPnReG9rS9yaWfAAG5Ko"
+    ],
+    "done": false
+  },
+  {
+    "num": 10,
+    "slug": "agents-vs-chatbots",
+    "title": "AI Agent vs Chatbot UAE: Automation, Agents, and Which System Your Business Actually Needs",
+    "file": "src/content/blog/en-AE/ai-agent-vs-chatbot-uae.md",
+    "drive_ids": [
+      "1P5mLodVlQDCh4OwdoQ43iR4hF9LLuUC9",
+      "1O928Pn-hlcHGtQvCCW2M9LdkyNE6xd_M",
+      "1cFHJ6WAGVGFB6ABSE7WvGFgMlW8ccLin"
+    ],
+    "done": false
+  },
+  {
+    "num": 11,
+    "slug": "ai-anomaly-detection-marketing",
+    "title": "AI Anomaly Detection for Marketing UAE Campaigns: Catch Problems Before They Drain Your AED Budget",
+    "file": "src/content/blog/en-AE/ai-anomaly-detection-marketing-uae.md",
+    "drive_ids": [
+      "1YzSTIniZgDFiICGfzGJh_zGT6CxaEWc0",
+      "1JSg4s36UUknlpNBzg5GGhgacUoDC8LaM",
+      "1uMl63xz1iyYV0z69dbHyFd00MIRmB8BM"
+    ],
+    "done": false
+  },
+  {
+    "num": 12,
+    "slug": "ai-brand-voice-social",
+    "title": "AI Brand Voice Social UAE: How to Keep Every Post Sounding Like You",
+    "file": "src/content/blog/en-AE/ai-brand-voice-social-uae.md",
+    "drive_ids": [
+      "1fpwwrKHO-g8GeKKHTqy2degwdhxATTYD",
+      "1fT__6ynZWyzmehrApfIqNat3eStfoVlC",
+      "1QhCJ4Nxdd3x6Z-6D8cACZGyvJdGABYgq"
+    ],
+    "done": false
+  },
+  {
+    "num": 13,
+    "slug": "ai-champions-program",
+    "title": "AI Champions Program UAE: The Internal Playbook for Private Companies",
+    "file": "src/content/blog/en-AE/ai-champions-program-uae.md",
+    "drive_ids": [
+      "1yMPHY6iefbXV9rIN3NvoWfi4ZnyHla3j",
+      "1qv_bBOmgDM8jT3x-dJrrqFN51vCP35Bl",
+      "1iXOgxXNgF7NxViP0xw7TR-cmDqwG7kMJ"
+    ],
+    "done": false
+  },
+  {
+    "num": 14,
+    "slug": "ai-competitor-monitoring",
+    "title": "AI Competitor Monitoring UAE: Run a Watch Loop That Catches Every Rival Move",
+    "file": "src/content/blog/en-AE/ai-competitor-monitoring-uae.md",
+    "drive_ids": [
+      "1X7fqOscJ_Cgb5878Dh409NTkoA7HGhyx",
+      "1-ZjlgElzKpyvp1ekJC1-7P15TcWwBmuL",
+      "127nhQ-HexRb234OAX2q_uxjinwuZ5hu1"
+    ],
+    "done": false
+  },
+  {
+    "num": 15,
+    "slug": "do-you-need-an-ai-consultant",
+    "title": "AI Consultant UAE: Do I Need One? A Decision-Maker's Guide",
+    "file": "src/content/blog/en-AE/do-i-need-an-ai-consultant-uae.md",
+    "drive_ids": [
+      "1dgEqSTi-Eex8vfCCDvKHQp__KBjrnE7N",
+      "12ouyu-TNVMC4hlpDpOi2IX3wtVfXna4N",
+      "1zxdo4r7oZ40kYtnUF4TKSngmGiQf3zNZ"
+    ],
+    "done": false
+  },
+  {
+    "num": 16,
+    "slug": "ai-consultant-vs-agency",
+    "title": "AI Consultant vs Agency vs Hiring an AI Engineer in the UAE: Which Model Fits Your Business?",
+    "file": "src/content/blog/en-AE/ai-consultant-vs-agency-uae.md",
+    "drive_ids": [
+      "1DY7igz_HL0q0PenV_l17jtmJ1LjzCX8E",
+      "1LI29AChNL5tRn0QyepsjvSxPRn-DrJbq",
+      "15B_tCSLbtgk-ib5J5OZpYm7AeGc7sjPt"
+    ],
+    "done": false
+  },
+  {
+    "num": 17,
+    "slug": "ai-consultant-cost",
+    "title": "AI Consulting Cost in the UAE: AI Consultant Fees, Tiers, and When It Is Worth It",
+    "file": "src/content/blog/en-AE/ai-consultant-cost-uae.md",
+    "drive_ids": [
+      "1FmHZeC9eBCYqLnrWAFjAS_qZrt0dF9Sz",
+      "14UW_b_2fZrgK_QZXwTvpZBqipF3kdBeV",
+      "12MtZ8_KLscgyeUB5IMVYp-oZ3jtWexSJ"
+    ],
+    "done": false
+  },
+  {
+    "num": 18,
+    "slug": "editing-ai-content",
+    "title": "AI Content Editing in the UAE: A Practical Guide for Dubai and Abu Dhabi Teams",
+    "file": "src/content/blog/en-AE/editing-ai-content-uae.md",
+    "drive_ids": [
+      "1JIR307_xVGJTNeROqN87DdwVRszBG33c",
+      "1elZ0iSRA5RCw-TBTuux3RHN52-tHutgX",
+      "1vSwseFJA6VnrvRdhFMkAKBWYEtpNCPap"
+    ],
+    "done": false
+  },
+  {
+    "num": 19,
+    "slug": "ai-cost-per-task",
+    "title": "AI Cost Per Task in the UAE: Unit Economics vs Manual Work in AED",
+    "file": "src/content/blog/en-AE/ai-cost-per-task-uae.md",
+    "drive_ids": [
+      "1Z-OjDDHesmUhp8oROX7n90DaEjmSiDW-",
+      "197QYowxe8mYGyzBTk-9cX2SWLWlqOiSk",
+      "1k__TXmcnwSUN6E6vk7vIrgzYIrH0zTza"
+    ],
+    "done": false
+  },
+  {
+    "num": 20,
+    "slug": "ai-disclosure",
+    "title": "AI Disclosure UAE: What Businesses Must Tell Clients About AI Use",
+    "file": "src/content/blog/en-AE/ai-disclosure-uae.md",
+    "drive_ids": [
+      "1JXrZkHz6pwwt2MrNWdoe1V4oZkIPXiFo",
+      "1H4gvh2eYN__wT0s5WIEXlxlju8m9YAOZ",
+      "1XNmYOHS9EWutjCqFBFt5xMZrX16ga2Vn"
+    ],
+    "done": false
+  },
+  {
+    "num": 21,
+    "slug": "ai-email-sequence",
+    "title": "AI Email Sequence UAE: Draft a Full Flow in One Sitting",
+    "file": "src/content/blog/en-AE/ai-email-sequence-uae.md",
+    "drive_ids": [
+      "1auyOFioew-4HtHGMBqZLxbYbqIMEjyNT",
+      "1spPQqOihuJBezLL6IbwRVEBDCiQ47vpm",
+      "1yz56YVuwR6K0bCBSzf51Wn7qFOVo13M3"
+    ],
+    "done": false
+  },
+  {
+    "num": 22,
+    "slug": "ai-human-handoff",
+    "title": "AI Human Handoff UAE: A Practical Escalation Design Guide for Dubai and Abu Dhabi Businesses",
+    "file": "src/content/blog/en-AE/ai-human-handoff-uae.md",
+    "drive_ids": [
+      "1eK3GI_w5qGCdrdMhufkIXQx3_6hDD_Tr",
+      "1wADhLy25uyVff-CBUyW42pzbUE8Dmpmy",
+      "1KL8as_Yobm353oswtJFk-8xaTgHBeY5M"
+    ],
+    "done": false
+  },
+  {
+    "num": 23,
+    "slug": "ai-humanizer",
+    "title": "AI Humanizer UAE: An Honest Verdict for Businesses and Professionals",
+    "file": "src/content/blog/en-AE/ai-humanizer-uae.md",
+    "drive_ids": [
+      "1KUrmSz484-LlOSwmDls_JxVm6z4bctGy",
+      "1QvZz5jipQenbtNnEDJuVySErj5YDY5ij",
+      "1iRk_FbHrS-DLoA7dI8GPIfmOEVjOXMIM"
+    ],
+    "done": false
+  },
+  {
+    "num": 24,
+    "slug": "ai-image-prompts",
+    "title": "AI Image Prompts UAE: Write Visual Prompts That Get the Shot Every Time",
+    "file": "src/content/blog/en-AE/ai-image-prompts-uae.md",
+    "drive_ids": [
+      "1sNgE6RoTN8Lv2lSs_Eqzk1GZyu9tBt4m",
+      "1yX96JTyEQ94DJO7LDB7f978UlVweD21Y",
+      "166xYOFdX-UiNA-MZXpuOhfvWBSt43VuU"
+    ],
+    "done": false
+  },
+  {
+    "num": 25,
+    "slug": "ai-images-for-ads",
+    "title": "AI Images for Ads UAE: What Works, What's Restricted, and How to Stay Compliant",
+    "file": "src/content/blog/en-AE/ai-images-for-ads-uae.md",
+    "drive_ids": [
+      "1SiqG9QyvLJS9WnWdH2TciCxP9vcyUMnB",
+      "1g7aUFyaCgVakqoPuTz8teTTiVA-P8MQ2",
+      "1Pz75IyijD_XGuLqsNrwE486DFOM-Twv_"
+    ],
+    "done": false
+  },
+  {
+    "num": 26,
+    "slug": "ai-maturity-model",
+    "title": "AI Maturity Model UAE: Score Your Own Capabilities Without the Consulting Theatre",
+    "file": "src/content/blog/en-AE/ai-maturity-model-uae.md",
+    "drive_ids": [
+      "1VgTQeui0Xv60tvervVHVpejoNlb-hRXs",
+      "1uDgiMO8ffWPlhu-be3i_0yJ2ne4nzzCO",
+      "1Tl6Z4c_LZDRrS-qRZQvz7wom8TIs2iE9"
+    ],
+    "done": false
+  },
+  {
+    "num": 27,
+    "slug": "ai-meeting-tools",
+    "title": "AI Meeting Assistant UAE: The Tools That Win Back Your Weekly Schedule",
+    "file": "src/content/blog/en-AE/ai-meeting-assistant-uae.md",
+    "drive_ids": [
+      "1Dy-IhDySkNdJdcWT23TwBlCCYA1ztptq",
+      "1Vl_3TDKP0qGDmJeBaLugflp7XIzsD1i4",
+      "1-O-jZGwGHt94CgYjhkaV5Y3Psmkd4gzi"
+    ],
+    "done": false
+  },
+  {
+    "num": 28,
+    "slug": "ai-observability",
+    "title": "AI Observability UAE: Logging and Monitoring Your AI Systems",
+    "file": "src/content/blog/en-AE/ai-observability-uae.md",
+    "drive_ids": [
+      "1wfc6WKcqIROYJNw24QeBQeHSwWIboodo",
+      "1hlIR_iG_ZZkg5naCfqWC-IAMdEo3UELd",
+      "1ubqoB6mvqLVQZYDiYktMHRbGNkMAY9Zi"
+    ],
+    "done": false
+  },
+  {
+    "num": 29,
+    "slug": "measuring-ai-time-savings",
+    "title": "AI Productivity Measurement in the UAE Without Fooling Yourself",
+    "file": "src/content/blog/en-AE/measuring-ai-time-savings-uae.md",
+    "drive_ids": [
+      "1Yu6E22Q8qW1HgFt1-aRbC5SAA3Owge8s",
+      "1Qt3r9sKWJ7OIjeV_vLpr8i_7oux3jzJH",
+      "1zkiuTvZz2VXGli6P-MsxQP30fuq7Eczy"
+    ],
+    "done": false
+  },
+  {
+    "num": 30,
+    "slug": "ai-recommendations-small-business",
+    "title": "AI Recommendations for Small Business UAE Catalogues",
+    "file": "src/content/blog/en-AE/ai-recommendations-small-business-uae.md",
+    "drive_ids": [
+      "1ncf23V73AfF_wGPMaOD4jLRI6CZC6UJZ",
+      "1xne0Vxqz__mnNZjTzvqr852M1DefLFME",
+      "1xiwvAYzQDApuW-lofPFDN4Fc3cJ87dAk"
+    ],
+    "done": false
+  },
+  {
+    "num": 31,
+    "slug": "ai-second-brain",
+    "title": "AI Second Brain UAE: Build a Knowledge System Your AI Agent Can Actually Read",
+    "file": "src/content/blog/en-AE/ai-second-brain-uae.md",
+    "drive_ids": [
+      "1B37NOuCibEbg0f291btrQP_OYHozH2zv",
+      "1bYxuuwdI0egM209wO_F3yqNiReoFPvhz",
+      "1dY3XbJxk_KYZudSebz65Py5AtFfzqNMW"
+    ],
+    "done": false
+  },
+  {
+    "num": 32,
+    "slug": "ai-spreadsheet-prompts",
+    "title": "AI Spreadsheet Prompts UAE Teams Actually Use: Excel, Table and CSV Work in AED",
+    "file": "src/content/blog/en-AE/ai-spreadsheet-prompts-uae.md",
+    "drive_ids": [
+      "1TcWSBE6acOoP66GOOf_ukqIlmqIUZ-iq",
+      "1ECmyFQ3QAD4fm03utukilU_rtU-dwvlA",
+      "1dN2nZwW3V1SqCAwQvd_g02Mgb29mNf_B"
+    ],
+    "done": false
+  },
+  {
+    "num": 33,
+    "slug": "ai-subject-lines",
+    "title": "AI Subject Lines UAE: Generate High-Converting Emails That Keep Your Brand Voice",
+    "file": "src/content/blog/en-AE/ai-subject-lines-uae.md",
+    "drive_ids": [
+      "19I4ZFcmvnHn3QRcap2_8xK1K64n_3A2i",
+      "1qbw4hHRrXEvHktvVFrbCg9_zHU6HozmP",
+      "1n9Xdumf-CQMxi8Qty783jtPlVMPdVfFJ"
+    ],
+    "done": false
+  },
+  {
+    "num": 34,
+    "slug": "ai-survey-analysis",
+    "title": "AI Survey Analysis UAE: Open Ended Responses Analysis, Faster and Smarter",
+    "file": "src/content/blog/en-AE/ai-survey-analysis-uae.md",
+    "drive_ids": [
+      "1r275aOlOnE5A0QVMxwb4P1Ax2qkCMDA5",
+      "1IyJUqJwHBRdl3wqQS5iHxBHF9nQZZmt9",
+      "1TakeJbG8POALisjvFv-oyWLLho5DoSFe"
+    ],
+    "done": false
+  },
+  {
+    "num": 35,
+    "slug": "ai-tech-stack",
+    "title": "AI Tech Stack UAE: Design an Intentional Stack Instead of Collecting Tools",
+    "file": "src/content/blog/en-AE/ai-tech-stack-uae.md",
+    "drive_ids": [
+      "1IfSURa3AtFJXwdnjFtsY05fVRBtAZ7xW",
+      "1Lxd8zSGlD-_FDB73O6T5W_p3q8QSugzh",
+      "1mMNB39yWOxUMzKbkdzSlZEFZSzxOMnk_"
+    ],
+    "done": false
+  },
+  {
+    "num": 36,
+    "slug": "ai-tools",
+    "title": "AI Tools UAE: How to Pick the Right Stack Without Collecting Redundant Subscriptions",
+    "file": "src/content/blog/en-AE/ai-tools-uae.md",
+    "drive_ids": [
+      "1mKtSMlxUyX1IJcAOaOI3U0eUgFJ-gr42",
+      "1xlY8Vunn4Cp57FWikouM_BCmV9WFU1-y",
+      "13b-f7Qk9jlwexrVe5p6lNlvkp32i27Z6"
+    ],
+    "done": false
+  },
+  {
+    "num": 37,
+    "slug": "ai-use-case-prioritization",
+    "title": "AI Use Case Prioritization UAE: Score by Value and Effort to Build the Right Portfolio First",
+    "file": "src/content/blog/en-AE/ai-use-case-prioritization-uae.md",
+    "drive_ids": [
+      "1l9ibKWZdOu8EoLsNcpG8hMNjtza4V04g",
+      "10K1UlssihFjE1GsEPse6hWEbWy9K-MHf",
+      "1H73O-WzXGgl_gwwzfTtfpKbc5Q5sfPNr"
+    ],
+    "done": false
+  },
+  {
+    "num": 38,
+    "slug": "ai-video-ads",
+    "title": "AI Video Ads UAE: Where They Convert and Where They Flop",
+    "file": "src/content/blog/en-AE/ai-video-ads-uae.md",
+    "drive_ids": [
+      "1uMusRcI5qOFYz4fXaGtnf59GwvIT7iRz",
+      "1yULV1fRuOCR_smNEGlsDgFt1mTyDjYhn",
+      "1RH5lxg4KIrL0-fFcQnV5AvmfU8sRdc7m"
+    ],
+    "done": false
+  },
+  {
+    "num": 39,
+    "slug": "ai-voice-agents",
+    "title": "AI Voice Agents UAE: Where the Technology Stands Today",
+    "file": "src/content/blog/en-AE/ai-voice-agents-uae.md",
+    "drive_ids": [
+      "1dRd3iHFzbAixO8pVnijIg9cS88WuOGeo",
+      "1EhAt-UWXUNwmn8ti-mMsNIh76ybB6jik",
+      "1OpP1hqqYZN5y86rzUyCL1ZI3cl4ebJe5"
+    ],
+    "done": false
+  },
+  {
+    "num": 40,
+    "slug": "ai-writing-sounds-robotic",
+    "title": "AI Writing Sounds Robotic in UAE: How to Fix It",
+    "file": "src/content/blog/en-AE/ai-writing-sounds-robotic-uae.md",
+    "drive_ids": [
+      "1P-QIBfMs8g_QxpyZESMqecWz07Mkbes4",
+      "1wlDVJghGEFGaNURHA7kVAotqrvX1sjwr",
+      "1JGh0gBDZZF4S47KkeRunay6GPqgW-wKk"
+    ],
+    "done": false
+  },
+  {
+    "num": 41,
+    "slug": "ai-and-gdpr",
+    "title": "AI and GDPR UAE: Answering the Questions That Recur for Dubai and Abu Dhabi Businesses",
+    "file": "src/content/blog/en-AE/ai-and-gdpr-uae.md",
+    "drive_ids": [
+      "1BQCE7LKc-P1Gs91CyNjnAxioFd6PoV-C",
+      "1GG5vUUyr9zfTI_A2RsFeLCj-6fZTTWgC",
+      "1k2Tr9f_vvpGp6aEMxT2TlakBrolt377y"
+    ],
+    "done": false
+  },
+  {
+    "num": 42,
+    "slug": "ai-for-local-business",
+    "title": "AI for Local Business UAE: Automate Around the Calendar, Not Against It",
+    "file": "src/content/blog/en-AE/ai-for-local-business-uae.md",
+    "drive_ids": [
+      "1GlnGFHBN6iZlWHt0XOYd4f5wUyKXYCzY",
+      "1lytmTusNeylrlcKljSdfkHmYkJliHrtD",
+      "1ywJBoeNlmRI-Ok3sNxE0pMVHWc3VyBJe"
+    ],
+    "done": false
+  },
+  {
+    "num": 43,
+    "slug": "ai-for-solopreneurs",
+    "title": "AI for Solopreneurs UAE: A Practical Starting Kit for One-Person Businesses",
+    "file": "src/content/blog/en-AE/ai-for-solopreneurs-uae.md",
+    "drive_ids": [
+      "1SSseVnOxDU3sA2uBeyR5s3gYroK_d7LN",
+      "15hwwmNxFntPF7Q9DuMe5cycDHOwBNZa7",
+      "1QL2Htklrab8_IydurhQDHWC6SKtKfdEF"
+    ],
+    "done": false
+  },
+  {
+    "num": 44,
+    "slug": "ai-ready-knowledge-base",
+    "title": "AI-Ready Knowledge Base UAE: A Practical Guide for Dubai and Abu Dhabi Businesses",
+    "file": "src/content/blog/en-AE/ai-ready-knowledge-base-uae.md",
+    "drive_ids": [
+      "1ZnwEIrA7Rghl_SzQ2QHJ0vrwRGIUAn-O",
+      "1tcS-P2s1BbpnbYC4jPTBptEtdOTqUqJy",
+      "1Xzmdhxah4iXKZCBVQw1SSTNoKiI5kZnA"
+    ],
+    "done": false
+  },
+  {
+    "num": 45,
+    "slug": "api-rate-limits",
+    "title": "API Rate Limits UAE: Why Automations Break and How Retry Logic Fixes Them",
+    "file": "src/content/blog/en-AE/api-rate-limits-uae.md",
+    "drive_ids": [
+      "1kMrLImQBjntwqbIiljgSPZEANknIDrwB",
+      "1URCoVXn2XTS3TC4Ze2LnINkVTfXH4MlO",
+      "1A1b1VvOUk4FN4j4dYmKd270_TpTYnIlb"
+    ],
+    "done": false
+  },
+  {
+    "num": 46,
+    "slug": "apis-for-non-developers",
+    "title": "API for Non Developers UAE: Connect Your Business Tools Without Writing Code",
+    "file": "src/content/blog/en-AE/api-for-non-developers-uae.md",
+    "drive_ids": [
+      "1_TXwYauAtZUxHSxVeYcW3zPyw2vsTwE-",
+      "1hNVC_7NlFOxBxbEUphw-ZBR8uDFgTtr6",
+      "1S0xjsYAQoEW4Le84WP0FnyJSO7oZZ-x_"
+    ],
+    "done": false
+  },
+  {
+    "num": 47,
+    "slug": "ad-creative-testing",
+    "title": "Ad Creative Testing UAE: Why Creative Strategy Beats Targeting on Snapchat and TikTok",
+    "file": "src/content/blog/en-AE/ad-creative-testing-uae.md",
+    "drive_ids": [
+      "1_6yVDFF6nILRHV1pRBpPT9M8ZyuLDtw_",
+      "1OXntSyxtLuf0CTm8kqLex9l-fxMZr3T0",
+      "1ewBZfZM5WBmNU_jWSDJyyui1-bIeTk2r"
+    ],
+    "done": false
+  },
+  {
+    "num": 48,
+    "slug": "automated-metric-alerts",
+    "title": "Automated Metric Alerts UAE: Push the Numbers That Matter Into Slack or Email",
+    "file": "src/content/blog/en-AE/automated-metric-alerts-uae.md",
+    "drive_ids": [
+      "1ReK4b-sWVQcFXBFL0OYV7wGWNrOAIK3A",
+      "1ErjkzFqbguSQiKD1R6HK9ELVOV5dh8jp",
+      "1fVCeWOrc6MDk4p4PNRgf76O6oBGvsQlR"
+    ],
+    "done": false
+  },
+  {
+    "num": 49,
+    "slug": "automated-weekly-report",
+    "title": "Automated Weekly Report UAE: Set It Once and Let It Send Itself",
+    "file": "src/content/blog/en-AE/automated-weekly-report-uae.md",
+    "drive_ids": [
+      "1CVUtB0jNZs5vpmqq3AMJXCJtc5f5u8ED",
+      "1puGQ3ezfeRxvVINWRh3o_0jbiozrmsqJ",
+      "1w85AzhuEGDmBUJsYsp52OAAi7wonIioD"
+    ],
+    "done": false
+  },
+  {
+    "num": 50,
+    "slug": "automation-audit",
+    "title": "Automation Audit UAE: How to Run One on Your Own Week",
+    "file": "src/content/blog/en-AE/automation-audit-uae.md",
+    "drive_ids": [
+      "1pZjo3VBNfqTSgM6QgUtLfILBC9ZvG8UF",
+      "1k61-qW_nSWTRoPcGlQjsUZCb9QRS2m0W",
+      "1DKkgvX67OA9J7YaUSiZCoV4XBpfdKyq6"
+    ],
+    "done": false
+  },
+  {
+    "num": 51,
+    "slug": "automation-roi",
+    "title": "Automation ROI UAE: How to Calculate the Return on a Single Automation in AED",
+    "file": "src/content/blog/en-AE/automation-roi-uae.md",
+    "drive_ids": [
+      "1KbKIh_262rHtapgUV2540iFAD8R-bVPq",
+      "1p0iuSH2keM5ijqdQTRKMfZN8wSk_J4yF",
+      "1kb3VMAp6iaiEaXKMrJ7-RJSoj89uVvL4"
+    ],
+    "done": false
+  },
+  {
+    "num": 52,
+    "slug": "behavior-triggered-automation",
+    "title": "Behavior Triggered Automation UAE: Replace Timers With Sequences That Follow What Contacts Actually Do",
+    "file": "src/content/blog/en-AE/behavior-triggered-automation-uae.md",
+    "drive_ids": [
+      "1pNRkuzEq6LIgnIq1O2zHhqqbPGRJpn7h",
+      "1noVijzBMWwbS8r8bf0C9YW7ZJBe1aBY9",
+      "1JA-gJRI-Ymvhrs9DiohEcwmcbjDPDGRK"
+    ],
+    "done": false
+  },
+  {
+    "num": 53,
+    "slug": "blog-post-length",
+    "title": "Blog Post Length in the UAE: How Long Should Your Article Really Be?",
+    "file": "src/content/blog/en-AE/blog-post-length-uae.md",
+    "drive_ids": [
+      "1MISqL1EJFtDGZI81vGxsYfthusnP8Gs-",
+      "1sER3qqbnXzjIahX3JFj4AwoopGuDw3Lw",
+      "1asu5XdN2nkjKl16y3ogjdKTh_GcjldM_"
+    ],
+    "done": false
+  },
+  {
+    "num": 54,
+    "slug": "blog-post-structure",
+    "title": "Blog Post Structure UAE: A Format That Survives Skim Readers",
+    "file": "src/content/blog/en-AE/blog-post-structure-uae.md",
+    "drive_ids": [
+      "1-X90ifzW32QMXMOcHP8h16MI2eIrel_B",
+      "18mFYwp0J4yiyLhBxPuXI6SdEqCGEl93m",
+      "1FWDawTc09xnYq8nCicegTR6BaV3IoelL"
+    ],
+    "done": false
+  },
+  {
+    "num": 55,
+    "slug": "build-an-agent-no-code",
+    "title": "Build an AI Agent No Code UAE Teams Can Ship in a Weekend",
+    "file": "src/content/blog/en-AE/build-ai-agent-no-code-uae.md",
+    "drive_ids": [
+      "191GzuLcqtAPbgAKqP4UVYPSDzS6chXwF",
+      "1nGKocA14HNRjHyJcvqfFRzvch7X5OLNF",
+      "1PVfmWauZUSU8U8VgYAavRB6RK872pMUS"
+    ],
+    "done": false
+  },
+  {
+    "num": 56,
+    "slug": "build-vs-buy-ai",
+    "title": "Build vs Buy AI in the UAE: A Decision Framework for Dubai, Abu Dhabi, and Free Zone Businesses",
+    "file": "src/content/blog/en-AE/build-vs-buy-ai-uae.md",
+    "drive_ids": [
+      "1wVhKbxpol_bsWvCcvlS_yGT2LL0MvUVb",
+      "1ZNCTs0Pm3KT2lk9_z9SvCnlwv9UQ3I5j",
+      "1hsqtwAQ3lc2PVAyXoG3noBAPFeI08QfR"
+    ],
+    "done": false
+  },
+  {
+    "num": 57,
+    "slug": "buyer-persona-vs-icp",
+    "title": "Buyer Persona vs ICP UAE: Which Tool to Use and When",
+    "file": "src/content/blog/en-AE/buyer-persona-vs-icp-uae.md",
+    "drive_ids": [
+      "1YcYFd7BFcDpUVdNowU_7sj-olppUJhLU",
+      "1YcVKwANX7Z9lx_6x5yZItJndkdY-AjWW",
+      "1ku_ZrcjWviD_7hukIJ9T_ncpOcLRvGLH"
+    ],
+    "done": false
+  },
+  {
+    "num": 58,
+    "slug": "cac-and-ltv",
+    "title": "CAC and LTV UAE: How to Calculate Both for a Service Business",
+    "file": "src/content/blog/en-AE/cac-and-ltv-uae.md",
+    "drive_ids": [
+      "1z0qgT44aJE8Y-pJNr4QxNrNsq-Hk3PjI",
+      "1XQ3Y2ietr4akLju8n-UxXkIEp7kzauQ_",
+      "1uCzgTSlvYvHSViob6vZWBxU_K1hVcd7m"
+    ],
+    "done": false
+  },
+  {
+    "num": 59,
+    "slug": "crm-data-hygiene",
+    "title": "CRM Data Hygiene UAE: A Practical Guide for Small Databases",
+    "file": "src/content/blog/en-AE/crm-data-hygiene-uae.md",
+    "drive_ids": [
+      "1cvvw_MMDh-AClV6CB8f4nUCanbPGaAqE",
+      "1CSLMeK2BUJz5304_5z0hteZrK61nWnc_",
+      "17JkXV3l5nY9C-Cqi9i3s1rz04VHOJUxT"
+    ],
+    "done": false
+  },
+  {
+    "num": 60,
+    "slug": "crm-marketing-data",
+    "title": "CRM Marketing Data UAE: The Hidden Layer Most Experts Configure Wrong",
+    "file": "src/content/blog/en-AE/crm-marketing-data-uae.md",
+    "drive_ids": [
+      "1zjTY3e6afa7EkjQGc6Wy7ueRRqsiS6fx",
+      "1dJr79dzftTxyIlh9KzzIWpXpfL1gKrnv",
+      "1eTtvEUWYOzBZf6kx4piOPXsKD2VBRIQ9"
+    ],
+    "done": false
+  },
+  {
+    "num": 61,
+    "slug": "case-study-template",
+    "title": "Case Study Template UAE: A Problem-Approach-Result Framework for Dubai and Abu Dhabi Brands",
+    "file": "src/content/blog/en-AE/case-study-template-uae.md",
+    "drive_ids": [
+      "1HDABPMPkHZsYtDV4Er5QM6dT-EKFCkLo",
+      "1IsRT4apeI2i8TVwcc8rUwx__dWHyWh8M",
+      "1b5Vljm1flFezTZKfi-sG-N4nlDenwwu8"
+    ],
+    "done": false
+  },
+  {
+    "num": 62,
+    "slug": "chain-of-thought-prompting",
+    "title": "Chain of Thought Prompting UAE: When to Ask for Reasoning, and When Not To",
+    "file": "src/content/blog/en-AE/chain-of-thought-prompting-uae.md",
+    "drive_ids": [
+      "1sZZt_sRXMiSfXxwqlnH1z5F2vtD3mwyo",
+      "1ZetjzNb1oRaCdzc8jg1C1ZjgejkLFaxl",
+      "1UB1PGA8et_4Nd6YvI3B-6kuyuhmvTweO"
+    ],
+    "done": false
+  },
+  {
+    "num": 63,
+    "slug": "chunking-and-embeddings",
+    "title": "Chunking and Embeddings UAE: The No-Jargon Guide for Dubai and Abu Dhabi Business Teams",
+    "file": "src/content/blog/en-AE/chunking-and-embeddings-uae.md",
+    "drive_ids": [
+      "15oGmAr4f42A9XkYB1pqU6GpTc4cgUr39",
+      "1sU4Gn9Av8bg1rG91wTdxx5JnYWpHbMyM",
+      "14sb8CzvxLZ1dx1urvmxbv5oqPx_rCsNZ"
+    ],
+    "done": false
+  },
+  {
+    "num": 64,
+    "slug": "claude-agent-sdk",
+    "title": "Claude Agent SDK UAE: What It Gives Teams Building Production AI Agents in 2026",
+    "file": "src/content/blog/en-AE/claude-agent-sdk-uae.md",
+    "drive_ids": [
+      "1sLl-R4Krh8sd5QOJ3HbC5oA7S_Ao6zhe",
+      "1OATQKLblEGIoiyjhiwePsVIm9013tqyQ",
+      "1EiVJeTmYFkbv_fXe331D8d185f5Pq7SC"
+    ],
+    "done": false
+  },
+  {
+    "num": 65,
+    "slug": "community-distribution",
+    "title": "Community Distribution UAE: Where Brand Conversations Actually Happen Online",
+    "file": "src/content/blog/en-AE/community-distribution-uae.md",
+    "drive_ids": [
+      "18rbRBJhGpuozJRbqs8Lr0CuM4zlHJlaH",
+      "1nSo_qt2uoxBF262XiiR7QxzuXVD4jYFK",
+      "1RX-HzZ3K0YGlhsqMdZ5tvrywbGwo5Ya7"
+    ],
+    "done": false
+  },
+  {
+    "num": 66,
+    "slug": "competitor-analysis-template",
+    "title": "Competitor Analysis Template UAE: A Practical System for One-Person Teams",
+    "file": "src/content/blog/en-AE/competitor-analysis-template-uae.md",
+    "drive_ids": [
+      "1Yc7KwVAPEGgU0Q78C3MEKGm7oXhWIAqY",
+      "16UP7tC_4atPPNH4w3CInY2GpmLO4mVrO",
+      "1y6yySpZ_bASUVGAees2dTTNb-kKlzikg"
+    ],
+    "done": false
+  },
+  {
+    "num": 67,
+    "slug": "consultant-vs-agency",
+    "title": "Consultant vs Agency UAE vs In-House Marketing: Which Model Fits Your Business?",
+    "file": "src/content/blog/en-AE/consultant-vs-agency-uae.md",
+    "drive_ids": [
+      "1RlSGIQTDTB8rNrThZSv1M4pZat6VaOHw",
+      "1GKjxlhHhkefjOXmSdNtc2u8b-DEnWNWQ",
+      "1nAV_DIEpCMhc98Duiu1HfUPJAMchTU2f"
+    ],
+    "done": false
+  },
+  {
+    "num": 68,
+    "slug": "content-audit",
+    "title": "Content Audit UAE: How to Run One for Dubai and Abu Dhabi Businesses",
+    "file": "src/content/blog/en-AE/content-audit-uae.md",
+    "drive_ids": [
+      "1L7EBRluk8fmfCVnwdk_2ZTmEFAs5c9I_",
+      "1MBKUtqui5F_tQU7pBW1KPhIxziN1RAnq",
+      "1myQB9tvOBfa4jA0ryoR-6v5BrUYe2Scm"
+    ],
+    "done": false
+  },
+  {
+    "num": 69,
+    "slug": "content-batching",
+    "title": "Content Batching UAE: Produce a Full Month of Content in Two Days",
+    "file": "src/content/blog/en-AE/content-batching-uae.md",
+    "drive_ids": [
+      "1xrxFV6yCjcJa-aGmKoJOnaa_2sEf0rjv",
+      "13GmhAP6rqm0V5RTtxPaIzOMhZCPzkE2G",
+      "1oJXSkkFHhCjztCZZkbPaZZx1SUIa1NsB"
+    ],
+    "done": false
+  },
+  {
+    "num": 70,
+    "slug": "content-pillars",
+    "title": "Content Pillars UAE: Build the Publishing Spine That Makes Your Brand Unmissable",
+    "file": "src/content/blog/en-AE/content-pillars-uae.md",
+    "drive_ids": [
+      "1yzwHu0tIqSOh_W_6C57DU7_wkFgHTX3c",
+      "1dobFF5DqD2F-3Qun9JxzNEtATCJmKRsK",
+      "1N9tx33HryHRJV-z0OV0NITkRFhsXXess"
+    ],
+    "done": false
+  },
+  {
+    "num": 71,
+    "slug": "content-pruning",
+    "title": "Content Pruning UAE: Cut Content Decay Before It Costs You Rankings on**",
+    "file": "src/content/blog/en-AE/content-pruning-uae.md",
+    "drive_ids": [
+      "1-nYMsRLM2qJdJC7YNZAnybLzFEuAl4hd",
+      "1-KBmUR_T-qSo8wjXo_5ZM_57M0xleldx",
+      "1G7VciyUC-wT1OfWe5pyspz-_K5sKdcmH"
+    ],
+    "done": false
+  },
+  {
+    "num": 72,
+    "slug": "content-syndication-uae-without-hurting-seo",
+    "title": "Content Syndication in the UAE Without Hurting SEO",
+    "file": "src/content/blog/en-AE/content-syndication-uae.md",
+    "drive_ids": [
+      "1PvH3ke3kV-ecSaXA_nUvipdU_bO3hkZZ",
+      "1Q2XhPnZDuPl1-csO9ne3sweZ3ftFix5i",
+      "1ufqHzU3QhRqXKZ-s6fqT3joL9o12giu7"
+    ],
+    "done": false
+  },
+  {
+    "num": 73,
+    "slug": "cookie-consent-marketing",
+    "title": "Cookie Consent Marketing UAE: PDPL Compliance for Snap, TikTok and LinkedIn",
+    "file": "src/content/blog/en-AE/cookie-consent-marketing-uae.md",
+    "drive_ids": [
+      "1Wtpap_U4JFTR5sVRW7nUfM2p3sMkzKx-",
+      "1Pw0JGBVzdpTAJWHnNZR3TcC0yU8U_pfS",
+      "16e2SU7iTtP_WjUeLNuacdnGuR33SwNOZ"
+    ],
+    "done": false
+  },
+  {
+    "num": 74,
+    "slug": "core-web-vitals",
+    "title": "Core Web Vitals UAE: What LCP, INP, and CLS Mean for Your Dubai Website's Google Rankings",
+    "file": "src/content/blog/en-AE/core-web-vitals-uae.md",
+    "drive_ids": [
+      "1f1e6wtbQ2YIc1Xs01VEoRODAYqS6VanV",
+      "1E1Pjl3idaUc8vQWSnAYmO5N8UaZN0kGx",
+      "1VKE3nXEVCbBqTzpBKpzzPxbd7FUz4e01"
+    ],
+    "done": false
+  },
+  {
+    "num": 75,
+    "slug": "cost-per-lead-benchmarks",
+    "title": "Cost Per Lead Benchmarks UAE: Why the Number You See Will Never Match the Number You Get",
+    "file": "src/content/blog/en-AE/cost-per-lead-benchmarks-uae.md",
+    "drive_ids": [
+      "1Nazn2k5Yt1AqUW1Wqx4eTgympKkUtLXX",
+      "1ajNh7JocZW_Z1uFFMqcNVDQxzi4bSz4-",
+      "1LRrPLitgqYQ_MxwAljHQZqfv66TOoUC_"
+    ],
+    "done": false
+  },
+  {
+    "num": 76,
+    "slug": "customer-acquisition-cost-benchmarks",
+    "title": "Customer Acquisition Cost Benchmarks UAE: A Channel-by-Channel AED Guide",
+    "file": "src/content/blog/en-AE/customer-acquisition-cost-benchmarks-uae.md",
+    "drive_ids": [
+      "1EXZLsRnwsBPBOyLHZZUhvliX83k5saVw",
+      "1XsWPiIp8EIu19Q9ZWEbPxwfbJCvLS-Iw",
+      "1dK1d3XCY41MuuiLJdtuQXU1aJiePTfvS"
+    ],
+    "done": false
+  },
+  {
+    "num": 77,
+    "slug": "customer-interview-questions",
+    "title": "Customer Interview Questions UAE: Twenty Discovery Questions That Reveal Why Buyers Choose You",
+    "file": "src/content/blog/en-AE/customer-interview-questions-uae.md",
+    "drive_ids": [
+      "1h8UWzShDP1N8zwTxJnxzL9Qu4GQc7GER",
+      "1i9oLSyv6jKLd3CuJ-9w0DJrAspJ2BwBQ",
+      "16AO_A9wBRzKCokmfwpiz93tBvBLoXX7V"
+    ],
+    "done": false
+  },
+  {
+    "num": 78,
+    "slug": "cleaning-data-for-ai",
+    "title": "Data Cleaning for AI UAE Teams: A Practical Guide for Dubai and Abu Dhabi Businesses",
+    "file": "src/content/blog/en-AE/data-cleaning-for-ai-uae.md",
+    "drive_ids": [
+      "1iWd6cZH0ZOVXCnUHfl1kkSBFV6d0bnq1",
+      "15HyhEHmaOGD31ANfOmOSvBSjN44dsZH3",
+      "1KL_aDq-smHMKgCOIzZk_M8WrV5ToEHRR"
+    ],
+    "done": false
+  },
+  {
+    "num": 79,
+    "slug": "deep-research-tools",
+    "title": "Deep Research Tools UAE: Tested on One Hard Question to Find the Best AI Research Agent",
+    "file": "src/content/blog/en-AE/deep-research-tools-uae.md",
+    "drive_ids": [
+      "1kUKrU-2r-oajyQm49ZGA5iece4cuDoML",
+      "1KcqkHD0kco2kMiaeJIhvyRr5v4DgCJJO",
+      "1umC1ZmKiT4AMXvDvnW6bjK3FYRMC4ne7"
+    ],
+    "done": false
+  },
+  {
+    "num": 80,
+    "slug": "developing-a-point-of-view",
+    "title": "Developing a Point of View Worth Disagreeing With in the UAE",
+    "file": "src/content/blog/en-AE/developing-a-point-of-view-uae.md",
+    "drive_ids": [
+      "1vzKFUrhrcCwImoLhfXvg30nS0TZvwKJi",
+      "1VWmLNAyDS4Z1Sb-Lt8-kHV1kfjgKFX6E",
+      "1wCk5iyDTJf_J8_qHB8PicgITw5QlYGXr"
+    ],
+    "done": false
+  },
+  {
+    "num": 81,
+    "slug": "marketing-consultant-cost",
+    "title": "Digital Marketing Consultant Cost in the UAE: Rates, Day Rates, and Fees in AED",
+    "file": "src/content/blog/en-AE/marketing-consultant-cost-uae.md",
+    "drive_ids": [
+      "1w45lWXytbXcrZK7uoExnQ5E3y2o-hGCZ",
+      "1BgaN2cTaRhO4thXkCinr9i9EP3JWpvNQ",
+      "1W1rdEo9NIBxFPb8VfQy9U3JB2vApTFpr"
+    ],
+    "done": false
+  },
+  {
+    "num": 82,
+    "slug": "marketing-kpis",
+    "title": "Digital Marketing KPIs in the UAE That Actually Change Decisions",
+    "file": "src/content/blog/en-AE/marketing-kpis-uae.md",
+    "drive_ids": [
+      "18UEWVb0zrJ0So65GK6EtiFubGTyF7Zjv",
+      "1nztqfr5IZ-SBTa8zgucjGu6zuq6hVJDR",
+      "1_EZsZBHHVAFxR4T5-10tGByOrlslx3-D"
+    ],
+    "done": false
+  },
+  {
+    "num": 83,
+    "slug": "digital-pr",
+    "title": "Digital PR UAE: How to Get Cited by Journalists and Build PR Backlinks That Move Rankings",
+    "file": "src/content/blog/en-AE/digital-pr-uae.md",
+    "drive_ids": [
+      "12uU81AX1a8wQZOJZkEfbhABpxBwrZ2lx",
+      "1xqSidVUFQZgxM8rT3pytq3tuuASDZvTv",
+      "1Iu4NroQFMhHvSyGx3D6Z5zwLwh-3kt29"
+    ],
+    "done": false
+  },
+  {
+    "num": 84,
+    "slug": "dynamic-landing-page-copy",
+    "title": "Dynamic Landing Page Copy UAE: Match Every Traffic Source and Audience Segment",
+    "file": "src/content/blog/en-AE/dynamic-landing-page-copy-uae.md",
+    "drive_ids": [
+      "1mfY6fKlg5ZjYliLPt_Y2MbbtRGgDO_Y9",
+      "169VduPUciCCxDXqpz9sJpTF7M7Cz6DbH",
+      "1UAy624C5jBmepwH5kqRX4Vr5H7BOoa0U"
+    ],
+    "done": false
+  },
+  {
+    "num": 85,
+    "slug": "editing-prompts",
+    "title": "Editing Prompts UAE: Rewrite and Tighten Copy for Dubai and Abu Dhabi Campaigns",
+    "file": "src/content/blog/en-AE/editing-prompts-uae.md",
+    "drive_ids": [
+      "1HBRW6sMZEKw8-E9UTzTP_rky3LvZOMmh",
+      "14QgJbwLJkN-5kpgcBp5GL5TDLWxe23Jh",
+      "1I8OMlUCsLnCKZBdzVuYTm1GLd2jJpCji"
+    ],
+    "done": false
+  },
+  {
+    "num": 86,
+    "slug": "facebook-ad-hooks",
+    "title": "Facebook Ad Hooks UAE: How to Write Scroll-Stopping Opening Lines That Win the Dubai and Abu Dhabi Feed",
+    "file": "src/content/blog/en-AE/facebook-ad-hooks-uae.md",
+    "drive_ids": [
+      "1c5Kdp45dNk52qK9QMfuO-4r2hagSaPz3",
+      "1BwxPmaJiOMOw38irBKkt9sY73FcqhGaZ",
+      "1qhHZzCYSA2qmcFYOtFhjwKv6_ajgC0CE"
+    ],
+    "done": false
+  },
+  {
+    "num": 87,
+    "slug": "few-shot-prompting",
+    "title": "Few Shot Prompting and One Shot Prompting in the UAE: Show, Don't Just Tell",
+    "file": "src/content/blog/en-AE/few-shot-prompting-uae.md",
+    "drive_ids": [
+      "1xArvkmgOBNCcw4JvedK_yTX2hew73S7j",
+      "1xTM_KN30g5SfgBcHMntzdaEGMAfRuhfH",
+      "1gBSPZOBaaT8kl4A0YYDmeXF4y3k0AnC8"
+    ],
+    "done": false
+  },
+  {
+    "num": 88,
+    "slug": "ad-angles",
+    "title": "Finding Ad Angles in the UAE Before You Write Copy",
+    "file": "src/content/blog/en-AE/ad-angles-uae.md",
+    "drive_ids": [
+      "1z3-tb9b4_Usi9JCIJI4mpNTeroSjzwVg",
+      "1dHsLskzWv5QKI0cRqzolhmj4J5CMWo0u",
+      "1ap5IsW9jNed2dx55u4uKxWXcUk4Or6Hp"
+    ],
+    "done": false
+  },
+  {
+    "num": 89,
+    "slug": "first-1000-newsletter-subscribers",
+    "title": "First 1000 Newsletter Subscribers UAE: How to Grow Email List Free",
+    "file": "src/content/blog/en-AE/first-1000-newsletter-subscribers-uae.md",
+    "drive_ids": [
+      "1XlF3kApQPTgp9x-eQTVuxYwqCXP_SjA3",
+      "1z9J-bvNCHsAZDf9f3FPVHHma_3BiNLFV",
+      "1nJKwfejzO4sWEE3H9tEJ4qw4Dq-aGZ3U"
+    ],
+    "done": false
+  },
+  {
+    "num": 90,
+    "slug": "first-vs-last-touch",
+    "title": "First Touch vs Last Touch UAE: Attribution Models in Practice",
+    "file": "src/content/blog/en-AE/first-touch-vs-last-touch-uae.md",
+    "drive_ids": [
+      "1jhtZH2dT_RuYqzypLh45MnlkGZRAkKSr",
+      "1fBbg6qKmVCP6_c4oMqB2WCiSI5j60yFb",
+      "1-Arc8_VXhVIRRljXLrnKAeWpix8MbMGT"
+    ],
+    "done": false
+  },
+  {
+    "num": 91,
+    "slug": "ga4-reports",
+    "title": "Five GA4 Reports UAE Teams Should Check Every Month",
+    "file": "src/content/blog/en-AE/ga4-reports-uae.md",
+    "drive_ids": [
+      "19teErkgPEt5qT-0r7Bd6e1hYNf2YZv9A",
+      "1PKHk2V3NNdBuzV1OGakrVhUCr_4M7db-",
+      "1qybyT-Avq_0mi_txd7nAPRjqzsa6Plnk"
+    ],
+    "done": false
+  },
+  {
+    "num": 92,
+    "slug": "function-calling-uae-tool-use-explained",
+    "title": "Function Calling UAE: AI Tool Use and Agent Tools Explained in Plain Language",
+    "file": "src/content/blog/en-AE/function-calling-uae.md",
+    "drive_ids": [
+      "1phNhAPWYCScaNi41PUOliGBfVqCAZ5j5",
+      "1nqKIAguKcVkuQ-b1r6O5N50VNfTVwc3q",
+      "1BRPmGsPuAzCV6cknpvEyrBOqg0b8RAri"
+    ],
+    "done": false
+  },
+  {
+    "num": 93,
+    "slug": "funnel-leaks",
+    "title": "Funnel Leaks UAE: Where Interest Dies and How to Diagnose It",
+    "file": "src/content/blog/en-AE/funnel-leaks-uae.md",
+    "drive_ids": [
+      "1FS74tFyWBVe0tryC8nvn-3wU9VmMBxcG",
+      "1AWaL3LCGGY_cYCjzuq7vPEyReHqrcgxu",
+      "1Zb1NW8wifshQNAIAE9csVj7JAD3wseHQ"
+    ],
+    "done": false
+  },
+  {
+    "num": 94,
+    "slug": "ga4-events",
+    "title": "GA4 Events UAE: Build an Event Schema That Reflects How UAE Buyers Actually Convert",
+    "file": "src/content/blog/en-AE/ga4-events-uae.md",
+    "drive_ids": [
+      "18XKxFRSlW9pETjvWZ_XpOziFI6VEf_2C",
+      "1A3CB3GSa6ERqSZnISF2MH-reTjDksSOL",
+      "1JuWBiEJWyna7C5OTavGBfxCOYQbV_NIV"
+    ],
+    "done": false
+  },
+  {
+    "num": 95,
+    "slug": "ga4",
+    "title": "GA4 UAE: Google Analytics 4 for Marketers Who Are Not Analysts",
+    "file": "src/content/blog/en-AE/ga4-uae.md",
+    "drive_ids": [
+      "1xSNJwqtDzIvjT-X60KDjUhPxRgfnYSxW",
+      "1p35ORUTJ-8pm2h11P7DBc2xLNTc_tetC",
+      "1gwDuLdWp2R2qd8fqZdrx_y7qOc0a1HqU"
+    ],
+    "done": false
+  },
+  {
+    "num": 96,
+    "slug": "generative-engine-optimization",
+    "title": "Generative Engine Optimization for UAE Brands: How to Get Found When Buyers Stop Googling",
+    "file": "src/content/blog/en-AE/generative-engine-optimization.md",
+    "drive_ids": [
+      "13qU-LOivcaF0tL24-K7TCFh7muUs7Ccp",
+      "1wjhsb8VIY5gdpsEvJNc7oA-PVbrz29XJ",
+      "1oEsXV-yltbHD6HsKo6JL6rB1vEHZfgrB"
+    ],
+    "done": false
+  },
+  {
+    "num": 97,
+    "slug": "ai-automation-getting-started",
+    "title": "Getting Started with AI Automation in the UAE: What to Automate First",
+    "file": "src/content/blog/en-AE/ai-automation-getting-started-uae.md",
+    "drive_ids": [
+      "1OtnlZeOJbxcKwHxi2TZCiGMcptbX_BVa",
+      "1a0WhXKgPZok_JaOptBLgMjr8OFyQPO85",
+      "1xkOvBoinww_QtG4T4nPDF7M05UUh0Q25"
+    ],
+    "done": false
+  },
+  {
+    "num": 98,
+    "slug": "go-to-market-for-consultants",
+    "title": "Go to Market for Consultants UAE: A Step-by-Step Launch Sequence",
+    "file": "src/content/blog/en-AE/go-to-market-for-consultants-uae.md",
+    "drive_ids": [
+      "1dM0ksfVwozY6VC7rxUKptAy8FWpKE5am",
+      "1qRFQ0MUOeH9DqC1E6M0osr83jxe15fBv",
+      "1VoYxaUe4FfIWiINmTImgMD8nhvYrSKMB"
+    ],
+    "done": false
+  },
+  {
+    "num": 99,
+    "slug": "google-ads-match-types",
+    "title": "Google Ads Match Types UAE: How Much Control You Actually Have",
+    "file": "src/content/blog/en-AE/google-ads-match-types-uae.md",
+    "drive_ids": [
+      "117CqOObPkcUig7qkbfxTM74097eQylOl",
+      "1JHMoDpigNEObjAsznWRSxrL6mJF2eBVo",
+      "1EnxyfCvq-YMEnzSmdtxnYv-gk4exXKrL"
+    ],
+    "done": false
+  },
+  {
+    "num": 100,
+    "slug": "google-ads-quality-score",
+    "title": "Google Ads Quality Score UAE: What Google Rewards and How to Improve It",
+    "file": "src/content/blog/en-AE/google-ads-quality-score-uae.md",
+    "drive_ids": [
+      "1tHaIF7ngvFCWVQjHI5p2ZNNrEDDCa_WX",
+      "1fWwGNzwaVkSgy9O-q9EEaqfjImdkVw0y",
+      "1SF9P_lse4YMZhP1x5aRprWHV8pZr4s5b"
+    ],
+    "done": false
+  },
+  {
+    "num": 101,
+    "slug": "google-business-profile",
+    "title": "Google Business Profile UAE: How to Get Listed Without a Storefront",
+    "file": "src/content/blog/en-AE/google-business-profile-uae.md",
+    "drive_ids": [
+      "10eT4DrD3mh85iD62Vz8pvkVcJx7OKVDS",
+      "1sNMRJy_zkwW8HZ_wKW_G7TYIF-ktaEpY",
+      "1OUseECrtJUatuesdLV9rKNvHO-uugtJ_"
+    ],
+    "done": false
+  },
+  {
+    "num": 102,
+    "slug": "guest-posting",
+    "title": "Guest Posting in the UAE: How to Beat Spam Filters and Build Links That Last",
+    "file": "src/content/blog/en-AE/guest-posting-uae.md",
+    "drive_ids": [
+      "14HnHOSxQGsFyuh7ADfl-sE2-Ie51-jH5",
+      "1QlVFD0xgc-JevippP6MmCSqgTaS-tnkX",
+      "1IF-FV0guLsC2XVQpcAxcGLVT-V0EuKIx"
+    ],
+    "done": false
+  },
+  {
+    "num": 103,
+    "slug": "hallucination-guardrails",
+    "title": "Hallucination Guardrails UAE: The Production Stack Dubai and Abu Dhabi Deployments Actually Need",
+    "file": "src/content/blog/en-AE/hallucination-guardrails-uae.md",
+    "drive_ids": [
+      "1IqWSel7xv-YMnb2WLcUMZiTIBZ_MgEKO",
+      "14hIke2DizGr7srsp5vhHpU6_jnepO0va",
+      "16LsNNAxsOeeuEihFbMBqOewO0ACTFFy6"
+    ],
+    "done": false
+  },
+  {
+    "num": 104,
+    "slug": "red-flags-hiring-a-marketing-consultant",
+    "title": "Hiring a Marketing Consultant UAE: Red Flags to Watch",
+    "file": "src/content/blog/en-AE/red-flags-hiring-a-marketing-consultant-uae.md",
+    "drive_ids": [
+      "1mUh9V8HSikzTWxmkpLlFHyMeK1rgwKWs",
+      "1jcMzxr9fTxyEVEt9r4DqWIv9jfIgMhWr",
+      "1LOWB1Ic-rMkMx5LqYMcC3aJvndMFn6nQ"
+    ],
+    "done": false
+  },
+  {
+    "num": 105,
+    "slug": "how-to-ask-for-testimonials",
+    "title": "How to Ask for Testimonials UAE Clients Will Actually Send You",
+    "file": "src/content/blog/en-AE/how-to-ask-for-testimonials-uae.md",
+    "drive_ids": [
+      "1AcmLnopFM3vFWM3MtrzryTB0G95HCeD6",
+      "1_5vRQunBtIXjBdwPYPFjW6ngckqeG0Tz",
+      "18mymsSqsRrNFfEeVmHkIZbABHjecSJlC"
+    ],
+    "done": false
+  },
+  {
+    "num": 106,
+    "slug": "how-to-brief-a-consultant",
+    "title": "How to Brief a Marketing Consultant in the UAE: Template and Step-by-Step Guide",
+    "file": "src/content/blog/en-AE/how-to-brief-a-marketing-consultant-uae.md",
+    "drive_ids": [
+      "1N5ZRvNeCPPFI9-FferGgyOfQw3yEsxbj",
+      "1_WWpDEL6ki-5Hc3Xburp-kLf53Vfo2u0",
+      "1G8ZF-GZcvm41bih-dCr-5APYV92T88J1"
+    ],
+    "done": false
+  },
+  {
+    "num": 107,
+    "slug": "first-agent-weekend",
+    "title": "How to Build Your First AI Agent in Dubai This Weekend",
+    "file": "src/content/blog/en-AE/build-first-ai-agent-uae.md",
+    "drive_ids": [
+      "1_Kl8PS3p6tT_R-bM_9IynFDNlWk7WPke",
+      "11D34Vcfv07BCSlkoFRlhTfMYJkrYs0sA",
+      "11Ts08fxBWKm1_GLdVkFTh6rcJ3i76axM"
+    ],
+    "done": false
+  },
+  {
+    "num": 108,
+    "slug": "free-consultation-offer",
+    "title": "How to Build a Free Consultation Offer in the UAE That Filters Time Wasters",
+    "file": "src/content/blog/en-AE/free-consultation-offer-uae.md",
+    "drive_ids": [
+      "1jb8qmRMStb9UCUEgbxCnkYHGFd1MmQHB",
+      "1LPhpdLqFvMyQ92h24jn9cnYuZDTDLNTa",
+      "1k5CFJ-m6_PGh1rdIOuZd9RO8ChrXmHb8"
+    ],
+    "done": false
+  },
+  {
+    "num": 109,
+    "slug": "looker-studio-report",
+    "title": "How to Build a Six-Card Looker Studio Report UAE Teams Actually Use",
+    "file": "src/content/blog/en-AE/looker-studio-report-uae.md",
+    "drive_ids": [
+      "1AdXQHuki8RK03yv6uV1RhQRNYZY1-N9Z",
+      "15RNzSVWXTVFPSDaZDmzgRbFztZ1pX6LX",
+      "1TyVDosXBGnL6OTLWAqAwDx2jL-Sjel9j"
+    ],
+    "done": false
+  },
+  {
+    "num": 110,
+    "slug": "how-to-choose-an-ai-partner",
+    "title": "How to Choose an AI Consulting Partner in the UAE Without Getting Sold To",
+    "file": "src/content/blog/en-AE/how-to-choose-an-ai-partner-uae.md",
+    "drive_ids": [
+      "1o2u6QuPPMl3Z8JNQJm1B4m2iXmIXFM89",
+      "1qg2TraXIAYjFPrSOcIOP8ekR0Os_yMMC",
+      "12EDzIZhx9LzEmUT-Qke9TxFf9ampkiee"
+    ],
+    "done": false
+  },
+  {
+    "num": 111,
+    "slug": "getting-cited-by-ai",
+    "title": "How to Get Cited by ChatGPT: The UAE Business Guide to AI Citations",
+    "file": "src/content/blog/en-AE/get-cited-by-chatgpt-uae.md",
+    "drive_ids": [
+      "12ci9n1xCb8pi6AHWu3Oz1WR75N0yqnam",
+      "1jMf96ZWcL2y2gUfaG9W5nrGbzfdJ2Nv0",
+      "12eltj0G9jUn-NVDOKINNmAkFHp7asLCX"
+    ],
+    "done": false
+  },
+  {
+    "num": 112,
+    "slug": "marketing-roi",
+    "title": "How to Prove Digital Marketing ROI in the UAE When Your Data Is Messy",
+    "file": "src/content/blog/en-AE/marketing-roi-uae.md",
+    "drive_ids": [
+      "1R6CDKXYQNlWUm31SUyizZp_NIFJIN9gq",
+      "1D_WSWL02jrRoezBeKIIfWgaPStzswXcP",
+      "1aN7NozEzrsjDYO9elffVDtjPm_tKoqT_"
+    ],
+    "done": false
+  },
+  {
+    "num": 113,
+    "slug": "repurpose-article-with-ai",
+    "title": "How to Repurpose an Article with AI in the UAE into Fifteen Social Posts",
+    "file": "src/content/blog/en-AE/repurpose-article-with-ai-uae.md",
+    "drive_ids": [
+      "1miJYY17FCNXDPu59nuRQ_vvInNsQvYN-",
+      "1XzVC37NdYHS64cBqloh6TbPTpPwMZs8I",
+      "1XUeRy7RdDDgLmhjA-ECToTJCEfhy78iX"
+    ],
+    "done": false
+  },
+  {
+    "num": 114,
+    "slug": "personal-positioning-statement",
+    "title": "How to Write a Personal Positioning Statement UAE Professionals Remember",
+    "file": "src/content/blog/en-AE/personal-positioning-statement-uae.md",
+    "drive_ids": [
+      "1DYRwjMKiZ4POFvocNZV0CxulHwehjo4Z",
+      "1pJh9EJ2xIEN0XbLDNVBZYbA9YGfvcXPs",
+      "1BPFrgh4wcpkctmkIB8ri6qL-RQWGLQzf"
+    ],
+    "done": false
+  },
+  {
+    "num": 115,
+    "slug": "about-page-that-converts",
+    "title": "How to Write an About Page That Converts UAE Readers",
+    "file": "src/content/blog/en-AE/about-page-that-converts-uae.md",
+    "drive_ids": [
+      "17nPkAybI8JqyDvzwpE0tfLYpyjasrDGS",
+      "1xUgtwwZJ-b_5RKEp2gICv3uaWTehTnBp",
+      "1Ey49QIA7YjXMIlTKFvsSwcfWHYOf5mXq"
+    ],
+    "done": false
+  },
+  {
+    "num": 116,
+    "slug": "indexing-issues",
+    "title": "Indexing Issues UAE: Why Your Pages Are Not Indexed and How to Fix Them",
+    "file": "src/content/blog/en-AE/indexing-issues-uae.md",
+    "drive_ids": [
+      "1BKOdzzMp0lgdTfw5cks1dCnYLGwG-4JD",
+      "1SeRjWKNKFjzUiRjdP1Le9aZNaW1uXiWS",
+      "1ryWQIhF6yRuWH1iVFxXN9dccrGOw2enI"
+    ],
+    "done": false
+  },
+  {
+    "num": 117,
+    "slug": "ai-usage-policy-uae-template",
+    "title": "Internal AI Usage Policy UAE: Template, Clauses, Laws, and Rollout",
+    "file": "src/content/blog/en-AE/ai-usage-policy-uae.md",
+    "drive_ids": [
+      "1wgqLVcZtRzb1qhU0AD9fwia_Gyo02i_n",
+      "1E4Xw9Qx0lnWhgBVIKuJxXmSBGSTRa9ge",
+      "1t3oXf42o-cdvihOPx6j8eslzYfYqxJNr"
+    ],
+    "done": false
+  },
+  {
+    "num": 118,
+    "slug": "internal-linking",
+    "title": "Internal Linking UAE: The Rules I Follow on Every Site",
+    "file": "src/content/blog/en-AE/internal-linking-uae.md",
+    "drive_ids": [
+      "13Es9JC1Ijp_6KpVzHRh-FhpidoEryHo0",
+      "1ytbdZLYlcCdeZBT9No5131i-5nMydXWo",
+      "1aklqFegyOEqIuLfsRX21Skr2t9T2vVvW"
+    ],
+    "done": false
+  },
+  {
+    "num": 119,
+    "slug": "invoice-data-extraction",
+    "title": "Invoice Data Extraction UAE: AI-Powered AP for Dubai and Abu Dhabi Businesses",
+    "file": "src/content/blog/en-AE/invoice-data-extraction-uae.md",
+    "drive_ids": [
+      "1iTMy1pCVerXsTx-4Tni0W1NGG8LqOmc_",
+      "1EiHGiIGaznNpHr_QyQwSmju3AdABbFV5",
+      "1oe6CufHKZv8gYHrIzjkB0t9e5SCTkD8k"
+    ],
+    "done": false
+  },
+  {
+    "num": 120,
+    "slug": "landing-page-copy-formula",
+    "title": "Landing Page Copy UAE: A Conversion Formula for Service Offers in Dubai and Abu Dhabi",
+    "file": "src/content/blog/en-AE/landing-page-copy-uae.md",
+    "drive_ids": [
+      "1qKTYNT43j6mZCUmsDwAaX18lG4TORXHr",
+      "16mQOxp4_1BlICRLlfILSgNJQSGxDh7bp",
+      "1WNaFhMM9Ei_vzY69OV8Vbp1DWtCynvsD"
+    ],
+    "done": false
+  },
+  {
+    "num": 121,
+    "slug": "landing-page-optimization",
+    "title": "Landing Page Optimization UAE: Where Every AED of Ad Spend Is Won or Lost",
+    "file": "src/content/blog/en-AE/landing-page-optimization-uae.md",
+    "drive_ids": [
+      "1ZXSvzp_V1fdw8O-O8Eis_hE0oXbFbNgE",
+      "156TwZYOxZi1im4vuimiPy4ueF_KkQo1q",
+      "1dMZ02U4mC4bx2aXy0-7k1uQG-UdwXor-"
+    ],
+    "done": false
+  },
+  {
+    "num": 122,
+    "slug": "landing-page-testing-uae-what-to-test-first",
+    "title": "Landing Page Testing UAE: What to Test First and Why It Matters",
+    "file": "src/content/blog/en-AE/landing-page-testing-uae.md",
+    "drive_ids": [
+      "1NNZ0rm4kYdUzc_ys5XNHowQlV_juFeD0",
+      "1NQXkh9Y5ciCriGw_rkIGZfOPmoJo4tmC",
+      "1jWyvpUkVCh8bM5IumIwldKkDfcRsr-ro"
+    ],
+    "done": false
+  },
+  {
+    "num": 123,
+    "slug": "lead-enrichment-automation",
+    "title": "Lead Enrichment Automation UAE: Turn Any Email Address Into a Full Prospect Profile",
+    "file": "src/content/blog/en-AE/lead-enrichment-automation-uae.md",
+    "drive_ids": [
+      "1o7O9O8sGEvGyOA20dWlSGEUt7ZABiJb7",
+      "1W8oSiUyhGzOQpCLof1x2z6OO6YZFrEsL",
+      "1EHsYnMTXofICcJlmqpsOE0rukAoZ9zn3"
+    ],
+    "done": false
+  },
+  {
+    "num": 124,
+    "slug": "lead-magnet",
+    "title": "Lead Magnet UAE: Design Offers That Attract Serious Buyers in Dubai and Abu Dhabi",
+    "file": "src/content/blog/en-AE/lead-magnet-uae.md",
+    "drive_ids": [
+      "1yZFgMkZXuLMPlQouuG9524W2tevcpmDZ",
+      "19XDR9_05fEVYbaVttH7cSA1r4uddmzmK",
+      "1wwby82_3j_U_3wOdOempkBGTa97yuUhx"
+    ],
+    "done": false
+  },
+  {
+    "num": 125,
+    "slug": "link-building",
+    "title": "Link Building UAE Without Spam: A White Hat Strategy for Dubai and Abu Dhabi Businesses",
+    "file": "src/content/blog/en-AE/link-building-uae.md",
+    "drive_ids": [
+      "16FahMt8jZPpFYWn53VXMjB2QVfemgb3i",
+      "1BI8o6Lgck9PQjG7YGCW_GafeIWsIsRV6",
+      "1wCHCNK4c2p_7iYogPUqP_HhlTeRwv59h"
+    ],
+    "done": false
+  },
+  {
+    "num": 126,
+    "slug": "linkedin-ads-cost",
+    "title": "LinkedIn Ads Cost in the UAE: What You'll Pay and When It's Worth It",
+    "file": "src/content/blog/en-AE/linkedin-ads-cost-uae.md",
+    "drive_ids": [
+      "1xzKsHSK15PvW6NshgroMAMDFxSzNDo8v",
+      "1LnnFmc-oLXgzal16QQdDXNn5caiNeaeV",
+      "1eDYfXZ77oO_2n5JRcFT59OpVV56bXo6s"
+    ],
+    "done": false
+  },
+  {
+    "num": 127,
+    "slug": "linkedin-lead-gen-forms",
+    "title": "LinkedIn Lead Gen Forms UAE: Capture B2B Intent Across Every Trade Window",
+    "file": "src/content/blog/en-AE/linkedin-lead-gen-forms-uae.md",
+    "drive_ids": [
+      "1en7hJPms8vmPctWNsDngwwjLiyDXh2OP",
+      "12ll8LiFVNiz9Q4ZuTrgw3TUhqpsFApqt",
+      "1_cmFF0u8CtYpq0dYzhZQi44PUIXdgJ0v"
+    ],
+    "done": false
+  },
+  {
+    "num": 128,
+    "slug": "linkedin-posting-frequency",
+    "title": "LinkedIn Posting Frequency UAE: How Often to Post for Maximum Reach",
+    "file": "src/content/blog/en-AE/linkedin-posting-frequency-uae.md",
+    "drive_ids": [
+      "1Z8YiJdlIHmeKmg74NQzzI55kLyzthi-q",
+      "1LRl2LVHadqBwBv-K3X7-rYFvNM8Ye2jI",
+      "1WwpqpnpnrPzc2ZT_Ne1WZKJasRxakvmZ"
+    ],
+    "done": false
+  },
+  {
+    "num": 129,
+    "slug": "linkedin-profile-optimization",
+    "title": "LinkedIn Profile Optimization UAE: How Dubai and Abu Dhabi Professionals Get Found by Recruiters",
+    "file": "src/content/blog/en-AE/linkedin-profile-optimization-uae.md",
+    "drive_ids": [
+      "131hFsUUos9LGfRlX26MCcpRY8948lc4S",
+      "1yvoe8EIRObOLF8glpLtDPm76gg6p7Ku4",
+      "116VisvAWpM60b55qGD6psA5YVSVksvVT"
+    ],
+    "done": false
+  },
+  {
+    "num": 130,
+    "slug": "local-citations",
+    "title": "Local Citations UAE: NAP Consistency and Citation Building for Dubai and Abu Dhabi Businesses",
+    "file": "src/content/blog/en-AE/local-citations-uae.md",
+    "drive_ids": [
+      "1KG5LA_bc-dn0mLFXAEtlrAvpM1uZGCDl",
+      "1bYTVxBAhnfTKlXTFK-IUHPkkAuPiRJZk",
+      "1CRdSQ_-HFkpNQ3ajpwNe4FT9m0jtGzan"
+    ],
+    "done": false
+  },
+  {
+    "num": 131,
+    "slug": "long-context-prompting",
+    "title": "Long Context Prompting UAE: Working With Large Documents Without Losing the Plot",
+    "file": "src/content/blog/en-AE/long-context-prompting-uae.md",
+    "drive_ids": [
+      "13NF4MWAesy-7mlb9co3R-mWONXkrp02-",
+      "1ckIon5C45HlEmx5QF6R4m7qhQPSNxkZU",
+      "1pY7NVcwGCCrRV5RxSVayUGNuUdVt1DpS"
+    ],
+    "done": false
+  },
+  {
+    "num": 132,
+    "slug": "long-tail-keywords",
+    "title": "Long Tail Keywords UAE: How Small Sites Win the Search Traffic Big Brands Ignore",
+    "file": "src/content/blog/en-AE/long-tail-keywords-uae.md",
+    "drive_ids": [
+      "1tE7imcXNqqvpL5CF-J-JMg5KhYyAI-QT",
+      "1iLGhPtMAsVx_13WNGG-V4fgjWA0Abvw1",
+      "1T_dqxT3VA7tpjYe805DQn1z3HeReyMiO"
+    ],
+    "done": false
+  },
+  {
+    "num": 133,
+    "slug": "marketing-attribution-uae-models-compared",
+    "title": "Marketing Attribution UAE: Three Models Compared",
+    "file": "src/content/blog/en-AE/marketing-attribution-uae.md",
+    "drive_ids": [
+      "18c_xKqwwCem_1WWZQhiwDcQSgkoCTHQ5",
+      "1_GZekPElfjOnRi7BZ4WbSnQ7dh6vqUUS",
+      "1dyN-PNcFjRFbfwzt7eXF_J2k9FIfwFw_"
+    ],
+    "done": false
+  },
+  {
+    "num": 134,
+    "slug": "marketing-consultant-first-90-days",
+    "title": "Marketing Consultant First 90 Days UAE: The Client's Complete Guide to the Engagement",
+    "file": "src/content/blog/en-AE/marketing-consultant-first-90-days-uae.md",
+    "drive_ids": [
+      "1yHygXYqThYH5HbNUJ2pB9z4PCB6fbzN-",
+      "1vRtp5xVxQj4ck9oKgi5xCvc1M8OE7thm",
+      "1CBS7mFgclRowo8vPmeUsGvdDKltZyci-"
+    ],
+    "done": false
+  },
+  {
+    "num": 135,
+    "slug": "marketing-dashboard",
+    "title": "Marketing Dashboard UAE: The One-Screen Design That Drives Better Decisions",
+    "file": "src/content/blog/en-AE/marketing-dashboard-uae.md",
+    "drive_ids": [
+      "1XmnCW8imLKLZqqID6gCj3bTJGqjvXIqU",
+      "13bvXLTEfIfU2BCqITT-cU9uiHzj6zrSf",
+      "1XikqQgkPjCWVPwcI5WBSHzJdpvnQ42Md"
+    ],
+    "done": false
+  },
+  {
+    "num": 136,
+    "slug": "marketing-reporting-for-clients",
+    "title": "Marketing Reporting for Clients in the UAE That Proves AED Revenue, Not Just Metrics",
+    "file": "src/content/blog/en-AE/marketing-reporting-for-clients-uae.md",
+    "drive_ids": [
+      "1DGgkVoiXWNwfGFPk2C2U2KqADWv85cNX",
+      "19ZEfeVEYMXFJGqD31PWnRNBlA9AkFAH4",
+      "1L_jUm4-ajS_5TzpKpLUjb6WedGZtMYti"
+    ],
+    "done": false
+  },
+  {
+    "num": 137,
+    "slug": "marketing-dashboard",
+    "title": "Marketing Dashboard UAE: The One-Screen Design That Drives Better Decisions",
+    "file": "src/content/blog/en-AE/marketing-dashboard-uae.md",
+    "drive_ids": [
+      "132-LFUWfMt16qDnn2DhRqTo-xgkzw4xF",
+      "13sVE7U1hIJ49qmGDAgC2I1oNWi2k5W1D",
+      "1F5SsQ5P-2ZANUmNy55B-O_fLuXqcLnfn"
+    ],
+    "done": false
+  },
+  {
+    "num": 138,
+    "slug": "marketing-reporting-for-clients",
+    "title": "Marketing Reporting for Clients in the UAE That Proves AED Revenue, Not Just Metrics",
+    "file": "src/content/blog/en-AE/marketing-reporting-for-clients-uae.md",
+    "drive_ids": [
+      "1H7ieQTjxlt7i3AhCIm6eZsbsUtHx7yni",
+      "1sHzwIT9dPJBez-R27MkIGqM10sxZeIas",
+      "1FLUyrTJla-qbjTGhGxFiH-pZ4bGLRHYm"
+    ],
+    "done": false
+  },
+  {
+    "num": 139,
+    "slug": "marketing-spend-percentage-of-revenue",
+    "title": "Marketing Spend Percentage of Revenue UAE: The Right Budget for Your Business Type",
+    "file": "src/content/blog/en-AE/marketing-spend-percentage-of-revenue-uae.md",
+    "drive_ids": [
+      "1IqlWA2B-e476x4MWO9P3bMBn-wuxyQx-",
+      "1gXlnMNoaJCMk9Y64aucdBVuMAxs44_ip",
+      "1emGnqBKLuzesCK4QP9pK30UR5yzCoyKE"
+    ],
+    "done": false
+  },
+  {
+    "num": 140,
+    "slug": "measuring-seo-results",
+    "title": "Measuring SEO Results UAE: Beyond Rankings to Revenue That Matters",
+    "file": "src/content/blog/en-AE/measuring-seo-results-uae.md",
+    "drive_ids": [
+      "1d4ClqK_e9KIfF7ach0pqR1IQ0-jlomZi",
+      "1aTHTs7C8qFK_xonZDeseuq-kPK7wN-8E",
+      "1F068iM1zTt_3ZGSJCamlJdz6Y8W-XA-y"
+    ],
+    "done": false
+  },
+  {
+    "num": 141,
+    "slug": "meeting-notes-to-crm",
+    "title": "Meeting Notes to CRM UAE: The Sales Team's Complete Guide to Automation",
+    "file": "src/content/blog/en-AE/meeting-notes-to-crm-uae.md",
+    "drive_ids": [
+      "1WkuxkNwJK-5wcttD48rXYPVUJ1oD13JY",
+      "1WBClafnoipD2jBXXxi5YOQk3i1Bm09op",
+      "1b6eqYN6ofEny23rwwMwvlt2qDeATpjD2"
+    ],
+    "done": false
+  },
+  {
+    "num": 142,
+    "slug": "messaging-house",
+    "title": "Messaging House UAE: One Document That Keeps Every Channel Aligned",
+    "file": "src/content/blog/en-AE/messaging-house-uae.md",
+    "drive_ids": [
+      "1Aphy69YqWQqAjQDo7rLzjfKl0arjWE8N",
+      "1e7r_ThzYmVpmH7-_Lg4Rf5gwqXTG-Lz0",
+      "15RWOh18yDkb7VC12y1yS94WCofcOpBin"
+    ],
+    "done": false
+  },
+  {
+    "num": 143,
+    "slug": "meta-ads-targeting",
+    "title": "Meta Ads Targeting UAE: When Broad Beats Narrow in a Small, Multilingual Market",
+    "file": "src/content/blog/en-AE/meta-ads-targeting-uae.md",
+    "drive_ids": [
+      "10R3tnjtIz1XkaOsSodA5CcJdjf2b7M4g",
+      "1yRzkL8pwBT9-bT4guuUKzueFzPBe2BVB",
+      "1T87pfPi9eBEF7OlZvgetZ0MEWroi5vWx"
+    ],
+    "done": false
+  },
+  {
+    "num": 144,
+    "slug": "model-context-protocol",
+    "title": "Model Context Protocol UAE: A Practical Guide to Wiring AI Agents Into Your Stack",
+    "file": "src/content/blog/en-AE/model-context-protocol-uae.md",
+    "drive_ids": [
+      "1ne30X7ZV-Pfp8qT_F3X7gl2f-rIBVCcn",
+      "1-ERb3sqFl3udRG0UENhjfyEG6n67e8uZ",
+      "18tZuDDW_l959GzuhW16z21yrdwur5-n_"
+    ],
+    "done": false
+  },
+  {
+    "num": 145,
+    "slug": "natural-language-data-query",
+    "title": "Natural Language Data Query in UAE Marketing: Ask Your Data in Plain English",
+    "file": "src/content/blog/en-AE/natural-language-data-query-uae.md",
+    "drive_ids": [
+      "17o27m4cZV78OJHA5TxVi1i3Oov15b-eD",
+      "1kJUu9W10lBfOL6l9L5tMb1n-NoCz6_Cn",
+      "1L6JjCFEHNmMw0pbiF5fbnX9dv5At9a7o"
+    ],
+    "done": false
+  },
+  {
+    "num": 146,
+    "slug": "newsletter-welcome-sequence",
+    "title": "Newsletter Welcome Sequence UAE: How to Build One That Converts Subscribers",
+    "file": "src/content/blog/en-AE/newsletter-welcome-sequence-uae.md",
+    "drive_ids": [
+      "12XQ7xRkWuN4BoRDsdxm4W3iDklWedqpo",
+      "1k4VlCWaB11o3XPNIF4jY0zisAWLdWxHD",
+      "1BRPM5NxaWlB2ZJQadaYTSOvZLUlGEBhp"
+    ],
+    "done": false
+  },
+  {
+    "num": 147,
+    "slug": "no-code-agent-platforms",
+    "title": "No-Code Agent Platforms UAE: Every Major Builder Compared on One Real Build",
+    "file": "src/content/blog/en-AE/no-code-agent-platforms-uae.md",
+    "drive_ids": [
+      "1FBJ8p00dGGvaQKDKsIC9nhQ_0XgoH2tK",
+      "1mNIg93f3DQE4uJy_D-pLb-P7xJ8QcpkH",
+      "1SxRKMHHE_BthMDn32yw761k7h5qi1Su7"
+    ],
+    "done": false
+  },
+  {
+    "num": 148,
+    "slug": "north-star-metric",
+    "title": "North Star Metric UAE: The Single Metric That Drives Real Growth",
+    "file": "src/content/blog/en-AE/north-star-metric-uae.md",
+    "drive_ids": [
+      "16kN2qZcxCuzhLtvD22gc-536MNb59ZDX",
+      "1ZFWAv8QRgVL10EEKd6LWVd5_N9TAB2af",
+      "1EWGj1lNLEyOtqlFQ9W8_xHZGkjZHHj2Y"
+    ],
+    "done": false
+  },
+  {
+    "num": 149,
+    "slug": "ocr-vs-llm",
+    "title": "OCR vs LLM UAE Document Extraction: Which Method Fits Your Business",
+    "file": "src/content/blog/en-AE/ocr-vs-llm-uae.md",
+    "drive_ids": [
+      "1FLkabemHKYJfKA7YRhO2kZHXsMkcW6Gz",
+      "1TB_K5ye73iZQByw94pJKrUfflYIUpsgj",
+      "1dYMwpp3C-nwPAGHS1gNYnyxvskBU5tfS"
+    ],
+    "done": false
+  },
+  {
+    "num": 150,
+    "slug": "one-page-marketing-plan",
+    "title": "One-Page Marketing Plan UAE: The Lean Template Built for Dubai and Abu Dhabi Businesses",
+    "file": "src/content/blog/en-AE/one-page-marketing-plan-uae.md",
+    "drive_ids": [
+      "1ALaaIVu1lCHd3yW4waS-IXA8Bk2t6AXj",
+      "1IMD6X_p_-hzGBbZaWyhHdVLp7_7Y3mHm",
+      "19U4dgTK4cfx4mY3VGWL-UPJRCwGYqSRN"
+    ],
+    "done": false
+  },
+  {
+    "num": 151,
+    "slug": "open-source-llm",
+    "title": "Open Source LLM UAE: When It Makes Sense for Businesses",
+    "file": "src/content/blog/en-AE/open-source-llm-uae.md",
+    "drive_ids": [
+      "1B7X4Zg1cAzKdwPeKd6wLYW8aea-f_XVQ",
+      "1HW-1fL-tMNB4SXe_U1VAMifpU1O8kP3y",
+      "1IevIJDfk8iMhTKY3wF6RxUkztMiEv7gz"
+    ],
+    "done": false
+  },
+  {
+    "num": 152,
+    "slug": "outline-prompts",
+    "title": "Outline Prompts UAE Content Teams Can Use Right Now",
+    "file": "src/content/blog/en-AE/outline-prompts-uae.md",
+    "drive_ids": [
+      "1x1_FgUpekx6KvLgeD05QSOCpdFov_TVl",
+      "12G5HqTQUzsZWSp287DqrK901ZXoABjOn",
+      "16wnulIxdzPrq2uicOMK_0BTUIjpXsqqg"
+    ],
+    "done": false
+  },
+  {
+    "num": 153,
+    "slug": "person-schema-knowledge-panel",
+    "title": "Person Schema Markup UAE: Build a Knowledge Panel for Individuals in Dubai and Abu Dhabi",
+    "file": "src/content/blog/en-AE/person-schema-markup-uae.md",
+    "drive_ids": [
+      "1oNLRYbtR8fsp5ovx3jkrfNq8vCeBDs6J",
+      "1ecR9dac2dsQswJSJrnhNleCLoBuwNlzf",
+      "1XvUcQAV2u_lkgMSHYjHuPGghb6GvCLEv"
+    ],
+    "done": false
+  },
+  {
+    "num": 154,
+    "slug": "personal-brand-audit",
+    "title": "Personal Brand Audit UAE: How to Run One on Yourself",
+    "file": "src/content/blog/en-AE/personal-brand-audit-uae.md",
+    "drive_ids": [
+      "1JgoTJ-XFN6g7EbZ5k9aQaWZYUYAJdR2L",
+      "1FyhVrey2J1GHyw0HQSEnwRv9DLFXpepo",
+      "1qc7ZE2boUeES52jkACKJMgYLhpOr8V5m"
+    ],
+    "done": false
+  },
+  {
+    "num": 155,
+    "slug": "personal-newsletter",
+    "title": "Personal Newsletter UAE: How to Build One People Actually Open",
+    "file": "src/content/blog/en-AE/personal-newsletter-uae.md",
+    "drive_ids": [
+      "1epuxPyqALlvT3iViW7Ase695jN1YJUpE",
+      "1C04COz3hYGxUvOMXSOUY1WKeyux_721n",
+      "1_w8a99tZLZDYzYMx-jcf5txuXwWPgT2S"
+    ],
+    "done": false
+  },
+  {
+    "num": 156,
+    "slug": "pillar-page",
+    "title": "Pillar Page UAE: How Hub-and-Spoke SEO Builds Topical Authority on**",
+    "file": "src/content/blog/en-AE/pillar-page-uae.md",
+    "drive_ids": [
+      "1mrve1JTmLRE8JgGEyMwvX1RcC69CEJ80",
+      "1OayBTHLQlN_3ew_FNZoOfJ9NxxNDmVo9",
+      "1USgLrFdxjlg168R8yr6fC8Rgu5NF-O-D"
+    ],
+    "done": false
+  },
+  {
+    "num": 157,
+    "slug": "podcast-guest-pitch",
+    "title": "Podcast Guest Pitch UAE: How to Get on Podcasts and Land a Yes",
+    "file": "src/content/blog/en-AE/podcast-guest-pitch-uae.md",
+    "drive_ids": [
+      "1HmGThgIim2MWDYjMYyP4pd8lRr04NhG7",
+      "1jT1ByuRrhGEdxDVte6Pk-kLU9Ckj5yYG",
+      "1lr-pnac21waKVSrQK4cNqCMjG-xn6qSI"
+    ],
+    "done": false
+  },
+  {
+    "num": 158,
+    "slug": "portfolio-without-client-names",
+    "title": "Portfolio Without Client Names UAE: Prove Your Work When an NDA Covers the Client",
+    "file": "src/content/blog/en-AE/portfolio-without-client-names-uae.md",
+    "drive_ids": [
+      "1PcF-vEOFVIPiI-Exm2G1sBqnM3vlOiLx",
+      "1BHyOVc9c-lRNFyH-nC94IMFh6mUXoMcy",
+      "1nydzcpGN7CU8QzGlpjZ2Ia6aatBCIFUH"
+    ],
+    "done": false
+  },
+  {
+    "num": 159,
+    "slug": "positioning-statement-template",
+    "title": "Positioning Statement Template UAE: Formula, Worked Examples for Dubai and Abu Dhabi Brands",
+    "file": "src/content/blog/en-AE/positioning-statement-template-uae.md",
+    "drive_ids": [
+      "1YTodMIfFcPogYPr0VayVofm2QAtnwoRT",
+      "1JOVPb8y0y6_S0g44i6S_TStAVvPprOZS",
+      "1jQ0gVLxe1c2aERgcNXIUpFRFVb9Wmxeg"
+    ],
+    "done": false
+  },
+  {
+    "num": 160,
+    "slug": "positioning-vs-differentiation",
+    "title": "Positioning vs Differentiation in the UAE",
+    "file": "src/content/blog/en-AE/positioning-vs-differentiation-uae.md",
+    "drive_ids": [
+      "10q_imz4WjDz7ah0njOk8wyhFarI9g2mT",
+      "1-ojiQPyjAKpdIZoWNV9wy1Rt39_yJdLh",
+      "1YuruCTTUNqki4EQF_c1FJWbE3k-uKuZc"
+    ],
+    "done": false
+  },
+  {
+    "num": 161,
+    "slug": "reduce-llm-costs",
+    "title": "Practical Ways to Reduce LLM Costs in the UAE: Token Optimization, Caching, and Smarter Model Choices",
+    "file": "src/content/blog/en-AE/reduce-llm-costs-uae.md",
+    "drive_ids": [
+      "1JKetDE383KCZPBUkVjmVc4FpmqTV7T0t",
+      "12DmB3pQG-aOI0Lb9mVkj6Y7xbgkpMCsf",
+      "1LY4QJ7cMSKDXqw1X3QrW8uyXENVIbkho"
+    ],
+    "done": false
+  },
+  {
+    "num": 162,
+    "slug": "prompt-constraints",
+    "title": "Prompt Constraints UAE: Adding Output Rules and Refusals to Your AI Prompts",
+    "file": "src/content/blog/en-AE/prompt-constraints-uae.md",
+    "drive_ids": [
+      "1Oj3wys_XDHnWVsbX7g2MOaXoYWg-jLdC",
+      "1NA0162K5dbgRcY5GS5UMoaBmZk7W81Gu",
+      "1xw4jlqXAcyDXLlw5lvBGp1ZpqTVz9rXm"
+    ],
+    "done": false
+  },
+  {
+    "num": 163,
+    "slug": "reasoning-model-prompting",
+    "title": "Prompt Engineering for Reasoning Models in the UAE: A Calibration Guide for Dubai and Abu Dhabi Teams",
+    "file": "src/content/blog/en-AE/prompting-reasoning-models-uae.md",
+    "drive_ids": [
+      "1Czir4QW6LpjYqWN-1--DvNgKSlL19hQT",
+      "1hvrNG3fT4Mlwa_gT5l6wMaeJ_M3eVu3Y",
+      "1SspfDFosIjmX2O3y7HHsSoWd8KaqPNbo"
+    ],
+    "done": false
+  },
+  {
+    "num": 165,
+    "slug": "prompt-migration",
+    "title": "Prompt Migration UAE: How to Switch AI Models Without Breaking Your Results",
+    "file": "src/content/blog/en-AE/prompt-migration-uae.md",
+    "drive_ids": [
+      "16qb87UKOX1qBDdn5CA9W7yty-cNB8K0l",
+      "1Yty0JbHy9ngwxZ-OJZ0syEuN0vbyUgka",
+      "1gFsL4GLVbIASK4V85vVdFzJZFplZp38H"
+    ],
+    "done": false
+  },
+  {
+    "num": 166,
+    "slug": "prospect-research-agent",
+    "title": "Prospect Research Agent UAE: AI-Powered Lead Intelligence That Earns the Reply",
+    "file": "src/content/blog/en-AE/prospect-research-agent-uae.md",
+    "drive_ids": [
+      "1x3zkFwxC5y903xIv7et2Fro3Ovk_XajE",
+      "1073M8NSfuHuy9ecxUG9qkj20ujUg5_J3",
+      "1Mu6QnhQHs-nfI-x2B6dlnaQOmnoVMFDP"
+    ],
+    "done": false
+  }
+]
